@@ -8,6 +8,8 @@ public class MainActivity extends AppCompatActivity {
 
     public int yes;
     public int no;
+    public int maybe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
