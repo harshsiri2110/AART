@@ -21,9 +21,7 @@
                 android:layout_width="match_parent"
                 android:scaleType="fitCenter"
                 android:layout_height="200dp"
-                android:background="#2a2a2b">
-
-            </ImageView>
+                android:background="#2a2a2b"/>
 
             <TextView
                 android:id="@+id/title"
@@ -38,15 +36,14 @@
                 android:textStyle="italic" />
 
             <ImageView
-                android:id="@+id/ageIcon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:src="@drawable/age"
+                android:id="@+id/ageIcon"
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="47dp"
-                android:src="@drawable/age">
-
-            </ImageView>
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,14 +52,28 @@
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="51dp"
                 android:text="2 months"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/ageText"/>
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-
+                android:src="@drawable/gender2"
+                android:id="@+id/genderIcon"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="47dp"
+                android:layout_marginLeft="120dp"
                 />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="51dp"
+                android:text="Female"
+                android:textSize="15sp"
+                android:id="@+id/genderText"/>
 
         </RelativeLayout>
 
