@@ -55,7 +55,11 @@
                 android:text="2 months"
                 android:textSize="15sp"/>
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
 
+                />
 
 
         </RelativeLayout>
