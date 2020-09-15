@@ -38,22 +38,24 @@
                 android:textStyle="italic" />
 
             <ImageView
+                android:id="@+id/ageIcon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/age"
-                android:id="@+id/ageIcon"
                 android:layout_below="@+id/image"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="10dp"></ImageView>
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="47dp"
+                android:src="@drawable/age">
+
+            </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="45dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="51dp"
                 android:text="2 months"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
             <ImageView
                 android:layout_width="25dp"
