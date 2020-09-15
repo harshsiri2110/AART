@@ -36,7 +36,28 @@
                 android:textColor="#262626"
                 android:textSize="16sp"
                 android:textStyle="italic" />
-            
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/age"
+                android:id="@+id/ageIcon"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="55dp"
+                android:text="2 months"
+                android:textSize="15sp"/>
+
+
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
