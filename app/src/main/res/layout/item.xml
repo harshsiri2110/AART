@@ -15,12 +15,17 @@
             android:layout_height="300dp"
             >
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/image"
                 android:src="@drawable/dog"
                 android:layout_width="match_parent"
                 android:scaleType="fitCenter"
                 android:layout_height="200dp"
+                android:background="#2a2a2b"/>-->
+            <com.denzcoskun.imageslider.ImageSlider
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/image"
                 android:background="#2a2a2b"/>
 
             <TextView
@@ -93,7 +98,7 @@
                 android:layout_marginTop="51dp"
                 android:text="Kothrud, Pune"
                 android:textSize="15sp"
-                android:id="@+id/=locationtext"/>
+                android:id="@+id/locationtext"/>
 
 
         </RelativeLayout>
