@@ -11,6 +11,9 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+
+
 public class Cards extends AppCompatActivity {
 
     @Override
@@ -21,8 +24,8 @@ public class Cards extends AppCompatActivity {
         ImageSlider imageSlider = findViewById(R.id.image);
 
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.dog,true));
+        slideModels.add(new SlideModel(R.drawable.dog, ScaleTypes.CENTER_INSIDE));
 
-        imageSlider.setImageList(slideModels,true);
+        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
     }
 }
