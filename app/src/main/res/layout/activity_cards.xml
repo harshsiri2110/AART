@@ -24,16 +24,16 @@
                 android:scaleType="fitCenter"
                 android:layout_height="200dp"
                 android:background="#2a2a2b"/>-->
+
             <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:id="@+id/image"
+                android:background="#e6f2ff"
                 app:iss_auto_cycle="true"
-                app:iss_delay="0"
-                app:iss_period="1000"
                 app:iss_corner_radius="5"
-                android:background="#2a2a2b"
-                />
+                app:iss_delay="10"
+                app:iss_period="1000" />
 
             <TextView
                 android:id="@+id/title"
@@ -42,7 +42,7 @@
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
-                android:text="Brown Indie Puppy"
+                android:text="Brown and white Indie Puppy"
                 android:textColor="#262626"
                 android:textSize="16sp"
                 android:textStyle="italic" />
@@ -63,7 +63,7 @@
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="47dp"
                 android:layout_marginTop="51dp"
-                android:text="2 months"
+                android:text="3 months"
                 android:textSize="15sp"
                 android:id="@+id/ageText"/>
 
@@ -83,7 +83,7 @@
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="163dp"
                 android:layout_marginTop="51dp"
-                android:text="Female"
+                android:text="male"
                 android:textSize="15sp"
                 android:id="@+id/genderText"/>
 
@@ -94,14 +94,14 @@
                 android:id="@+id/locationIcon"
                 android:layout_below="@+id/image"
                 android:layout_marginTop="47dp"
-                android:layout_marginLeft="240dp"
+                android:layout_marginLeft="237dp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image"
-                android:layout_marginLeft="269dp"
+                android:layout_marginLeft="264dp"
                 android:layout_marginTop="51dp"
                 android:text="Kothrud, Pune"
                 android:textSize="15sp"

@@ -24,8 +24,9 @@ public class Cards extends AppCompatActivity {
         ImageSlider imageSlider = findViewById(R.id.image);
 
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.dog, ScaleTypes.CENTER_INSIDE));
-
+        slideModels.add(new SlideModel(R.drawable.dog1, ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.dog2, ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.dog3, ScaleTypes.CENTER_INSIDE));
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
     }
 }
