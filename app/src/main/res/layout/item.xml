@@ -26,6 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/image"
+                app:auto_cycle="true"
+                app:delay="0"
+                app:period="1000"
+                app:corner_radius="5"
                 android:background="#2a2a2b"/>
 
             <TextView
