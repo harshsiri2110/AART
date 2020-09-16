@@ -32,7 +32,9 @@
                 app:delay="0"
                 app:period="1000"
                 app:corner_radius="5"
-                android:background="#2a2a2b"/>
+                android:background="#2a2a2b"
+                android:scaleType="fitCenter"
+                />
 
             <TextView
                 android:id="@+id/title"
