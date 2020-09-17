@@ -30,10 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#e6f2ff"
-                app:iss_auto_cycle="true"
+                app:iss_auto_cycle="false"
                 app:iss_corner_radius="5"
                 app:iss_delay="10"
-                app:iss_period="1000" />
+                app:iss_period="1000"
+                />
 
             <TextView
                 android:id="@+id/title"

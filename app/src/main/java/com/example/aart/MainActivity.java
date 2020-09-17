@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     Adapter adapter;
-    Integer[] colours= null;
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     List<Model> models;
 
     @Override
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter(models,this);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130,0,130,0);
+        viewPager.setPadding(25,0,25,0);
 
     }
 }
