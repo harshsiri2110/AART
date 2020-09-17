@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new Adapter(models,this);
 
+
     }
 }
