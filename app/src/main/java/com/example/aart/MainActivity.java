@@ -8,13 +8,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager viewPager;
+    //ViewPager viewPager;
+    ListView listView;
+
     Adapter adapter;
     List<Model> models;
 
@@ -30,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
         models.add(new Model(R.drawable.dog, "Brown indie dog", "4 months", "Female", "Baner, Pune"));
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));
         models.add(new Model(R.drawable.dog, "Black indie dog", "2 months", "Female", "Aundh, Pune"));
+
         adapter = new Adapter(models,this);
-        viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-        viewPager.setPadding(25,0,25,0);
+        listView = findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+        //viewPager = findViewById(R.id.viewPager);
+
+        //viewPager.setPadding(25,0,25,0);
+
 
     }
 }

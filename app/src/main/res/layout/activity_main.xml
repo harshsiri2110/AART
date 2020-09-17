@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
     <androidx.viewpager.widget.ViewPager
         android:foregroundGravity="center"
         android:layout_width="match_parent"
@@ -16,5 +17,12 @@
         android:overScrollMode="never"
         android:clipToPadding="false">
     </androidx.viewpager.widget.ViewPager>
+    -->
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView"
+
+        />
 </RelativeLayout>
