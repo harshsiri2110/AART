@@ -27,6 +27,7 @@ public class Cards extends AppCompatActivity {
         slideModels.add(new SlideModel(R.drawable.dog1, ScaleTypes.CENTER_INSIDE));
         slideModels.add(new SlideModel(R.drawable.dog2, ScaleTypes.CENTER_INSIDE));
         slideModels.add(new SlideModel(R.drawable.dog3, ScaleTypes.CENTER_INSIDE));
+
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
     }
 }
