@@ -3,12 +3,16 @@ package com.example.aart;
 public class Model {
    private int image;
    private String title;
-   private String desc;
+   private String ageText;
+   private String genderText;
+   private String locationText;
 
-   public Model(int image, String title, String desc) {
+    public Model(int image, String title, String age, String gender, String location) {
         this.image = image;
         this.title = title;
-        this.desc = desc;
+        this.ageText = age;
+        this.genderText = gender;
+        this.locationText= location;
     }
 
     public int getImage() {
@@ -27,12 +31,28 @@ public class Model {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getAge() {
+        return ageText;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAge(String age) {
+        this.ageText = age;
+    }
+
+    public String getGender() {
+        return genderText;
+    }
+
+    public void setGender(String gender) {
+        this.genderText = gender;
+    }
+
+    public String getLocation() {
+        return locationText;
+    }
+
+    public void setLocation(String location) {
+        this.locationText = location;
     }
 }
 

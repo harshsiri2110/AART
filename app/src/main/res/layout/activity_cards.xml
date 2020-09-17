@@ -58,6 +58,7 @@
                 />
 
             <TextView
+                android:id="@+id/ageText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image"
@@ -65,7 +66,7 @@
                 android:layout_marginTop="51dp"
                 android:text="3 months"
                 android:textSize="15sp"
-                android:id="@+id/ageText"/>
+                />
 
             <ImageView
                 android:layout_width="25dp"
@@ -78,6 +79,7 @@
                 />
 
             <TextView
+                android:id="@+id/genderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image"
@@ -85,7 +87,7 @@
                 android:layout_marginTop="51dp"
                 android:text="male"
                 android:textSize="15sp"
-                android:id="@+id/genderText"/>
+                />
 
             <ImageView
                 android:layout_width="25dp"
@@ -105,7 +107,7 @@
                 android:layout_marginTop="51dp"
                 android:text="Kothrud, Pune"
                 android:textSize="15sp"
-                android:id="@+id/locationtext"/>
+                android:id="@+id/locationText"/>
 
 
         </RelativeLayout>
