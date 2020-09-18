@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "77477073208",
+    "firebase_url": "https://aart-c7906.firebaseio.com",
+    "project_id": "aart-c7906",
+    "storage_bucket": "aart-c7906.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77477073208:android:765f74720f76b0721171cd",
+        "android_client_info": {
+          "package_name": "com.example.aart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77477073208-qo8t1fr4ic9qamaa58r1volcomo91kp6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdP6nFcgb_3n4_djs2R8oix5b5fIspgVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77477073208-qo8t1fr4ic9qamaa58r1volcomo91kp6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
