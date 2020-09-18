@@ -21,6 +21,7 @@
             android:focusableInTouchMode="true"
             android:ems="10"
             android:inputType="text"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,6 +38,8 @@
             android:focusableInTouchMode="true"
             android:ems="10"
             android:inputType="text"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             />
     </com.google.android.material.textfield.TextInputLayout>
    <RadioGroup
@@ -47,7 +50,10 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Gender:"
-          android:textSize="20sp">
+          android:textSize="20sp"
+          android:layout_marginBottom="10dp"
+          android:layout_marginTop="10dp">
+
 
       </TextView>
        <RadioButton
@@ -56,6 +62,7 @@
            android:text="Male"
            android:textSize="20sp"
            android:layout_marginLeft="10dp"
+           android:layout_marginTop="10dp"
            >
 
        </RadioButton>
@@ -63,6 +70,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="10dp"
+           android:layout_marginTop="10dp"
            android:text="Female"
            android:textSize="20sp"
            >
