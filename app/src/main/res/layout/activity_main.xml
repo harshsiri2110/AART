@@ -8,17 +8,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--
-    <androidx.viewpager.widget.ViewPager
-        android:foregroundGravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewPager"
-        android:layout_centerInParent="true"
-        android:overScrollMode="never"
-        android:clipToPadding="false">
-    </androidx.viewpager.widget.ViewPager>
-    -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Post"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/uploadPost"
+        />
 
     <ListView
         android:layout_width="match_parent"
@@ -27,4 +23,5 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="8sp"
         />
+
 </RelativeLayout>

@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     Adapter adapter;
     List<Model> models;
+    Button uploadPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter(models,this);
         listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
-        //viewPager = findViewById(R.id.viewPager);
 
-        //viewPager.setPadding(25,0,25,0);
+        uploadPost = findViewById(R.id.uploadPost);
 
-
+        uploadPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,UploadForm.class));
+            }
+        });
     }
 }
