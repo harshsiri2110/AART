@@ -11,13 +11,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Name"
+            android:hint="Title"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:ems="10"
@@ -32,11 +31,67 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
+            android:hint="Age"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:ems="10"
             />
     </com.google.android.material.textfield.TextInputLayout>
+   <RadioGroup
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Gender:"
+          android:textSize="20sp">
+
+      </TextView>
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Male"
+           android:textSize="20sp"
+           android:layout_marginLeft="10dp"
+           >
+
+       </RadioButton>
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="10dp"
+           android:text="Female"
+           android:textSize="20sp"
+           >
+
+       </RadioButton>
+   </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:ems="10"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload form"
+        android:textSize="22sp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_rounded"
+        >
+
+    </Button>
 
 </LinearLayout>
