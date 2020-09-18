@@ -89,6 +89,7 @@
         android:text="Upload form"
         android:textSize="22sp"
         android:layout_marginTop="40dp"
+        android:backgroundTint="@color/grey_font"
         android:background="@drawable/button_rounded"
         >
 
