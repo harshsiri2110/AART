@@ -44,6 +44,7 @@ public class UploadForm extends AppCompatActivity {
                 selectedButton = (RadioButton)findViewById(selectedId);
 
                 gender = selectedButton.getText().toString();
+
             }
         });
 
