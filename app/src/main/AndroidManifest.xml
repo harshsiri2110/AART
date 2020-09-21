@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aart">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_aart"
@@ -9,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_aart_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadForm"></activity>
+        <activity android:name=".UploadForm" />
         <activity android:name=".Cards" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,7 +21,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
