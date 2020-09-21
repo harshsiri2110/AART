@@ -3,7 +3,7 @@ package com.example.aart;
 public class Member {
     private String title;
     private  String age;
-    private String locatn;
+    private String location;
 
     private String gender;
 
@@ -34,10 +34,10 @@ public class Member {
     }
 
     public String getLocatn() {
-        return locatn;
+        return location;
     }
 
     public void setLocatn(String locatn) {
-        this.locatn = locatn;
+        this.location = locatn;
     }
 }
