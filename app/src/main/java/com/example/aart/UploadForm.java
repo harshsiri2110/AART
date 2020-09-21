@@ -33,7 +33,6 @@ Member member;
                 member.setTitle(txttitle.getText().toString());
                 member.setAge(txtage.getText().toString().trim());
                 member.setLocatn(locatn.getText().toString().trim());
-
                 reff.push().setValue(member);
                 Toast.makeText(UploadForm.this, "data inserted");
             }
