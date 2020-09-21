@@ -33,11 +33,11 @@ public class Member {
         this.age = age;
     }
 
-    public String getLocatn() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocatn(String locatn) {
+    public void setLocation(String locatn) {
         this.location = locatn;
     }
 }

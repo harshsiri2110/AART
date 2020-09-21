@@ -50,7 +50,7 @@ public class UploadForm extends AppCompatActivity {
 
                 member.setTitle(txtTitle.getText().toString());
                 member.setAge(txtAge.getText().toString());
-                member.setLocatn(location.getText().toString());
+                member.setLocation(location.getText().toString());
                 member.setGender(txtGender.getText().toString());
 
                 reff.push().setValue(member);
