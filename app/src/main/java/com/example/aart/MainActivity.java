@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     //ViewPager viewPager;
     ListView listView;
-
     Adapter adapter;
     List<Model> models;
     Button uploadPost;

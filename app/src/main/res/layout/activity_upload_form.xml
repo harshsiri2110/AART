@@ -125,7 +125,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/imgView"
+        android:background="#e6f2ff"
+
+        />
 
     <Button
         android:id="@+id/btnupload"
@@ -134,7 +138,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/button_rounded"
         android:backgroundTint="@color/grey_font"
-        android:text="Upload form"
+        android:text="Upload"
         android:textSize="22sp">
 
     </Button>
