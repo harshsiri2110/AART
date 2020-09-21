@@ -5,6 +5,18 @@ public class Member {
     private  String age;
     private String locatn;
 
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+
     public String getTitle() {
         return title;
     }
