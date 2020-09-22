@@ -137,6 +137,7 @@ public class UploadForm extends AppCompatActivity {
                 for (int i=0 ; i< totalItemsSelected;i++)
                 {
                     imageUriList.add(data.getClipData().getItemAt(i).getUri());
+
                 }
 
             }
