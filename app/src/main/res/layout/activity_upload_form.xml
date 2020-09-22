@@ -123,12 +123,23 @@
 
     </LinearLayout>
 
+    <!--
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imgView"
         android:background="#e6f2ff"
 
+        />-->
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imgView"
+        android:background="#e6f2ff"
+        app:iss_auto_cycle="true"
+        app:iss_period="1000"
+        app:iss_delay="10"
         />
 
     <Button
