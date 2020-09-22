@@ -118,9 +118,9 @@ public class UploadForm extends AppCompatActivity {
 
                 reff.child(String.valueOf(maxId+1)).setValue(member);
 
-                if(!previewImages.isEmpty())
+                if(!imageUriList.isEmpty())
                 {
-                    for(int i = 0 ; i < previewImages.size();i++)
+                    for(int i = 0 ; i < imageUriList.size();i++)
                     {
                         uploadPicture(imageUriList.get(i));
                     }
@@ -155,23 +155,9 @@ public class UploadForm extends AppCompatActivity {
                 int totalItemsSelected = data.getClipData().getItemCount();
 
                 for (int i = 0; i < totalItemsSelected; i++) {
-
                     imageUriList.add(data.getClipData().getItemAt(i).getUri());
                     previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
-
-                    /*StorageReference fileToUpload = storageReference.child("images").child("filename");
-                    fileToUpload.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
-                    {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                        {
-                           // Toast.makeText(UploadForm.this, "Done ", Toast.LENGTH_SHORT);
-                        }
-                    });*/
                 }
-
-
-
             }
             else if(data.getData() != null)
             {
