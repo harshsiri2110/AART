@@ -110,6 +110,8 @@ public class UploadForm extends AppCompatActivity {
 
 
                 Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
+
+                startActivity(new Intent(UploadForm.this,MainActivity.class));
             }
         }));
     }

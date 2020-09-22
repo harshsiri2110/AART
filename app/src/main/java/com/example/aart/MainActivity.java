@@ -46,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         models = new ArrayList<>();
         models.add(new Model(R.drawable.dog, "Brown and white indie dog", "3 months", "Male", "Kothrud, Pune"));
+        /*
         models.add(new Model(R.drawable.dog, "Brown indie dog", "4 months", "Female", "Baner, Pune"));
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));
         models.add(new Model(R.drawable.dog, "Black indie dog", "2 months", "Female", "Aundh, Pune"));
+        */
+
 
         adapter = new Adapter(models,this);
         listView = findViewById(R.id.listView);
