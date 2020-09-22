@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         reference = FirebaseDatabase.getInstance().getReference().child("Member");
 
         //startActivity(new Intent(MainActivity.this,Cards.class));
@@ -52,10 +51,36 @@ public class MainActivity extends AppCompatActivity {
         models.add(new Model(R.drawable.dog, "Black indie dog", "2 months", "Female", "Aundh, Pune"));
         */
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        adapter = new Adapter(models,this);
-        listView = findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+                for(int i = 1 ; i <= snapshot.getChildrenCount(); i++)
+                {
+                    if(snapshot.hasChild(String.valueOf(i)))
+                    {
+                       models.add(new Model(R.drawable.dog,
+                               snapshot.child(String.valueOf(i)).child("title").getValue().toString(),
+                               snapshot.child(String.valueOf(i)).child("age").getValue().toString(),
+                               snapshot.child(String.valueOf(i)).child("gender").getValue().toString(),
+                               snapshot.child(String.valueOf(i)).child("location").getValue().toString()));
+                    }
+                }
+
+                adapter = new Adapter(models,MainActivity.this);
+                listView = findViewById(R.id.listView);
+                listView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         uploadPost = findViewById(R.id.uploadPost);
 
