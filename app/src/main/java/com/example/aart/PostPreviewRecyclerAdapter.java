@@ -1,6 +1,7 @@
 package com.example.aart;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;

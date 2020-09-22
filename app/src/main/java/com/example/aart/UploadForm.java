@@ -17,16 +17,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class UploadForm extends AppCompatActivity {
     EditText txtTitle,txtAge, location;
@@ -45,6 +50,8 @@ public class UploadForm extends AppCompatActivity {
     List<Uri> imageUriList = new ArrayList<Uri>();
 
     Member member;
+
+
     long maxId = 0;
 
     public Uri imgUri;
@@ -53,7 +60,7 @@ public class UploadForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
-
+        storageReference = FirebaseStorage.getInstance().getReference();
 
 
         txtTitle = (EditText)findViewById(R.id.txttitle);
@@ -139,8 +146,19 @@ public class UploadForm extends AppCompatActivity {
                 for (int i=0 ; i< totalItemsSelected;i++)
                 {
                     imageUriList.add(data.getClipData().getItemAt(i).getUri());
-
+                    uploadPicture();
+                    /*StorageReference fileToUpload = storageReference.child("images").child("filename");
+                    fileToUpload.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                    {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                        {
+                           // Toast.makeText(UploadForm.this, "Done ", Toast.LENGTH_SHORT);
+                        }
+                    });*/
                 }
+
+
 
             }
             else if(data.getData() != null)
@@ -155,5 +173,25 @@ public class UploadForm extends AppCompatActivity {
 
         }
 
+    }
+    public void uploadPicture()
+    {
+        final String randomKey= UUID.randomUUID().toString();
+        StorageReference riversRef = storageReference.child("images" + randomKey);
+
+        riversRef.putFile(imgUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
     }
 }
