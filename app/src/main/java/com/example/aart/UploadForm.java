@@ -17,14 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
-
 import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +38,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 
 public class UploadForm extends AppCompatActivity {
-    EditText txtTitle,txtAge, location;
+    EditText txtTitle, txtAge, location;
     Button btnupload, selectImages;
     DatabaseReference reff;
 
@@ -55,16 +49,17 @@ public class UploadForm extends AppCompatActivity {
 
     StorageReference storageReference;
 
+    PostPreviewRecyclerAdapter postPreviewRecyclerAdapter;
+
     List<Uri> imageUriList = new ArrayList<Uri>();
 
     List<SlideModel> previewImages = new ArrayList<SlideModel>();
 
     Member member;
 
-
     long maxId = 0;
 
-    public Uri imgUri;
+    //public Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +80,7 @@ public class UploadForm extends AppCompatActivity {
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
 
-        member= new Member();
+        member = new Member();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
 
@@ -123,6 +118,14 @@ public class UploadForm extends AppCompatActivity {
 
                 reff.child(String.valueOf(maxId+1)).setValue(member);
 
+                if(!previewImages.isEmpty())
+                {
+                    for(int i = 0 ; i < previewImages.size();i++)
+                    {
+                        uploadPicture(imageUriList.get(i));
+                    }
+                }
+
 
                 Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
 
@@ -151,12 +154,10 @@ public class UploadForm extends AppCompatActivity {
             {
                 int totalItemsSelected = data.getClipData().getItemCount();
 
-                for (int i=0 ; i< totalItemsSelected;i++)
-                {
+                for (int i = 0; i < totalItemsSelected; i++) {
 
                     imageUriList.add(data.getClipData().getItemAt(i).getUri());
-                    imgUri= data.getData();
-                    uploadPicture();
+                    previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
 
                     /*StorageReference fileToUpload = storageReference.child("images").child("filename");
                     fileToUpload.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
@@ -167,9 +168,6 @@ public class UploadForm extends AppCompatActivity {
                            // Toast.makeText(UploadForm.this, "Done ", Toast.LENGTH_SHORT);
                         }
                     });*/
-
-                    previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
-
                 }
 
 
@@ -177,20 +175,20 @@ public class UploadForm extends AppCompatActivity {
             }
             else if(data.getData() != null)
             {
+                imageUriList.add(data.getData());
                 previewImages.add(new SlideModel(data.getData().toString(), ScaleTypes.CENTER_INSIDE));
             }
 
             imgView.setImageList(previewImages, ScaleTypes.FIT);
 
-
-
         }
 
     }
-    public void uploadPicture()
+
+    public void uploadPicture(Uri imgUri)
     {
         final String randomKey= UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images" + randomKey);
+        StorageReference riversRef = storageReference.child(String.valueOf(maxId+1)).child("images" + randomKey);
 
         riversRef.putFile(imgUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -206,5 +204,6 @@ public class UploadForm extends AppCompatActivity {
                         // ...
                     }
                 });
+
     }
 }
