@@ -16,7 +16,6 @@ public class Member {
     }
 
 
-
     public String getTitle() {
         return title;
     }
