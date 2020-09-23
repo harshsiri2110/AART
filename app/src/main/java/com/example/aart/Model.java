@@ -28,6 +28,9 @@ public class Model {
         this.locationText= location;
     }
 
+    public Model() {
+    }
+
     public int getImageLocal() {
         return imageLocal;
     }

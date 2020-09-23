@@ -71,7 +71,6 @@ public class Adapter extends BaseAdapter {
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 
-
         title.setText(models.get(position).getTitle());
         ageText.setText(models.get(position).getAge());
         genderText.setText(models.get(position).getGender());

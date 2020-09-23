@@ -59,7 +59,7 @@ public class UploadForm extends AppCompatActivity {
 
     List<SlideModel> previewImages = new ArrayList<SlideModel>();
 
-    Member member;
+    Model model;
 
     long maxId = 0;
 
@@ -83,7 +83,7 @@ public class UploadForm extends AppCompatActivity {
 
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
-        member = new Member();
+        model = new Model();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
 
@@ -116,12 +116,13 @@ public class UploadForm extends AppCompatActivity {
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 
-                member.setTitle(txtTitle.getText().toString());
-                member.setAge(txtAge.getText().toString());
-                member.setLocation(location.getText().toString());
-                member.setGender(txtGender.getText().toString());
+                model.setImage(imageUriList);
+                model.setTitle(txtTitle.getText().toString());
+                model.setAge(txtAge.getText().toString());
+                model.setLocation(location.getText().toString());
+                model.setGender(txtGender.getText().toString());
 
-                reff.child(String.valueOf(maxId+1)).setValue(member);
+                reff.child(String.valueOf(maxId+1)).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
