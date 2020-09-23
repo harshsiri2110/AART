@@ -9,14 +9,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApiNotAvailableException;
@@ -59,7 +63,7 @@ public class UploadForm extends AppCompatActivity {
 
     long maxId = 0;
 
-    //public Uri imgUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,6 @@ public class UploadForm extends AppCompatActivity {
 
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
-
         member = new Member();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
@@ -95,6 +98,8 @@ public class UploadForm extends AppCompatActivity {
 
             }
         });
+
+
 
         selectImages.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +139,7 @@ public class UploadForm extends AppCompatActivity {
         }));
     }
 
+
     private void FileChooser()
     {
         Intent intent = new Intent();
@@ -166,7 +172,6 @@ public class UploadForm extends AppCompatActivity {
             }
 
             imgView.setImageList(previewImages, ScaleTypes.FIT);
-
         }
 
     }

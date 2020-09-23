@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.dog, "Brown and white indie dog", "3 months", "Male", "Kothrud, Pune"));
+        models.add(new Model(R.drawable.dog, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune"));
         /*
         models.add(new Model(R.drawable.dog, "Brown indie dog", "4 months", "Female", "Baner, Pune"));
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));

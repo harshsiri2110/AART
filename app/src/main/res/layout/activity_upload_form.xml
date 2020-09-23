@@ -137,10 +137,10 @@
         android:layout_height="200dp"
         android:id="@+id/imgView"
         android:background="#e6f2ff"
-        app:iss_auto_cycle="true"
-        app:iss_period="1000"
-        app:iss_delay="10"
-        />
+
+        >
+    </com.denzcoskun.imageslider.ImageSlider>
+
 
     <Button
         android:id="@+id/btnupload"

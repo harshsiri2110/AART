@@ -15,7 +15,6 @@ public class Member {
         this.gender = gender;
     }
 
-
     public String getTitle() {
         return title;
     }
