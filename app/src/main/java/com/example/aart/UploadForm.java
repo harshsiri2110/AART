@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApiNotAvailableException;
@@ -34,7 +35,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -44,7 +49,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 public class UploadForm extends AppCompatActivity {
     EditText txtTitle, txtAge, location;
     Button btnupload, selectImages;
-    DatabaseReference reff;
+    DatabaseReference reff, reff2;
 
     RadioGroup radioGenderGroup;
     RadioButton txtGender;
@@ -61,9 +66,15 @@ public class UploadForm extends AppCompatActivity {
 
     Model model;
 
+    Member member;
+
     long maxId = 0;
+    long currId;
 
 
+    Map<String,String> uploadUrl = new HashMap<>();
+
+    List<String> fileUrls = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +92,15 @@ public class UploadForm extends AppCompatActivity {
 
         radioGenderGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+        member = new Member();
+
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
         model = new Model();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
+
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Images");
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,7 +113,6 @@ public class UploadForm extends AppCompatActivity {
 
             }
         });
-
 
 
         selectImages.setOnClickListener(new View.OnClickListener() {
@@ -116,13 +130,15 @@ public class UploadForm extends AppCompatActivity {
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 
-                model.setImage(imageUriList);
+
                 model.setTitle(txtTitle.getText().toString());
                 model.setAge(txtAge.getText().toString());
                 model.setLocation(location.getText().toString());
                 model.setGender(txtGender.getText().toString());
 
-                reff.child(String.valueOf(maxId+1)).setValue(model);
+                currId = maxId + 1;
+
+                reff.child(String.valueOf(currId)).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
@@ -130,7 +146,9 @@ public class UploadForm extends AppCompatActivity {
                     {
                         uploadPicture(imageUriList.get(i));
                     }
+
                 }
+
 
 
                 Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
@@ -180,13 +198,21 @@ public class UploadForm extends AppCompatActivity {
     public void uploadPicture(Uri imgUri)
     {
         final String randomKey= UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child(String.valueOf(maxId+1)).child("images" + randomKey);
+        final StorageReference storageRef = storageReference.child(String.valueOf(maxId+1)).child("images" + randomKey);
 
-        riversRef.putFile(imgUri)
+        storageRef.putFile(imgUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                //fileUrls.add(uri.toString());
+                                //uploadUrl.put("URL", uri.toString());
+                                reff.child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -196,6 +222,5 @@ public class UploadForm extends AppCompatActivity {
                         // ...
                     }
                 });
-
     }
 }

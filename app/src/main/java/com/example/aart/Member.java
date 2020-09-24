@@ -1,41 +1,25 @@
 package com.example.aart;
 
+import java.util.List;
+
 public class Member {
-    private String title;
-    private  String age;
-    private String location;
 
-    private String gender;
+    private String Uri;
 
-    public String getGender() {
-        return gender;
+    public Member(String uri) {
+        Uri = uri;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getUri() {
+        return Uri;
     }
 
-    public String getTitle() {
-        return title;
+    public void setUri(String uri) {
+        Uri = uri;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Member() {
     }
 
-    public String getAge() {
-        return age;
-    }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String locatn) {
-        this.location = locatn;
-    }
 }
