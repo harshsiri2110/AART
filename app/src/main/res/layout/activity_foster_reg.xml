@@ -19,8 +19,9 @@
             android:ems="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:inputType="textCapSentences"
             android:hint="Name"
-            android:inputType="text" />
+             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -101,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="#DDECFB"
+        android:backgroundTint="@color/grey_font"
         android:text="Register as Foster"
         android:textSize="22sp">
     </Button>
