@@ -37,9 +37,11 @@ public class Foster_reg extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foster_reg);
 
+        fosterdetails = new Fosterdetails();
+
         reference= FirebaseDatabase.getInstance().getReference().child("Foster");
 
-        name = findViewById(R.id.name);
+        name = findViewById(R.id.fosterName);
         number = findViewById(R.id.num);
         email = findViewById(R.id.email);
         password = findViewById(R.id.pass);
@@ -71,7 +73,7 @@ public class Foster_reg extends AppCompatActivity
 
                 currId = maxId + 1;
 
-                reference.child(String.valueOf(currId)).setValue(fosterdetails)
+                reference.child(String.valueOf(maxId+1)).setValue(fosterdetails)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

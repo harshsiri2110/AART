@@ -140,7 +140,6 @@ public class UploadForm extends AppCompatActivity
                 model.setGender(txtGender.getText().toString());
                 model.setDescription(description.getText().toString());
 
-
                 currId = maxId + 1;
 
                 reff.child(String.valueOf(currId)).setValue(model);

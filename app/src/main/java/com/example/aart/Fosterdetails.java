@@ -14,6 +14,10 @@ public class Fosterdetails
         this.password = password;
         this.mobileno = mobileno;
     }
+    public Fosterdetails()
+    {
+
+    }
 
     public String getName()
     {
