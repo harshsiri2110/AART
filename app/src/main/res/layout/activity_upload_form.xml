@@ -142,7 +142,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             >
 
             <EditText
@@ -153,7 +153,9 @@
                 android:hint="Description"
                 android:ems="10"
                 android:focusable="true"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true"
+                />
+
         </com.google.android.material.textfield.TextInputLayout>
 
 

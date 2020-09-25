@@ -47,7 +47,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 
 public class UploadForm extends AppCompatActivity {
-    EditText txtTitle, txtAge, location;
+    EditText txtTitle, txtAge, location, description;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
 
@@ -81,7 +81,7 @@ public class UploadForm extends AppCompatActivity {
         setContentView(R.layout.activity_upload_form);
         storageReference = FirebaseStorage.getInstance().getReference();
 
-
+        description = (EditText)findViewById(R.id.postDescription);
         txtTitle = (EditText)findViewById(R.id.txttitle);
         txtAge = (EditText)findViewById(R.id.txtage);
         location = (EditText)findViewById(R.id.locatn);
