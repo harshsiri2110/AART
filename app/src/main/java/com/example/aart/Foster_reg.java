@@ -1,5 +1,6 @@
 package com.example.aart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,9 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Foster_reg extends AppCompatActivity
 {
@@ -40,19 +47,43 @@ public class Foster_reg extends AppCompatActivity
 
         submit = findViewById(R.id.btnreg);
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                maxId = snapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         submit.setOnClickListener((new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 fosterdetails.setName(name.getText().toString());
-                Long.parseLong(number.getText().toString());
+                fosterdetails.setMobileno(Long.parseLong(number.getText().toString()));
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
 
                 currId = maxId + 1;
 
-                reference.child(String.valueOf(currId)).setValue(fosterdetails);
+                reference.child(String.valueOf(currId)).setValue(fosterdetails)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Foster_reg.this,"Data inserted!",Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Foster_reg.this,"Data NOT inserted!",Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }));
     }

@@ -99,9 +99,6 @@ public class UploadForm extends AppCompatActivity
         model = new Model();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
-
-        reff2 = FirebaseDatabase.getInstance().getReference().child("Images");
-
         reff.addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -142,6 +139,7 @@ public class UploadForm extends AppCompatActivity
                 model.setLocation(location.getText().toString());
                 model.setGender(txtGender.getText().toString());
                 model.setDescription(description.getText().toString());
+
 
                 currId = maxId + 1;
 
