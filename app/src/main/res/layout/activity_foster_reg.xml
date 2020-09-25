@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".UploadForm">
+    tools:context=".Foster_reg">
 
 <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -95,6 +95,15 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <Button
+        android:id="@+id/btnreg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="#DDECFB"
+        android:text="Register as Foster"
+        android:textSize="22sp">
+    </Button>
 
 </LinearLayout>
