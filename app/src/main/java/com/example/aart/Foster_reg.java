@@ -25,5 +25,7 @@ public class Foster_reg extends AppCompatActivity {
 
         submit = findViewById(R.id.btnreg);
 
+
+
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     ListView listView;
     Adapter adapter;
     List<Model> models;
-    Button uploadPost;
+    Button uploadPost, fosterRegBtn;
 
     DatabaseReference reference;
 
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
 
         reference = FirebaseDatabase.getInstance().getReference().child("Member");
 
+        fosterRegBtn = findViewById(R.id.fosterRegBtn);
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
@@ -89,6 +90,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,UploadForm.class));
+            }
+        });
+
+        fosterRegBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,Foster_reg.class));
             }
         });
 
