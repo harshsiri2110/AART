@@ -46,7 +46,6 @@ public class Foster_reg extends AppCompatActivity
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
             }
-
         }));
     }
 }
