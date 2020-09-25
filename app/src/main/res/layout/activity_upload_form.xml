@@ -8,6 +8,34 @@
     android:padding="30dp"
     tools:context=".UploadForm">
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speciesSelect"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/dogSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Dog"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/CatSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Cat"
+            android:textSize="20sp" />
+
+    </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

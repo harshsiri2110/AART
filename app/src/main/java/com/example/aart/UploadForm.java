@@ -58,7 +58,6 @@ public class UploadForm extends AppCompatActivity {
 
     StorageReference storageReference;
 
-    PostPreviewRecyclerAdapter postPreviewRecyclerAdapter;
 
     List<Uri> imageUriList = new ArrayList<Uri>();
 
