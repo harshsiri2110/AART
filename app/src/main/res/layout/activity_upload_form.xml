@@ -3,205 +3,218 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".UploadForm">
+    tools:context=".UploadForm"
+    android:isScrollContainer="true"
+    >
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/speciesSelect"
-        android:orientation="horizontal"
-        >
-
-        <RadioButton
-            android:id="@+id/dogSelect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Dog"
-            android:textSize="22sp" />
-
-        <RadioButton
-            android:id="@+id/CatSelect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Cat"
-            android:textSize="22sp" />
-
-    </RadioGroup>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/txttitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="Title"
-
-            android:inputType="textCapSentences" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <EditText
-            android:id="@+id/txtage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="Age"
-            android:inputType="textCapSentences" />
-    </com.google.android.material.textfield.TextInputLayout>
-   <RadioGroup
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:id="@+id/radioGroup"
-       >
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Gender:"
-          android:textSize="20sp"
-          android:layout_marginBottom="10dp"
-          android:layout_marginTop="10dp">
+            android:orientation="vertical">
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/speciesSelect"
+            android:orientation="horizontal"
 
-      </TextView>
-       <RadioButton
-           android:layout_width="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/dogSelect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Dog"
+                android:textSize="22sp" />
+
+            <RadioButton
+                android:id="@+id/CatSelect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Cat"
+                android:textSize="22sp" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Title"
+
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <EditText
+                android:id="@+id/txtage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Age"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+       <RadioGroup
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="Male"
-           android:textSize="20sp"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="10dp"
-           android:id="@+id/radioMale"
+           android:orientation="horizontal"
+           android:id="@+id/radioGroup"
            >
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Gender:"
+              android:textSize="20sp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginTop="10dp">
 
-       </RadioButton>
-       <RadioButton
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="10dp"
-           android:text="Female"
-           android:id="@+id/radioFemale"
-           android:textSize="20sp"
-           >
 
-       </RadioButton>
-   </RadioGroup>
+          </TextView>
+           <RadioButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Male"
+               android:textSize="20sp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="10dp"
+               android:id="@+id/radioMale"
+               >
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+           </RadioButton>
+           <RadioButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="10dp"
+               android:text="Female"
+               android:id="@+id/radioFemale"
+               android:textSize="20sp"
+               >
 
-        <EditText
-            android:id="@+id/locatn"
+           </RadioButton>
+       </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="Location"
-            android:inputType="textCapSentences"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/locatn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Location"
+                android:inputType="textCapSentences"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/postDescription"
+                android:inputType="textCapSentences|textMultiLine"
+                android:hint="Description"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Images:"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+
+            </TextView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Images"
+                android:id="@+id/selectImages"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                />
+
+        </LinearLayout>
+
+        <!--
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upload Images:"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+            android:id="@+id/imgView"
+            android:background="#e6f2ff"
+
+            />-->
 
 
-        </TextView>
+        <com.denzcoskun.imageslider.ImageSlider
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:id="@+id/imgView"
+            android:background="#e6f2ff"
+            >
+        </com.denzcoskun.imageslider.ImageSlider>
+
+
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Images"
-            android:id="@+id/selectImages"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            />
-
-    </LinearLayout>
-
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgView"
-        android:background="#e6f2ff"
-
-        />-->
-
-    <com.denzcoskun.imageslider.ImageSlider
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/imgView"
-        android:background="#e6f2ff"
-
-        >
-    </com.denzcoskun.imageslider.ImageSlider>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        >
-
-        <EditText
+            android:id="@+id/btnupload"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/postDescription"
-            android:inputType="textCapSentences"
-            android:hint="Description"
-            android:ems="10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/grey_font"
+            android:text="Upload"
+            android:textSize="22sp">
 
+        </Button>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:id="@+id/btnupload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/grey_font"
-        android:text="Upload"
-        android:textSize="22sp">
-
-    </Button>
-
-
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
