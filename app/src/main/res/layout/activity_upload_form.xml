@@ -23,7 +23,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Dog"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <RadioButton
             android:id="@+id/CatSelect"
@@ -33,7 +33,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Cat"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
     </RadioGroup>
 
