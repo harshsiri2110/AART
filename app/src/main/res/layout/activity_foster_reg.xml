@@ -19,8 +19,9 @@
             android:ems="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:inputType="textCapSentences"
             android:hint="Name"
-            android:inputType="text" />
+             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
