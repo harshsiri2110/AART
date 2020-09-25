@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Model {
 
+   private List<Uri>imageList;
    private int imageLocal;
    private String title;
    private String description;
@@ -21,34 +22,36 @@ public class Model {
         this.genderText = gender;
         this.locationText= location;
         this.description = description;
-
     }
 
     public Model() {
     }
 
-    public int getImageLocal()
-    {
+    public List<Uri> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Uri> imageList) {
+        this.imageList = imageList;
+    }
+
+    public int getImageLocal() {
         return imageLocal;
     }
 
-    public void setLocal(int image)
-    {
+    public void setLocal(int image) {
         this.imageLocal = image;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     public String getTitle() {
-
         return title;
     }
 
