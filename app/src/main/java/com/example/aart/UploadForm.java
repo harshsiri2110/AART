@@ -46,7 +46,8 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 
-public class UploadForm extends AppCompatActivity {
+public class UploadForm extends AppCompatActivity
+{
     EditText txtTitle, txtAge, location, description;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
@@ -75,7 +76,8 @@ public class UploadForm extends AppCompatActivity {
     List<String> fileUrls = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -100,28 +102,34 @@ public class UploadForm extends AppCompatActivity {
 
         reff2 = FirebaseDatabase.getInstance().getReference().child("Images");
 
-        reff.addValueEventListener(new ValueEventListener() {
+        reff.addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
                 maxId = snapshot.getChildrenCount();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error)
+            {
 
             }
         });
 
 
-        selectImages.setOnClickListener(new View.OnClickListener() {
+        selectImages.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 FileChooser();
             }
         });
 
 
-        btnupload.setOnClickListener((new View.OnClickListener() {
+        btnupload.setOnClickListener((new View.OnClickListener()
+        {
             @Override
             public void onClick(View view){
 
@@ -145,18 +153,13 @@ public class UploadForm extends AppCompatActivity {
                     {
                         uploadPicture(imageUriList.get(i));
                     }
-
                 }
-
-
-
                 Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
 
                 startActivity(new Intent(UploadForm.this,MainActivity.class));
             }
         }));
     }
-
 
     private void FileChooser()
     {
@@ -169,7 +172,8 @@ public class UploadForm extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1 && resultCode == RESULT_OK )
@@ -178,7 +182,8 @@ public class UploadForm extends AppCompatActivity {
             {
                 int totalItemsSelected = data.getClipData().getItemCount();
 
-                for (int i = 0; i < totalItemsSelected; i++) {
+                for (int i = 0; i < totalItemsSelected; i++)
+                {
                     imageUriList.add(data.getClipData().getItemAt(i).getUri());
                     previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
                 }
@@ -191,7 +196,6 @@ public class UploadForm extends AppCompatActivity {
 
             imgView.setImageList(previewImages, ScaleTypes.FIT);
         }
-
     }
 
     public void uploadPicture(Uri imgUri)
@@ -200,13 +204,17 @@ public class UploadForm extends AppCompatActivity {
         final StorageReference storageRef = storageReference.child(String.valueOf(maxId+1)).child("images" + randomKey);
 
         storageRef.putFile(imgUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                    {
                         // Get a URL to the uploaded content
-                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                        {
                             @Override
-                            public void onSuccess(Uri uri) {
+                            public void onSuccess(Uri uri)
+                            {
                                 //fileUrls.add(uri.toString());
                                 //uploadUrl.put("URL", uri.toString());
                                 reff.child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
@@ -214,9 +222,11 @@ public class UploadForm extends AppCompatActivity {
                         });
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
+                .addOnFailureListener(new OnFailureListener()
+                {
                     @Override
-                    public void onFailure(@NonNull Exception exception) {
+                    public void onFailure(@NonNull Exception exception)
+                    {
                         // Handle unsuccessful uploads
                         // ...
                     }

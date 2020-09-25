@@ -27,23 +27,28 @@ public class Model {
     public Model() {
     }
 
-    public int getImageLocal() {
+    public int getImageLocal()
+    {
         return imageLocal;
     }
 
-    public void setLocal(int image) {
+    public void setLocal(int image)
+    {
         this.imageLocal = image;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
     public String getTitle() {
+
         return title;
     }
 
