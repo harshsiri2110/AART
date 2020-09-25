@@ -20,6 +20,10 @@ public class Foster_reg extends AppCompatActivity
     DatabaseReference reference;
     Fosterdetails fosterdetails;
 
+    long maxId = 0;
+    long currId;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,6 +49,10 @@ public class Foster_reg extends AppCompatActivity
                 Long.parseLong(number.getText().toString());
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
+
+                currId = maxId + 1;
+
+                reference.child(String.valueOf(currId)).setValue(fosterdetails);
             }
         }));
     }
