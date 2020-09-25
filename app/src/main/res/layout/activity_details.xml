@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".Cards">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+<com.denzcoskun.imageslider.ImageSlider
+    android:id="@+id/images"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="#e6f2ff"
+    app:iss_auto_cycle="false"
+    app:iss_corner_radius="5"
+    app:iss_delay="10"
+    app:iss_period="1000"
+    />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/images"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Brown and white Indie Puppy"
+        android:textColor="#262626"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        />
+
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/age"
+            android:id="@+id/ageIcon"
+            android:layout_below="@+id/images"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="47dp"
+            />
+
+        <TextView
+            android:id="@+id/ageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/images"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="51dp"
+            android:text="3 months"
+            android:textSize="15sp"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/gender2"
+            android:id="@+id/genderIcon"
+            android:layout_below="@+id/images"
+            android:layout_marginTop="47dp"
+            android:layout_marginLeft="137dp"
+            />
+
+        <TextView
+            android:id="@+id/genderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/images"
+            android:layout_marginLeft="163dp"
+            android:layout_marginTop="51dp"
+            android:text="male"
+            android:textSize="15sp"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/location"
+            android:id="@+id/locationIcon"
+            android:layout_below="@+id/images"
+            android:layout_marginTop="47dp"
+            android:layout_marginLeft="237dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/images"
+            android:layout_marginLeft="264dp"
+            android:layout_marginTop="51dp"
+            android:text="Kothrud, Pune"
+            android:textSize="15sp"
+            android:id="@+id/locationText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/genderIcon"
+            android:textColor="#262626"
+            android:text="ABOUT ME"
+            android:fontFeatureSettings="@string/bottom_sheet_behavior"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:textSize="20sp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/genderIcon"
+            android:textColor="#262626"
+            android:text="Foster Details"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="235dp"
+            android:textSize="20sp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/genderIcon"
+            android:textColor="#0C0000"
+            android:text="Name"/>
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/genderIcon"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="265dp"
+            app:srcCompat="@android:drawable/ic_menu_call"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/location"
+            android:id="@+id/location"
+            android:layout_below="@+id/genderIcon"
+            android:layout_marginTop="305dp"
+            android:layout_marginLeft="16dp"
+            />
+
+
+
+    </RelativeLayout>
+</LinearLayout>

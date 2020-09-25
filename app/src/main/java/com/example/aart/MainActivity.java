@@ -82,9 +82,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-
-
         uploadPost = findViewById(R.id.uploadPost);
 
         uploadPost.setOnClickListener(new View.OnClickListener() {
