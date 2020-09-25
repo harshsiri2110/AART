@@ -8,17 +8,19 @@ public class Model {
 
    private int imageLocal;
    private String title;
+   private String description;
    private String ageText;
    private String genderText;
    private String locationText;
 
 
-    public Model(int image, String title, String age, String gender, String location) {
+    public Model(int image, String title, String age, String gender, String location, String description) {
         this.imageLocal = image;
         this.title = title;
         this.ageText = age;
         this.genderText = gender;
         this.locationText= location;
+        this.description = description;
 
     }
 
@@ -33,7 +35,13 @@ public class Model {
         this.imageLocal = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getTitle() {
         return title;

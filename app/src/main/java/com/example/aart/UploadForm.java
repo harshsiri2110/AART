@@ -58,7 +58,6 @@ public class UploadForm extends AppCompatActivity {
 
     StorageReference storageReference;
 
-
     List<Uri> imageUriList = new ArrayList<Uri>();
 
     List<SlideModel> previewImages = new ArrayList<SlideModel>();
@@ -134,6 +133,7 @@ public class UploadForm extends AppCompatActivity {
                 model.setAge(txtAge.getText().toString());
                 model.setLocation(location.getText().toString());
                 model.setGender(txtGender.getText().toString());
+                model.setDescription(description.getText().toString());
 
                 currId = maxId + 1;
 
