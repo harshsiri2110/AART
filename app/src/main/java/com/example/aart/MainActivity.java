@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.dog, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune"));
+        models.add(new Model(R.drawable.dog, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune","Very sweet dog"));
         /*
         models.add(new Model(R.drawable.dog, "Brown indie dog", "4 months", "Female", "Baner, Pune"));
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));
@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity
                                snapshot.child(String.valueOf(i)).child("title").getValue().toString(),
                                snapshot.child(String.valueOf(i)).child("age").getValue().toString(),
                                snapshot.child(String.valueOf(i)).child("gender").getValue().toString(),
-                               snapshot.child(String.valueOf(i)).child("location").getValue().toString()));
+                               snapshot.child(String.valueOf(i)).child("location").getValue().toString(),
+                               snapshot.child(String.valueOf(i)).child("description").getValue().toString()));
                     }
                 }
 
