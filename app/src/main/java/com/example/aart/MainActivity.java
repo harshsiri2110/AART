@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.animation.ArgbEvaluator;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
     Button uploadPost, fosterRegBtn;
 
     DatabaseReference reference;
-
+    List<Uri> uriList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +58,35 @@ public class MainActivity extends AppCompatActivity
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
 
                 for(int i = 1 ; i <= snapshot.getChildrenCount(); i++)
                 {
                     if(snapshot.hasChild(String.valueOf(i)))
                     {
-                       models.add(new Model(R.drawable.dog,
+                        DatabaseReference imgref= reference.child("images");
+                        imgref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot)
+                            {
+                                for(DataSnapshot currsnap : snapshot.getChildren())
+                                {
+                                    uriList.add(Uri.parse(currsnap.child("uri").getValue().toString()));
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                       models.add(new Model(uriList,
                                snapshot.child(String.valueOf(i)).child("title").getValue().toString(),
                                snapshot.child(String.valueOf(i)).child("age").getValue().toString(),
                                snapshot.child(String.valueOf(i)).child("gender").getValue().toString(),
-                               snapshot.child(String.valueOf(i)).child("location").getValue().toString(),
-                               snapshot.child(String.valueOf(i)).child("description").getValue().toString()));
+                               snapshot.child(String.valueOf(i)).child("location").getValue().toString()));
                     }
                 }
 

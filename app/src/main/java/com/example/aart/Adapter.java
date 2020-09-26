@@ -2,6 +2,7 @@ package com.example.aart;
 
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +66,10 @@ public class Adapter extends BaseAdapter {
         locationText = view.findViewById(R.id.locationText);
 
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.dog1, ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.dog2, ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.dog3, ScaleTypes.CENTER_INSIDE));
+        for (Uri curruri:models.get(position).getImageList())
+        {
+            slideModels.add(new SlideModel(curruri.toString(), ScaleTypes.CENTER_INSIDE));
+        }
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 

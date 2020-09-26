@@ -14,6 +14,13 @@ public class Model {
    private String genderText;
    private String locationText;
 
+    public Model(List<Uri> imageList, String title, String ageText, String genderText, String locationText) {
+        this.imageList = imageList;
+        this.title = title;
+        this.ageText = ageText;
+        this.genderText = genderText;
+        this.locationText = locationText;
+    }
 
     public Model(int image, String title, String age, String gender, String location, String description) {
         this.imageLocal = image;
