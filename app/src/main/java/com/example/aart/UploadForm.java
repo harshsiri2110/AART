@@ -70,6 +70,7 @@ public class UploadForm extends AppCompatActivity
     long currId;
 
 
+    String catOrDog;
     Map<String,String> uploadUrl = new HashMap<>();
 
     List<String> fileUrls = new ArrayList<>();
@@ -145,7 +146,9 @@ public class UploadForm extends AppCompatActivity
 
                 currId = maxId + 1;
 
-                reff.child(txtSpecies.getText().toString()).child(String.valueOf(currId)).setValue(model);
+                catOrDog = txtSpecies.getText().toString();
+
+                reff.child(catOrDog).child(String.valueOf(currId)).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
@@ -217,7 +220,7 @@ public class UploadForm extends AppCompatActivity
                             {
                                 //fileUrls.add(uri.toString());
                                 //uploadUrl.put("URL", uri.toString());
-                                reff.child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
+                                reff.child(catOrDog).child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
                             }
                         });
                     }
