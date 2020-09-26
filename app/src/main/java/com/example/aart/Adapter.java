@@ -66,9 +66,10 @@ public class Adapter extends BaseAdapter {
         locationText = view.findViewById(R.id.locationText);
 
         List<SlideModel> slideModels = new ArrayList<>();
-        for (Uri curruri:models.get(position).getImageList())
+
+        for (String curruri : models.get(position).getImageList())
         {
-            slideModels.add(new SlideModel(curruri.toString(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(curruri, ScaleTypes.CENTER_INSIDE));
         }
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);

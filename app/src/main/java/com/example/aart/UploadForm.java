@@ -221,6 +221,8 @@ public class UploadForm extends AppCompatActivity
                                 //fileUrls.add(uri.toString());
                                 //uploadUrl.put("URL", uri.toString());
                                 reff.child(catOrDog).child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
+
+
                             }
                         });
                     }
