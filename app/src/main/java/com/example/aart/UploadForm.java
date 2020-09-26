@@ -52,9 +52,8 @@ public class UploadForm extends AppCompatActivity
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
 
-    RadioGroup radioGenderGroup;
-    RadioButton txtGender;
-
+    RadioGroup radioGenderGroup, radioSpeciesGroup;
+    RadioButton txtGender, txtSpecies;
     ImageSlider imgView;
 
     StorageReference storageReference;
@@ -91,6 +90,7 @@ public class UploadForm extends AppCompatActivity
         selectImages = (Button) findViewById(R.id.selectImages);
 
         radioGenderGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioSpeciesGroup = (RadioGroup) findViewById(R.id.speciesSelect);
 
         member = new Member();
 
@@ -98,7 +98,8 @@ public class UploadForm extends AppCompatActivity
 
         model = new Model();
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Member");
+        reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+
         reff.addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -133,6 +134,8 @@ public class UploadForm extends AppCompatActivity
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 
+                selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
+                txtSpecies= (RadioButton)findViewById(selectedId);
 
                 model.setTitle(txtTitle.getText().toString());
                 model.setAge(txtAge.getText().toString());
@@ -142,7 +145,7 @@ public class UploadForm extends AppCompatActivity
 
                 currId = maxId + 1;
 
-                reff.child(String.valueOf(currId)).setValue(model);
+                reff.child(txtSpecies.getText().toString()).child(String.valueOf(currId)).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
