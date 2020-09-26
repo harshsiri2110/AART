@@ -7,7 +7,7 @@ public class Fosterdetails
     private String password;
     private long mobileNo;
 
-    public Fosterdetails(String name, String email, String password, long mobileno)
+    public Fosterdetails(String name, String email, String password, long mobileNo)
     {
         this.name = name;
         this.email = email;
