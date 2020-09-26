@@ -5,14 +5,14 @@ public class Fosterdetails
     private String name;
     private String email;
     private String password;
-    private long mobileno;
+    private long mobileNo;
 
     public Fosterdetails(String name, String email, String password, long mobileno)
     {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.mobileno = mobileno;
+        this.mobileNo = mobileNo;
     }
     public Fosterdetails()
     {
@@ -49,13 +49,13 @@ public class Fosterdetails
         this.password = password;
     }
 
-    public long getMobileno()
+    public long getMobileNo()
     {
-        return mobileno;
+        return mobileNo;
     }
 
-    public void setMobileno(long mobileno)
+    public void setMobileNo(long mobileNo)
     {
-        this.mobileno = mobileno;
+        this.mobileNo = mobileNo;
     }
 }

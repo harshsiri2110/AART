@@ -3,6 +3,7 @@ package com.example.aart;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,14 +50,18 @@ public class Foster_reg extends AppCompatActivity
 
         submit = findViewById(R.id.btnreg);
 
-        reference.addValueEventListener(new ValueEventListener() {
+
+        reference.addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
                 maxId = snapshot.getChildrenCount();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error)
+            {
 
             }
         });
@@ -67,7 +72,7 @@ public class Foster_reg extends AppCompatActivity
             public void onClick(View view)
             {
                 fosterdetails.setName(name.getText().toString());
-                fosterdetails.setMobileno(Long.parseLong(number.getText().toString()));
+                fosterdetails.setMobileNo(Long.parseLong(number.getText().toString()));
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
 
@@ -76,7 +81,7 @@ public class Foster_reg extends AppCompatActivity
                 reference.child(String.valueOf(maxId+1)).setValue(fosterdetails)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onSuccess(Void Void) {
                         Toast.makeText(Foster_reg.this,"Data inserted!",Toast.LENGTH_LONG).show();
                     }
                 })
@@ -86,6 +91,7 @@ public class Foster_reg extends AppCompatActivity
                         Toast.makeText(Foster_reg.this,"Data NOT inserted!",Toast.LENGTH_LONG).show();
                     }
                 });
+                startActivity(new Intent(Foster_reg.this,MainActivity.class));
             }
         }));
     }
