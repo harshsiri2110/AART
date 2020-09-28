@@ -3,6 +3,7 @@ package com.example.aart;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.widgets.Snapshot;
 import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] species = {"Dog","Cat"};
+       // final String[] species = {"Dog","Cat"};
+        final List<String> species = new ArrayList<>() ;
 
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
@@ -68,15 +70,77 @@ public class MainActivity extends AppCompatActivity
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));
         models.add(new Model(R.drawable.dog, "Black indie dog", "2 months", "Female", "Aundh, Pune"));
         */
-
         reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot currsnap : snapshot.getChildren()){
+                    species.add(currsnap.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        for(String catorDog: species){
+            final DatabaseReference speciesReff = reference.child(catorDog);
+            speciesReff.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(final DataSnapshot currPostSnap: snapshot.getChildren()){
+                        uriList.clear();
+                        DatabaseReference imgref= currPostSnap.child("images").getRef();
+
+                        imgref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+                                for (DataSnapshot currSnap : imgSnapshot.getChildren()) {
+                                    //Log.d("URL",currSnap.child("uri").getValue().toString());
+                                    uriList.add(currSnap.child("uri").getValue().toString());
+                                }
+
+                                models.add(new Model(uriList,
+                                        currPostSnap.child("title").getValue().toString(),
+                                        currPostSnap.child("age").getValue().toString(),
+                                        currPostSnap.child("gender").getValue().toString(),
+                                        currPostSnap.child("location").getValue().toString()));
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                    adapter = new Adapter(models, MainActivity.this);
+                    listView = findViewById(R.id.listView);
+                    listView.setAdapter(adapter);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+        /*reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //for(int j = 0 ; j < 2 ; j++) {
                     //if (snapshot.hasChild(species[j])) {
                 for(DataSnapshot speciesSnapShot : snapshot.getChildren())
                 {
-                        final DatabaseReference currReff = speciesSnapShot.getRef();
+                        final DatabaseReference currReff = reference.child(speciesSnapShot.getKey());
 
                         currReff.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -87,7 +151,7 @@ public class MainActivity extends AppCompatActivity
                                     uriList.clear();
 
                                     //if (snapshot.hasChild(String.valueOf(i))) {
-                                        DatabaseReference imgref = currPostSnap.child("images").getRef();
+                                        DatabaseReference imgref = currReff.child(currPostSnap.getKey());
 
                                         Log.d("URL", "I am here!");
                                         imgref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -139,7 +203,7 @@ public class MainActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
             Log.d("TEST", "Hello I am here!");
 
