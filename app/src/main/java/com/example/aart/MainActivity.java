@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity
                 {
                         final DatabaseReference currReff = reference.child(speciesSnapShot.getKey());
 
-                        currReff.addListenerForSingleValueEvent(new ValueEventListener() {
+                        currReff.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull final DataSnapshot snapshot) {
                                 //for (int i = 1; i <= snapshot.getChildrenCount(); i++) {
