@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     Button uploadPost, fosterRegBtn;
 
     int currPost;
+    int backButtonCount = 0;
 
     DatabaseReference reference;
     List<String> uriList= new ArrayList<>();
@@ -49,50 +51,74 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Member");
+        final String[] species = {"Dog","Cat"};
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
         fosterRegBtn = findViewById(R.id.fosterRegBtn);
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
-        uriList.add("https://firebasestorage.googleapis.com/v0/b/aart-c7906.appspot.com/o/2%2Fimages98994436-5cf3-4f41-a3bc-9e98f469c114?alt=media&token=6c106bd9-d8b5-4ba0-93eb-db70b00bf5f2");
-        models.add(new Model(uriList, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune"));
+        //uriList.add("https://firebasestorage.googleapis.com/v0/b/aart-c7906.appspot.com/o/2%2Fimages98994436-5cf3-4f41-a3bc-9e98f469c114?alt=media&token=6c106bd9-d8b5-4ba0-93eb-db70b00bf5f2");
+        //models.add(new Model(uriList, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune"));
         /*
         models.add(new Model(R.drawable.dog, "Brown indie dog", "4 months", "Female", "Baner, Pune"));
         models.add(new Model(R.drawable.dog, "White indie dog", "1.5 months", "Male", "Warje, Pune"));
         models.add(new Model(R.drawable.dog, "Black indie dog", "2 months", "Female", "Aundh, Pune"));
         */
 
-        Log.d("TEST", "Hello I am here!");
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull final DataSnapshot snapshot)
-            {
-                for(int i = 1 ; i <= snapshot.getChildrenCount(); i++)
-                {
-                    currPost = i;
-                    uriList= new ArrayList<>();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(int j = 0 ; j < 2 ; j++) {
+                    if (snapshot.hasChild(species[j])) {
 
-                    if(snapshot.hasChild(String.valueOf(i)))
-                    {
-                        DatabaseReference imgref= reference.child(String.valueOf(i)).child("images");
+                        final DatabaseReference currReff = reference.child(species[j]);
 
-                        Log.d("URL","I am here!");
-                        imgref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        currReff.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
-                                for(DataSnapshot currSnap : imgSnapshot.getChildren())
-                                {
-                                    //Log.d("URL",currSnap.child("uri").getValue().toString());
-                                    uriList.add(currSnap.child("uri").getValue().toString());
-                                }
+                            public void onDataChange(@NonNull final DataSnapshot snapshot) {
+                                //for (int i = 1; i <= snapshot.getChildrenCount(); i++) {
+                                for(final DataSnapshot currPostSnap : snapshot.getChildren()){
+                                    //currPost = i;
+                                    uriList = new ArrayList<>();
 
-                                models.add(new Model(uriList,
-                                        snapshot.child(String.valueOf(currPost)).child("title").getValue().toString(),
-                                        snapshot.child(String.valueOf(currPost)).child("age").getValue().toString(),
-                                        snapshot.child(String.valueOf(currPost)).child("gender").getValue().toString(),
-                                        snapshot.child(String.valueOf(currPost)).child("location").getValue().toString()));
+                                    //if (snapshot.hasChild(String.valueOf(i))) {
+                                        DatabaseReference imgref = currPostSnap.child("images").getRef();
+
+                                        Log.d("URL", "I am here!");
+                                        imgref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+                                                for (DataSnapshot currSnap : imgSnapshot.getChildren()) {
+                                                    //Log.d("URL",currSnap.child("uri").getValue().toString());
+                                                    uriList.add(currSnap.child("uri").getValue().toString());
+                                                }
+
+                                                models.add(new Model(uriList,
+                                                        currPostSnap.child("title").getValue().toString(),
+                                                        currPostSnap.child("age").getValue().toString(),
+                                                        currPostSnap.child("gender").getValue().toString(),
+                                                        currPostSnap.child("location").getValue().toString()));
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                        for (String url : uriList) {
+                                            Log.d("URL", url);
+                                        }
+
+
+                                    //}
+                                }
+                                adapter = new Adapter(models, MainActivity.this);
+                                listView = findViewById(R.id.listView);
+                                listView.setAdapter(adapter);
 
                             }
 
@@ -102,18 +128,8 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
 
-                        for(String url:uriList)
-                        {
-                            Log.d("URL",url);
-                        }
-
-
                     }
                 }
-
-                adapter = new Adapter(models,MainActivity.this);
-                listView = findViewById(R.id.listView);
-                listView.setAdapter(adapter);
             }
 
             @Override
@@ -121,6 +137,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+            Log.d("TEST", "Hello I am here!");
 
         uploadPost = findViewById(R.id.uploadPost);
 
@@ -140,4 +158,21 @@ public class MainActivity extends AppCompatActivity
 
 
         }
+
+    @Override
+    public void onBackPressed() {
+
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
 }

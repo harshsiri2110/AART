@@ -144,9 +144,21 @@ public class UploadForm extends AppCompatActivity
                 model.setGender(txtGender.getText().toString());
                 model.setDescription(description.getText().toString());
 
-                currId = maxId + 1;
-
                 catOrDog = txtSpecies.getText().toString();
+
+                reff.child(catOrDog).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        maxId = snapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                currId = maxId + 1;
 
                 reff.child(catOrDog).child(String.valueOf(currId)).setValue(model);
 
