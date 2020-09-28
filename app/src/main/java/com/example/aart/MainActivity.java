@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
+
+        uriList = new ArrayList<>();
         //uriList.add("https://firebasestorage.googleapis.com/v0/b/aart-c7906.appspot.com/o/2%2Fimages98994436-5cf3-4f41-a3bc-9e98f469c114?alt=media&token=6c106bd9-d8b5-4ba0-93eb-db70b00bf5f2");
         //models.add(new Model(uriList, "Brown and white indie dog", "3 months", "Male", "Kothrud,  Pune"));
         /*
@@ -70,10 +72,11 @@ public class MainActivity extends AppCompatActivity
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(int j = 0 ; j < 2 ; j++) {
-                    if (snapshot.hasChild(species[j])) {
-
-                        final DatabaseReference currReff = reference.child(species[j]);
+                //for(int j = 0 ; j < 2 ; j++) {
+                    //if (snapshot.hasChild(species[j])) {
+                for(DataSnapshot speciesSnapShot : snapshot.getChildren())
+                {
+                        final DatabaseReference currReff = speciesSnapShot.getRef();
 
                         currReff.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity
                                 //for (int i = 1; i <= snapshot.getChildrenCount(); i++) {
                                 for(final DataSnapshot currPostSnap : snapshot.getChildren()){
                                     //currPost = i;
-                                    uriList = new ArrayList<>();
+                                    uriList.clear();
 
                                     //if (snapshot.hasChild(String.valueOf(i))) {
                                         DatabaseReference imgref = currPostSnap.child("images").getRef();
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
 
-                    }
+                    //}
                 }
             }
 
