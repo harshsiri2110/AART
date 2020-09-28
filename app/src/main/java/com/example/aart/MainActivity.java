@@ -111,11 +111,9 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
 
-
                 adapter = new Adapter(models,MainActivity.this);
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
-
             }
 
             @Override
