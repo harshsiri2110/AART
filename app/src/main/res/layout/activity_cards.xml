@@ -49,14 +49,13 @@
                 android:textStyle="italic" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/age"
                 android:id="@+id/ageIcon"
+                android:layout_width="14dp"
+                android:layout_height="17dp"
                 android:layout_below="@+id/image"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="47dp"
-                />
+                android:src="@drawable/age" />
 
             <TextView
                 android:id="@+id/ageText"
