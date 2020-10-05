@@ -15,15 +15,15 @@
             android:text="Upload Post"
             android:id="@+id/uploadPost"
             />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentRight="true"
+        android:id="@+id/logout"
+        />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Foster Registration"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/fosterRegBtn"
-            />
+
 
 
 

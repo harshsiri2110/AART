@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity
     ListView listView;
     Adapter adapter;
     List<Model> models;
-    Button uploadPost, fosterRegBtn;
+    Button uploadPost, logout;
 
     int currPost;
-    int backButtonCount = 0;
+    //int backButtonCount =0;
 
     DatabaseReference reference;
     List<String> uriList= new ArrayList<>();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-        fosterRegBtn = findViewById(R.id.fosterRegBtn);
+
         //startActivity(new Intent(MainActivity.this,Cards.class));
 
         models = new ArrayList<>();
@@ -215,31 +215,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this,UploadForm.class));
             }
         });
-
-        fosterRegBtn.setOnClickListener(new View.OnClickListener() {
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Foster_reg.class));
+                startActivity(new Intent(MainActivity.this, FirstPage.class));
             }
         });
 
-
         }
 
-    @Override
-    public void onBackPressed() {
 
-        if(backButtonCount >= 1)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
-            backButtonCount++;
-        }
-    }
 }

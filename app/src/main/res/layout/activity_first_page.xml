@@ -8,6 +8,16 @@
     android:padding="30dp"
     tools:context=".Foster_reg">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
     <ImageButton
         android:id="@+id/dogSelect"
@@ -16,7 +26,9 @@
         tools:srcCompat="@tools:sample/avatars"
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="20dp"/>
+
+
     <TextView
         android:id="@+id/dogtxt"
         android:layout_width="match_parent"
@@ -64,6 +76,11 @@
         android:text="already registered? login here"
         android:textSize="15sp">
     </Button>
+
+        </LinearLayout>
+
+
+</ScrollView>
 
 </LinearLayout>
 
