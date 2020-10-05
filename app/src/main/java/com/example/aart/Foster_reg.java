@@ -96,6 +96,7 @@ public class Foster_reg extends AppCompatActivity
 
                 String memail= email.getText().toString().trim();
                 String mpassword = password.getText().toString().trim();
+                String mConfirmPass = confirmPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(memail)){
                     email.setError("Email is Required.");
@@ -112,7 +113,7 @@ public class Foster_reg extends AppCompatActivity
                     return;
                 }
 
-                if(!confirmPassword.getText().equals(password.getText()))
+                if(!mConfirmPass.equals(mpassword))
                 {
                     confirmPassword.setError("Password is not the same");
                     return;

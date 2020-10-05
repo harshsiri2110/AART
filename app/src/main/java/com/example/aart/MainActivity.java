@@ -80,7 +80,13 @@ public class MainActivity extends AppCompatActivity
 
         pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
 
-        //pullToRefresh.setOnRefreshListener(this);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showCards();
+
+            }
+        });
 
         /*reference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -180,6 +186,23 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    private void refreshList()
+    {
+        reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void showCards()
     {
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
@@ -229,6 +252,7 @@ public class MainActivity extends AppCompatActivity
                                         models.add(currModel);
 
                                         adapter.notifyDataSetChanged();
+
                                     }
 
                                 }
@@ -249,7 +273,7 @@ public class MainActivity extends AppCompatActivity
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
-
+                pullToRefresh.setRefreshing(false);
 
             }
 
