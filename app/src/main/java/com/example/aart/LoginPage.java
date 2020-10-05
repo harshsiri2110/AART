@@ -52,6 +52,7 @@ public class LoginPage extends AppCompatActivity {
                     password.setError(("Password must be >= 6 characters"));
                     return;
                 }
+
                 firebaseAuth.signInWithEmailAndPassword(memail, mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
