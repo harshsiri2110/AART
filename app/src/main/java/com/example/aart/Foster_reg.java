@@ -57,6 +57,7 @@ public class Foster_reg extends AppCompatActivity
         confirmPassword = findViewById(R.id.Cpass);
 
         submit = findViewById(R.id.btnreg);
+        login = findViewById(R.id.mlogin);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
