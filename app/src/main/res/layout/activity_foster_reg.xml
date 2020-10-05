@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/material_on_surface_disabled"
+        android:background="@android:color/transparent"
         android:text="Already registered? Login here"
         android:textAllCaps="false"
         android:textSize="20sp" />
