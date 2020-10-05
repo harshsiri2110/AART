@@ -74,11 +74,7 @@ public class Adapter extends BaseAdapter {
             slideModels.add(new SlideModel(currUri.getUri(), ScaleTypes.CENTER_INSIDE));
         }
 
-        //slideModels.notifyAll();
-
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
-
-        //imageSlider.notifyAll();
 
         title.setText(models.get(position).getTitle());
         ageText.setText(models.get(position).getAge());

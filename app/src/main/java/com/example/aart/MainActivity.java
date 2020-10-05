@@ -83,8 +83,7 @@ public class MainActivity extends AppCompatActivity
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                showCards();
-
+                refreshList();
             }
         });
 
@@ -194,6 +193,51 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                int postCount = (int) snapshot.getChildrenCount();
+
+                snapshot.child(String.valueOf(postCount)).getRef().addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        final Model currModel = snapshot.getValue(Model.class);
+
+                        snapshot.child("images").getRef().addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+
+                                imgCount = Integer.MIN_VALUE;
+                                imgCount = (int)imgSnapshot.getChildrenCount();
+                                //Log.d("TEST","Images count - "+imgCount);
+
+                                for(DataSnapshot currImgSnap : imgSnapshot.getChildren())
+                                {
+                                    ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
+
+                                    if(!currModel.getImageList().contains(currImg))
+                                    {
+                                        currModel.getImageList().add(currImg);
+                                    }
+
+                                    if(currModel.getImageList().size() == imgCount)
+                                    {
+                                        adapter.notifyDataSetChanged();
+
+                                        pullToRefresh.setRefreshing(false);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
@@ -273,7 +317,7 @@ public class MainActivity extends AppCompatActivity
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
-                pullToRefresh.setRefreshing(false);
+
 
             }
 
