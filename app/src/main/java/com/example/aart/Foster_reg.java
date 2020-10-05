@@ -31,7 +31,7 @@ public class Foster_reg extends AppCompatActivity
 
     EditText name,number,email,password,confirmPassword;
 
-    Button submit;
+    Button submit, login;
     DatabaseReference reference;
     Fosterdetails fosterdetails;
     FirebaseAuth firebaseAuth;
@@ -115,8 +115,8 @@ public class Foster_reg extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            startActivity(new Intent(Foster_reg.this,MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         }
                         else {
                             Toast.makeText(Foster_reg.this, "Error!", Toast.LENGTH_SHORT).show();
@@ -140,5 +140,11 @@ public class Foster_reg extends AppCompatActivity
                 //startActivity(new Intent(Foster_reg.this,MainActivity.class));
             }
         }));
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Foster_reg.this, LoginPage.class));
+            }
+        });
     }
 }

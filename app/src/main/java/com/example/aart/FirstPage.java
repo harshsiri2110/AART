@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class FirstPage extends AppCompatActivity {
-    Button regbtn;
+    Button regbtn, getLoginbtn;
     Button loginbtn;
     ImageButton dogSelect;
     int backButtonCount = 0;
@@ -22,6 +22,7 @@ public class FirstPage extends AppCompatActivity {
         setContentView(R.layout.activity_first_page);
         regbtn = findViewById(R.id.btnreg);
         dogSelect = findViewById(R.id.dogSelect);
+        getLoginbtn = findViewById(R.id.btnlogin);
 
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,13 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this,MainActivity.class));
+            }
+        });
+
+        getLoginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FirstPage.this, LoginPage.class));
             }
         });
     }
