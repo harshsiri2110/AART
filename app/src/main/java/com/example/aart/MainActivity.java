@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.widgets.Snapshot;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity
     int imgCount;
     int postCount;
 
+    SwipeRefreshLayout pullToRefresh;
+
     List<String> postList = new ArrayList<>();
 
     Model currModel = new Model();
@@ -67,7 +70,6 @@ public class MainActivity extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listView);
 
-
         models = new ArrayList<>();
         if(!models.isEmpty())
         {
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         showCards();
+
+        pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
+
+        //pullToRefresh.setOnRefreshListener(this);
 
         /*reference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -183,18 +189,18 @@ public class MainActivity extends AppCompatActivity
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
 
                 postCount = Integer.MIN_VALUE;
+
                 for(final DataSnapshot currPostSnap : snapshot.getChildren())
                 {
-                    currPostSnap.getRef().child("images").addListenerForSingleValueEvent(new ValueEventListener() {
+                    currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
 
                             currModel = currPostSnap.getValue(Model.class);
 
-
                             imgCount = Integer.MIN_VALUE;
                             imgCount = (int)imgSnapshot.getChildrenCount();
-                            Log.d("TEST","Images count - "+imgCount);
+                            //Log.d("TEST","Images count - "+imgCount);
 
                             for(DataSnapshot currImgSnap : imgSnapshot.getChildren())
                             {
@@ -235,9 +241,15 @@ public class MainActivity extends AppCompatActivity
                         }
                     });
                 }
+
                 adapter = new Adapter(models, MainActivity.this);
+
+                adapter.notifyDataSetChanged();
+
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
+
+
 
             }
 

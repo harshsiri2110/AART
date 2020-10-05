@@ -110,6 +110,13 @@ public class Foster_reg extends AppCompatActivity
                     password.setError(("Password must be >= 6 characters"));
                     return;
                 }
+
+                if(!confirmPassword.getText().equals(password.getText()))
+                {
+                    confirmPassword.setError("Password is not the same");
+                    return;
+                }
+
                 firebaseAuth.createUserWithEmailAndPassword(memail,mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

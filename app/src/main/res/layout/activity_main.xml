@@ -28,13 +28,20 @@
 
 
 
-    <ListView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="8sp"
-        android:layout_below="@+id/uploadPost"
-        />
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8sp"
+            android:layout_below="@+id/uploadPost"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
