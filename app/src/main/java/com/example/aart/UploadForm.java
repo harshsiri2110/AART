@@ -62,9 +62,9 @@ public class UploadForm extends AppCompatActivity
 
     List<SlideModel> previewImages = new ArrayList<SlideModel>();
 
-    Model model;
+    List<ImageUrl> imageUrls = new ArrayList<>();
 
-    Member member;
+    Model model;
 
     long maxId = 0;
     long currId;
@@ -92,8 +92,6 @@ public class UploadForm extends AppCompatActivity
 
         radioGenderGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioSpeciesGroup = (RadioGroup) findViewById(R.id.speciesSelect);
-
-        member = new Member();
 
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
@@ -143,10 +141,10 @@ public class UploadForm extends AppCompatActivity
                 model.setLocation(location.getText().toString());
                 model.setGender(txtGender.getText().toString());
                 model.setDescription(description.getText().toString());
+                model.setSpeciesText(txtSpecies.getText().toString());
+                model.setID(UUID.randomUUID().toString());
 
-                catOrDog = txtSpecies.getText().toString();
-
-                reff.child(catOrDog).addValueEventListener(new ValueEventListener() {
+                reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         maxId = snapshot.getChildrenCount();
@@ -160,7 +158,7 @@ public class UploadForm extends AppCompatActivity
 
                 currId = maxId + 1;
 
-                reff.child(catOrDog).child(String.valueOf(currId)).setValue(model);
+                reff.child(String.valueOf(currId)).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
@@ -230,11 +228,7 @@ public class UploadForm extends AppCompatActivity
                             @Override
                             public void onSuccess(Uri uri)
                             {
-                                //fileUrls.add(uri.toString());
-                                //uploadUrl.put("URL", uri.toString());
-                                reff.child(catOrDog).child(String.valueOf(currId)).child("images").push().setValue(new Member(uri.toString()));
-
-
+                                reff.child(String.valueOf(currId)).child("images").push().setValue(new ImageUrl(uri.toString()));
                             }
                         });
                     }

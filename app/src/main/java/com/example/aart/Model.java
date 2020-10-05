@@ -2,56 +2,54 @@ package com.example.aart;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
 
-   private List<String>imageList;
-   private int imageLocal;
+   private List<ImageUrl>imageList;
    private String title;
    private String description;
    private String ageText;
    private String genderText;
    private String locationText;
+   private String speciesText;
+   private String ID;
 
-    public Model(List<String> imageList, String title, String ageText, String genderText, String locationText) {
+    public Model(List<ImageUrl> imageList, String title, String ageText, String genderText, String locationText) {
         this.imageList = imageList;
         this.title = title;
         this.ageText = ageText;
         this.genderText = genderText;
         this.locationText = locationText;
-        this.imageLocal = 0;
     }
 
-    public Model(int image, String title, String age, String gender, String location, String description) {
-        this.imageLocal = image;
-        this.title = title;
-        this.ageText = age;
-        this.genderText = gender;
-        this.locationText= location;
-        this.description = description;
-        this.imageList = null;
+    public String getSpeciesText() {
+        return speciesText;
     }
 
-
+    public void setSpeciesText(String speciesText) {
+        this.speciesText = speciesText;
+    }
 
     public Model() {
+        imageList = new ArrayList<>();
     }
 
-    public List<String> getImageList() {
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public List<ImageUrl> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<String> imageList) {
+    public void setImageList(List<ImageUrl> imageList) {
         this.imageList = imageList;
-    }
-
-    public int getImageLocal() {
-        return imageLocal;
-    }
-
-    public void setLocal(int image) {
-        this.imageLocal = image;
     }
 
     public String getDescription() {

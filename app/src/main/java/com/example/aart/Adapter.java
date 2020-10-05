@@ -3,6 +3,7 @@ package com.example.aart;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,10 @@ public class Adapter extends BaseAdapter {
 
         List<SlideModel> slideModels = new ArrayList<>();
 
-        for (String curruri : models.get(position).getImageList())
+        for (ImageUrl currUri : models.get(position).getImageList())
         {
-            slideModels.add(new SlideModel(curruri, ScaleTypes.CENTER_INSIDE));
+            //Log.d("TEST","Inside Adapter!, Uri - "+currUri.getUri());
+            slideModels.add(new SlideModel(currUri.getUri(), ScaleTypes.CENTER_INSIDE));
         }
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
