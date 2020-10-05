@@ -115,8 +115,8 @@ public class Foster_reg extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            //(new Intent(Foster_reg.this,MainActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         }
                         else {
                             Toast.makeText(Foster_reg.this, "Error!", Toast.LENGTH_SHORT).show();

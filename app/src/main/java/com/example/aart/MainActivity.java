@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity
 
     DatabaseReference reference;
     List<String> uriList= new ArrayList<>();
+    public void logoutreg(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), FirstPage.class));
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,13 +221,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this,UploadForm.class));
             }
         });
-        logout = findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, FirstPage.class));
-            }
-        });
+
 
         }
 
