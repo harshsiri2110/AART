@@ -17,11 +17,13 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listView);
+        ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
+        Glide.with(this).load(R.drawable.loadingbar).into(listPlaceholder);
+
+        listView.setEmptyView(listPlaceholder);
 
         models = new ArrayList<>();
         if(!models.isEmpty())
@@ -182,5 +188,12 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        startActivity(new Intent(getApplicationContext(),FirstPage.class));
+
     }
 }

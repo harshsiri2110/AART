@@ -24,6 +24,12 @@
         android:onClick="logoutreg"
         />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listPlaceholder"
+        android:scaleType="fitCenter"/>
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
