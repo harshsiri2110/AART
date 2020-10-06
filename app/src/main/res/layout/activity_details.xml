@@ -9,6 +9,7 @@ tools:context=".Cards">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
 <com.denzcoskun.imageslider.ImageSlider
@@ -118,29 +119,28 @@ tools:context=".Cards">
             android:layout_below="@+id/genderIcon"
             android:textColor="#262626"
             android:text="Foster Details"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="235dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/genderIcon"
-            android:textColor="#0C0000"
-            android:text="Name"/>
 
         <ImageView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_below="@+id/genderIcon"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="265dp"
-            app:srcCompat="@android:drawable/ic_menu_call"
-            />
+            android:layout_marginTop="229dp"
+            app:srcCompat="@drawable/nameicon" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/genderIcon"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="267dp"
+            app:srcCompat="@drawable/callicon" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/location"
             android:id="@+id/location"
             android:layout_below="@+id/genderIcon"
