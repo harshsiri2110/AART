@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listView);
         ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
-        Glide.with(this).load(R.drawable.loadingbar).into(listPlaceholder);
+        Glide.with(this).load(R.drawable.loading_bar2).into(listPlaceholder);
 
         listView.setEmptyView(listPlaceholder);
 
