@@ -26,7 +26,7 @@ public class FirstPage extends AppCompatActivity {
 
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this,Foster_reg.class));
             }
         });

@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        logout = findViewById(R.id.logout);
+        /*logout = findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,FirstPage.class));
             }
-        });
+        });*/
     }
 
     private void refreshList()
