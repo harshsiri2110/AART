@@ -113,6 +113,7 @@
         android:layout_centerInParent="true"
         android:background="@android:color/transparent"
         android:text="Already registered? Login here"
+        android:textStyle="italic"
         android:textAllCaps="false"
         android:textSize="20sp" />
 

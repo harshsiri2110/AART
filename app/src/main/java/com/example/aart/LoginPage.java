@@ -61,7 +61,7 @@ public class LoginPage extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         else{
-                            Toast.makeText(LoginPage.this, "Error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this, "The username or password is incorrect or the user does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
