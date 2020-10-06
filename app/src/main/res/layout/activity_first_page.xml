@@ -29,6 +29,7 @@
         android:src="@drawable/doggo1"
         android:scaleType="fitCenter"
         android:backgroundTint="#000000"
+        android:padding="10dp"
         />
 
 
@@ -51,6 +52,7 @@
         android:src="@drawable/cat1"
         android:scaleType="fitCenter"
         android:backgroundTint="#000000"
+        android:padding="10dp"
         />
 
     <TextView
