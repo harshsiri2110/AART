@@ -118,7 +118,8 @@ tools:context=".Cards">
             android:layout_marginLeft="16dp"
             android:layout_below="@+id/genderIcon"
             android:textColor="#262626"
-            android:text="Foster Details"/>
+            android:text="Foster Details"
+            android:textStyle="bold"/>
 
         <ImageView
 
@@ -126,7 +127,7 @@ tools:context=".Cards">
             android:layout_height="30dp"
             android:layout_below="@+id/genderIcon"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="229dp"
+            android:layout_marginTop="241dp"
             app:srcCompat="@drawable/nameicon" />
 
         <ImageView
@@ -135,19 +136,17 @@ tools:context=".Cards">
             android:layout_height="30dp"
             android:layout_below="@+id/genderIcon"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="267dp"
+            android:layout_marginTop="281dp"
             app:srcCompat="@drawable/callicon" />
 
         <ImageView
+            android:id="@+id/location"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/location"
-            android:id="@+id/location"
             android:layout_below="@+id/genderIcon"
-            android:layout_marginTop="305dp"
             android:layout_marginLeft="16dp"
-            />
-
+            android:layout_marginTop="320dp"
+            android:src="@drawable/location" />
 
 
     </RelativeLayout>
