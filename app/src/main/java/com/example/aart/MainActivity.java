@@ -117,7 +117,10 @@ public class MainActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,Details.class);
+                intent.putExtra("selectedCard",(i+1));
+                startActivity(intent);
             }
         });
 
