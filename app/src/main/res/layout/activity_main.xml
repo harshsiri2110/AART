@@ -45,6 +45,7 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="8sp"
             android:layout_below="@+id/uploadPost"
+            android:descendantFocusability="blocksDescendants"
             />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

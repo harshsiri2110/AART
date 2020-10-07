@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -112,7 +113,18 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this,FirstPage.class));
             }
         });*/
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
+
+
 
     private void refreshList()
     {
@@ -162,8 +174,8 @@ public class MainActivity extends AppCompatActivity
 
                                         adapter.notifyDataSetChanged();
 
-                                    }
 
+                                    }
                                 }
                             }
                         }
@@ -181,6 +193,8 @@ public class MainActivity extends AppCompatActivity
 
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
+
+
             }
 
             @Override
