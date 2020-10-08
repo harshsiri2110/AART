@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,9 +24,14 @@ public class MedicalDetails extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String medicalDetails;
+    TextView medicalDet;
 
     public MedicalDetails() {
         // Required empty public constructor
+    }
+    public MedicalDetails(String medicalDetails){
+        this.medicalDetails= medicalDetails;
     }
 
     /**
@@ -52,6 +58,7 @@ public class MedicalDetails extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -59,6 +66,9 @@ public class MedicalDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_medical_details, container, false);
+        ViewGroup root = (ViewGroup)inflater.inflate(R.layout.fragment_medical_details, container, false);
+        medicalDet= root.findViewById(R.id.medicalDetails);
+        medicalDet.setText(medicalDetails);
+        return root;
     }
 }

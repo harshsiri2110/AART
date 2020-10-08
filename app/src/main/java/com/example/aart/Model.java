@@ -15,6 +15,9 @@ public class Model {
    private String locationText;
    private String speciesText;
    private String ID;
+   private String medical;
+
+
 
     public Model(List<ImageUrl> imageList, String title, String ageText, String genderText, String locationText) {
         this.imageList = imageList;
@@ -34,6 +37,8 @@ public class Model {
 
     public Model() {
         imageList = new ArrayList<>();
+        description= "";
+        medical = "";
     }
 
     public String getID() {
@@ -58,6 +63,13 @@ public class Model {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getMedical() {
+        return medical;
+    }
+
+    public void setMedical(String medical) {
+        this.medical = medical;
     }
 
     public String getTitle() {

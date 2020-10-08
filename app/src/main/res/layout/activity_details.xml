@@ -138,13 +138,6 @@ tools:context=".Cards">
             android:layout_below="@+id/tabLayout"
             android:id="@+id/details_view_pager"
             />
-
-
-
-
-
-
-
-
+        
     </RelativeLayout>
 </LinearLayout>

@@ -6,9 +6,24 @@
     tools:context=".MedicalDetails">
 
     <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Medical Information" />
+        android:text="Medical Information"
+        android:paddingLeft="16dp"
+        android:textSize="18sp"
+        android:id="@+id/medicalText"/>
 
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -139,6 +139,12 @@
                 android:inputType="textCapSentences"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="20sp">
+        </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -150,14 +156,38 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/postDescription"
                 android:inputType="textCapSentences|textMultiLine"
-                android:hint="Description"
+                android:hint="History, Behaviour etc.."
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medical Details"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp">
+            </TextView>
 
+        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medicalDetails"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:hint="Vaccination, Deworming, Illness(if any)"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
