@@ -31,7 +31,7 @@ public class MedicalDetails extends Fragment {
         // Required empty public constructor
     }
     public MedicalDetails(String medicalDetails){
-        this.medicalDetails= medicalDetails;
+        this.medicalDetails = medicalDetails;
     }
 
     /**
@@ -58,7 +58,6 @@ public class MedicalDetails extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
     }
 
@@ -67,7 +66,7 @@ public class MedicalDetails extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup)inflater.inflate(R.layout.fragment_medical_details, container, false);
-        medicalDet= root.findViewById(R.id.medicalDetails);
+        medicalDet= root.findViewById(R.id.medicalText);
         medicalDet.setText(medicalDetails);
         return root;
     }

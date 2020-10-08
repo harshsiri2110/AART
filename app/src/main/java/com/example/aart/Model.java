@@ -38,7 +38,7 @@ public class Model {
     public Model() {
         imageList = new ArrayList<>();
         description= "";
-        medical = "";
+        medical = "No medical history found :(";
     }
 
     public String getID() {
