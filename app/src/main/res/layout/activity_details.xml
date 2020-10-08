@@ -23,6 +23,7 @@ tools:context=".Cards">
     app:iss_period="1000"
     />
 
+
     <TextView
         android:id="@+id/details_title"
         android:layout_width="wrap_content"
@@ -99,7 +100,7 @@ tools:context=".Cards">
             android:textSize="15sp"
             android:id="@+id/locationText"/>
 
-        <TextView
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -120,74 +121,29 @@ tools:context=".Cards">
             android:layout_below="@+id/aboutMe"
             android:id="@+id/post_desc">
 
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/genderIcon"
-            android:textColor="#262626"
-            android:text="Foster Details"
-            android:textStyle="bold"
-            android:id="@+id/fosterDet"/>
-
-        <ImageView
-
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/genderIcon"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="241dp"
-            app:srcCompat="@drawable/nameicon" />
-        <TextView
+        </TextView>-->
+        <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="60dp"
-            android:layout_marginTop="15dp"
-            android:textSize="18sp"
-            android:layout_below="@+id/fosterDet"
-            android:text="Tanya "
-            android:id="@+id/fosterName"/>
-
-
-        <ImageView
-
-            android:layout_width="30dp"
-            android:layout_height="30dp"
             android:layout_below="@+id/genderIcon"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="281dp"
-            app:srcCompat="@drawable/callicon"/>
-        <TextView
+            android:layout_marginTop="10dp"
+
+            android:id="@+id/tabLayout"
+            >
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="60dp"
-            android:layout_marginTop="56dp"
-            android:textSize="18sp"
-            android:layout_below="@+id/fosterDet"
-            android:text="9876567893"
-            android:id="@+id/FosterNumber"/>
+            android:layout_below="@+id/tabLayout"
+            android:id="@+id/details_view_pager"
+            />
 
-        <ImageView
-            android:id="@+id/location"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/genderIcon"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="320dp"
-            android:src="@drawable/location" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="60dp"
-            android:layout_marginTop="95dp"
-            android:textSize="18sp"
-            android:layout_below="@+id/fosterDet"
-            android:text="Baner, Pune"
-            android:id="@+id/FosterLocation"/>
+
+
+
+
+
 
 
     </RelativeLayout>

@@ -2,6 +2,11 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -9,6 +14,7 @@ import android.widget.TextView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +36,10 @@ public class Details extends AppCompatActivity {
 
     TextView title, age, gender, location, description, foster_name, foster_number, foster_location;
 
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    ViewPagerAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +50,12 @@ public class Details extends AppCompatActivity {
         age = findViewById(R.id.ageText);
         gender = findViewById(R.id.genderText);
         location = findViewById(R.id.locationText);
-        description = findViewById(R.id.post_desc);
+        //description = findViewById(R.id.about_me_text);
 
-        foster_name = findViewById(R.id.fosterName);
-        foster_location = findViewById(R.id.FosterLocation);
-        foster_number = findViewById(R.id.FosterNumber);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.details_view_pager);
+
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         imageSlider = findViewById(R.id.images);
 
@@ -53,6 +64,36 @@ public class Details extends AppCompatActivity {
 
         getDetails(selectedCard);
 
+    }
+
+    class ViewPagerAdapter extends FragmentStatePagerAdapter
+    {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     private void getDetails(int position)
@@ -85,7 +126,11 @@ public class Details extends AppCompatActivity {
                                 age.setText(currModel.getAge());
                                 gender.setText(currModel.getGender());
                                 location.setText(currModel.getLocation());
-                                description.setText(currModel.getDescription());
+                                //description.setText(currModel.getDescription());
+
+
+                                adapter.addFrag(new AboutMe(currModel.getDescription(),"Tanya","1234567896"),"About Me");
+                                adapter.addFrag(new MedicalDetails(),"Medical History");
 
                                 for (ImageUrl currUri : currModel.getImageList())
                                 {
@@ -95,6 +140,11 @@ public class Details extends AppCompatActivity {
                                     if(slideModels.size() == currModel.getImageList().size())
                                     {
                                         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
+
+
+                                        viewPager.setAdapter(adapter);
+
+                                        tabLayout.setupWithViewPager(viewPager);
                                     }
                                 }
                             }
@@ -115,3 +165,5 @@ public class Details extends AppCompatActivity {
         });
     }
 }
+
+

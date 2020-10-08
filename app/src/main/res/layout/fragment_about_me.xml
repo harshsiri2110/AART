@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutMe">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About Me."
+        android:id="@+id/about_me_text"
+        android:textSize="18sp"
+        android:paddingLeft="16dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/about_me_text"
+        android:textColor="#262626"
+        android:text="Foster Details"
+        android:textStyle="bold"
+        android:id="@+id/fosterDet"/>
+
+    <ImageView
+
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/fosterDet"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/nameicon"
+        android:id="@+id/nameIcon"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="60dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/fosterDet"
+        android:text="Tanya "
+        android:id="@+id/fosterName"/>
+
+
+    <ImageView
+
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/nameIcon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/callicon"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="60dp"
+        android:layout_marginTop="63dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/fosterDet"
+        android:text="9876567893"
+        android:id="@+id/fosterNumber"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
