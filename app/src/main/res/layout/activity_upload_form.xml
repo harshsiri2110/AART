@@ -180,6 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/medicalDetails"
+
                     android:inputType="textCapSentences|textMultiLine"
                     android:hint="Vaccination, Deworming, Illness(if any)"
                     android:ems="10"
@@ -192,6 +193,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -199,20 +203,28 @@
                 android:text="Upload Images:"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
-
-
+                android:layout_marginTop="10dp"
+                android:id="@+id/imgupload">
             </TextView>
 
-            <Button
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Images"
-                android:id="@+id/selectImages"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                />
+                android:text="(Preferred horizontal pictures)"
+                android:textSize="15sp"
+                android:layout_below="@+id/imgupload"
 
+                ></TextView>
+
+                <Button
+                    android:id="@+id/selectImages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:text="Select Images" />
+            </RelativeLayout>
         </LinearLayout>
 
         <!--
@@ -247,6 +259,9 @@
 
         </Button>
 
+
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>

@@ -2,8 +2,10 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.widgets.Snapshot;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -15,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,6 +28,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity
     Adapter adapter;
     List<Model> models;
     Button uploadPost, logout;
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t1;
+    private NavigationView nv;
 
     int currPost;
     int imgCount;
@@ -70,6 +77,38 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dl = (DrawerLayout) findViewById(R.id.activity_main);
+        t1 = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
+
+        dl.addDrawerListener(t1);
+        t1.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView) findViewById(R.id.navView);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.item1:
+                        Toast.makeText(MainActivity.this, "Item1", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item2:
+                        Toast.makeText(MainActivity.this, "Item2", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item3:
+                        Toast.makeText(MainActivity.this, "Item3", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        return true;
+                }
+
+
+                return true;
+
+            }
+        });
 
         listView = (ListView) findViewById(R.id.listView);
         ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
@@ -126,6 +165,14 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(t1.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
