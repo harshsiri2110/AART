@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("TEST", "Hello I am here!");
 
-
-
         //On card click listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -206,9 +204,10 @@ public class MainActivity extends AppCompatActivity
             getMenuInflater().inflate(R.menu.nav_menu_login, menu);
         }
 
-
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -243,6 +242,10 @@ public class MainActivity extends AppCompatActivity
             {
                 startActivity(new Intent(getApplicationContext(), UploadForm.class));
                 break;
+            }
+            case R.id.filter_icon:
+            {
+
             }
         }
 
