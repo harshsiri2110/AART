@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,12 +49,7 @@ public class MainActivity extends AppCompatActivity
     ListView listView;
     Adapter adapter;
     List<Model> models;
-    Button uploadPost, logout;
-    private DrawerLayout dl;
-    private ActionBarDrawerToggle t1;
-    private NavigationView nv;
 
-    int currPost;
     int imgCount;
     int postCount;
 
@@ -65,88 +61,12 @@ public class MainActivity extends AppCompatActivity
 
     DatabaseReference reference;
 
-    FirebaseAuth firebaseAuth;
-
-    List<ImageUrl> uriList = new ArrayList<>();
-    List<List<ImageUrl>>  uriListList = new ArrayList<>();
-
-    public void logoutreg(View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), FirstPage.class));
-        finish();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dl = (DrawerLayout) findViewById(R.id.activity_main);
-        t1 = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
 
-        dl.addDrawerListener(t1);
-        t1.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        nv = (NavigationView) findViewById(R.id.navView);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null){
-
-            nv.inflateMenu(R.menu.nav_menu);
-            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
-            {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    int id = item.getItemId();
-                    switch (id)
-                    {
-                        case R.id.item1:
-                            Toast.makeText(MainActivity.this, "Item1", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.item2:
-                            Toast.makeText(MainActivity.this, "Item2", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.item3:
-                            Toast.makeText(MainActivity.this, "Item3", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            return true;
-                    }
-
-
-                    return true;
-
-                }
-            });
-
-        }
-        else{
-            nv.inflateMenu(R.menu.nav_menu_login);
-            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
-            {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    int id = item.getItemId();
-                    switch (id)
-                    {
-                        case R.id.menu_profile:
-                            Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.menu_signin:
-                            Toast.makeText(MainActivity.this, "Sign in", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.menu_upload:
-                            Toast.makeText(MainActivity.this, "Upload Post", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            return true;
-                    }
-                    return true;
-                }
-            });
-
-        }
-
+        //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
         Glide.with(this).load(R.drawable.loading_bar2).into(listPlaceholder);
@@ -161,6 +81,7 @@ public class MainActivity extends AppCompatActivity
 
         showCards();
 
+        //Swipe Refresh for cards
         pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -172,24 +93,9 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("TEST", "Hello I am here!");
 
-        uploadPost = findViewById(R.id.uploadPost);
 
-        uploadPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,UploadForm.class));
-            }
-        });
 
-        /*logout = findViewById(R.id.logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,FirstPage.class));
-            }
-        });*/
-
+        //On card click listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -201,17 +107,6 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(t1.onOptionsItemSelected(item))
-            return true;
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
     private void refreshList()
     {
@@ -297,4 +192,61 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(getApplicationContext(),FirstPage.class));
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() == null) {
+            getMenuInflater().inflate(R.menu.nav_menu, menu);
+        }
+        else
+        {
+            getMenuInflater().inflate(R.menu.nav_menu_login, menu);
+        }
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch(id)
+        {
+            case R.id.menu_sign_in:
+            {
+                startActivity(new Intent(getApplicationContext(), LoginPage.class));
+                break;
+            }
+            case R.id.menu_profile:
+            {
+                Toast.makeText(this, "Profile not made", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.menu_register:
+            {
+                startActivity(new Intent(getApplicationContext(), Foster_reg.class));
+                break;
+            }
+            case R.id.menu_logout:
+            {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), FirstPage.class));
+                finish();
+                break;
+            }
+            case R.id.menu_upload:
+            {
+                startActivity(new Intent(getApplicationContext(), UploadForm.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

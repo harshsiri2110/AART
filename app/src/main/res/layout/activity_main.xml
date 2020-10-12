@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,24 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:id="@+id/activity_main">
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Post"
-            android:id="@+id/uploadPost"
-            />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_alignParentRight="true"
-        android:id="@+id/logout"
-        android:onClick="logoutreg"
-        />
 
     <ImageView
         android:layout_width="match_parent"
@@ -38,7 +20,7 @@
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadPost">
+        >
 
         <ListView
             android:layout_width="match_parent"
@@ -46,21 +28,8 @@
             android:id="@+id/listView"
             android:divider="@android:color/transparent"
             android:dividerHeight="8sp"
-            android:layout_below="@+id/uploadPost"
             android:descendantFocusability="blocksDescendants"
             />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 </RelativeLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/nav"
-        
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:id="@+id/navView">
-
-    </com.google.android.material.navigation.NavigationView>
-
-</androidx.drawerlayout.widget.DrawerLayout>
