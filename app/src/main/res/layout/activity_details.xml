@@ -15,7 +15,7 @@ tools:context=".Cards">
 <com.denzcoskun.imageslider.ImageSlider
     android:id="@+id/images"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="275dp"
     android:background="@drawable/bg5"
     app:iss_auto_cycle="false"
     app:iss_corner_radius="5"
