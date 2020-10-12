@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity
     Model currModel = new Model();
 
     DatabaseReference reference;
+
+    FirebaseAuth firebaseAuth;
+
     List<ImageUrl> uriList = new ArrayList<>();
     List<List<ImageUrl>>  uriListList = new ArrayList<>();
 
@@ -85,30 +88,64 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nv = (NavigationView) findViewById(R.id.navView);
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
-        {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.item1:
-                        Toast.makeText(MainActivity.this, "Item1", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.item2:
-                        Toast.makeText(MainActivity.this, "Item2", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.item3:
-                        Toast.makeText(MainActivity.this, "Item3", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        return true;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null){
+
+            nv.inflateMenu(R.menu.nav_menu);
+            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+            {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+                    switch (id)
+                    {
+                        case R.id.item1:
+                            Toast.makeText(MainActivity.this, "Item1", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.item2:
+                            Toast.makeText(MainActivity.this, "Item2", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.item3:
+                            Toast.makeText(MainActivity.this, "Item3", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            return true;
+                    }
+
+
+                    return true;
+
                 }
+            });
 
+        }
+        else{
+            nv.inflateMenu(R.menu.nav_menu_login);
+            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+            {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+                    switch (id)
+                    {
+                        case R.id.menu_profile:
+                            Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.menu_signin:
+                            Toast.makeText(MainActivity.this, "Sign in", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.menu_upload:
+                            Toast.makeText(MainActivity.this, "Upload Post", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            return true;
+                    }
+                    return true;
+                }
+            });
 
-                return true;
-
-            }
-        });
+        }
 
         listView = (ListView) findViewById(R.id.listView);
         ImageView listPlaceholder = findViewById(R.id.listPlaceholder);

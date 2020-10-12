@@ -54,7 +54,8 @@ public class Adapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup viewGroup) {
 
         layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.activity_cards,null);
+       // View view = layoutInflater.inflate(R.layout.activity_cards,null);
+        View view = layoutInflater.inflate(R.layout.temp_cards,null);
 
         ImageSlider imageSlider;
 
