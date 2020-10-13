@@ -63,7 +63,7 @@ public class Foster_reg extends AppCompatActivity
 
         if(firebaseAuth.getCurrentUser()!= null)
         {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_Reg"));
             finish();
         }
 
@@ -124,7 +124,7 @@ public class Foster_reg extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         }
                         else {

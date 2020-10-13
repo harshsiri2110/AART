@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
 
     Model currModel = new Model();
 
+    String filter_species,filter_gender,filter_age1,filter_age2,filter_age3,activity ="";
+
     DatabaseReference reference;
 
     @Override
@@ -80,6 +82,22 @@ public class MainActivity extends AppCompatActivity
         }
 
         showCards();
+
+        Bundle bundle = getIntent().getExtras();
+
+        activity = bundle.getString("Activity");
+
+        if(activity.equals("Filter"))
+        {
+            filter_species = bundle.getString("Species");
+            filter_gender = bundle.getString("Gender");
+            filter_age1 = bundle.getString("Age1");
+            filter_age2 = bundle.getString("Age2");
+            filter_age3 = bundle.getString("Age3");
+
+            filter_list();
+
+        }
 
         //Swipe Refresh for cards
         pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
@@ -104,6 +122,88 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    private void filter_list()
+    {
+        int species = 0, gender = 0, age1 = 0, age2 = 0, age3 = 0;
+
+        if(filter_species.equals("Dog"))
+        {
+            species = 1;
+        }
+        else if(filter_species.equals("Cat"))
+        {
+            species = 2;
+        }
+
+
+        if(filter_gender.equals("Male"))
+        {
+            gender = 1;
+        }
+        else if(filter_gender.equals("Female"))
+        {
+            gender = 2;
+        }
+
+        if(filter_age1.equals("true"))
+        {
+            age1 = 1;
+        }
+
+        if(filter_age2.equals("true"))
+        {
+            age2 = 1;
+        }
+
+        if(filter_age3.equals("true"))
+        {
+            age3 = 1;
+        }
+
+
+        for(Model currModel : models)
+        {
+            if(species>0)
+            {
+                if(species == 1) {
+                    if(!currModel.getSpeciesText().equals("Dog"))
+                    {
+                        models.remove(currModel);
+                    }
+                }
+
+                if(species == 2) {
+                    if(!currModel.getSpeciesText().equals("Cat"))
+                    {
+                        models.remove(currModel);
+                    }
+                }
+            }
+
+            if(gender>0)
+            {
+                if(gender == 1) {
+                    if(!currModel.getGender().equals("Male"))
+                    {
+                        models.remove(currModel);
+                    }
+                }
+
+                if(species == 2) {
+                    if(!currModel.getGender().equals("Female"))
+                    {
+                        models.remove(currModel);
+                    }
+                }
+            }
+        }
+
+        /*finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);*/
     }
 
     private void refreshList()
@@ -153,8 +253,6 @@ public class MainActivity extends AppCompatActivity
                                         models.add(currModel);
 
                                         adapter.notifyDataSetChanged();
-
-
                                     }
                                 }
                             }
@@ -173,8 +271,6 @@ public class MainActivity extends AppCompatActivity
 
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
-
-
             }
 
             @Override
@@ -245,7 +341,8 @@ public class MainActivity extends AppCompatActivity
             }
             case R.id.filter_icon:
             {
-
+                startActivity(new Intent(getApplicationContext(), FilterPage.class));
+                break;
             }
         }
 
