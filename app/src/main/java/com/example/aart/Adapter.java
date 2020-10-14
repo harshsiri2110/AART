@@ -69,11 +69,17 @@ public class Adapter extends BaseAdapter {
         locationText = view.findViewById(R.id.locationText);
 
         List<SlideModel> slideModels = new ArrayList<>();
+        int count = 0;
 
         for (ImageUrl currUri : models.get(position).getImageList())
         {
             //Log.d("TEST","Inside Adapter!, Uri - "+currUri.getUri());
             slideModels.add(new SlideModel(currUri.getUri(), ScaleTypes.CENTER_INSIDE));
+            count++;
+            if(count >= 3)
+            {
+                break;
+            }
         }
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
