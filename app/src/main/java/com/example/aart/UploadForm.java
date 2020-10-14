@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -99,10 +100,32 @@ public class UploadForm extends AppCompatActivity
 
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         model = new Model();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+
+        reff2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                String currUser = firebaseAuth.getCurrentUser().getUid();
+
+                Fosterdetails currFoster = snapshot.child(currUser).getValue(Fosterdetails.class);
+
+                fosterName = currFoster.getName();
+
+                Log.d("TEST","The foster name is "+fosterName);
+                //model.setFosterName(fosterName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         reff.addValueEventListener(new ValueEventListener()
         {
@@ -149,21 +172,7 @@ public class UploadForm extends AppCompatActivity
                 model.setMedical(medical.getText().toString());
                 model.setSpeciesText(txtSpecies.getText().toString());
                 model.setID(UUID.randomUUID().toString());
-
-
-                reff2.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot)
-                    {
-                        fosterName = snapshot.child(firebaseAuth.getCurrentUser().getUid()).child("name").getValue().toString();
-                        model.setFosterName(fosterName);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                model.setFosterName(fosterName);
 
                 reff.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -190,7 +199,7 @@ public class UploadForm extends AppCompatActivity
                 }
                 Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(UploadForm.this,MainActivity.class));
+                startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
             }
         }));
     }

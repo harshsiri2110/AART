@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,Details.class);
-                intent.putExtra("selectedCard",(i));
+                intent.putExtra("selectedCard",i);
                 startActivity(intent);
             }
         });
