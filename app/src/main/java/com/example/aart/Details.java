@@ -138,7 +138,6 @@ public class Details extends AppCompatActivity {
                                                 location.setText(currModel.getLocation());
                                                 //description.setText(currModel.getDescription());
 
-
                                                 adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),"1234567896"),"About Me");
                                                 adapter.addFrag(new MedicalDetails(currModel.getMedical()),"Medical History");
 

@@ -57,10 +57,13 @@ public class MainActivity extends AppCompatActivity
     SwipeRefreshLayout pullToRefresh;
 
     List<String> postList = new ArrayList<>();
+    boolean filter_on = false;
 
     Model currModel = new Model();
 
     String filter_species,filter_gender,filter_age1,filter_age2,filter_age3,activity ="";
+
+    int species = 0, gender = 0, age1 = 0, age2 = 0, age3 = 0;
 
     DatabaseReference reference;
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         listView.setEmptyView(listPlaceholder);
 
         models = new ArrayList<>();
+
         if(!models.isEmpty())
         {
             models.clear();
@@ -96,8 +100,9 @@ public class MainActivity extends AppCompatActivity
             filter_age2 = bundle.getString("Age2");
             filter_age3 = bundle.getString("Age3");
 
-            filter_list();
+            filter_on = true;
 
+            filter_list();
         }
 
         //Swipe Refresh for cards
@@ -127,7 +132,6 @@ public class MainActivity extends AppCompatActivity
 
     private void filter_list()
     {
-        int species = 0, gender = 0, age1 = 0, age2 = 0, age3 = 0;
 
         if(filter_species.equals("Dog"))
         {
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        for(Model currModel : models)
+        /*for(Model currModel : models)
         {
             if(species>0)
             {
@@ -199,7 +203,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             }
-        }
+        }*/
 
         /*finish();
         overridePendingTransition(0, 0);
@@ -251,7 +255,40 @@ public class MainActivity extends AppCompatActivity
 
                                         postList.add(currModel.getID());
 
-                                        models.add(currModel);
+                                        //models.add(currModel);
+                                        if(filter_on) {
+                                            if (species > 0) {
+                                                if (species == 1) {
+                                                    if (currModel.getSpeciesText().equals("Dog")) {
+                                                        models.add(currModel);
+                                                    }
+                                                }
+
+                                                if (species == 2) {
+                                                    if (currModel.getSpeciesText().equals("Cat")) {
+                                                        models.add(currModel);
+                                                    }
+                                                }
+                                            }
+
+                                            if (gender > 0) {
+                                                if (gender == 1) {
+                                                    if (currModel.getGender().equals("Male")) {
+                                                        models.add(currModel);
+                                                    }
+                                                }
+
+                                                if (gender == 2) {
+                                                    if (currModel.getGender().equals("Female")) {
+                                                        models.add(currModel);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            models.add(currModel);
+                                        }
 
                                         //Collections.sort(models, Collections.<Model>reverseOrder());
 
@@ -267,6 +304,8 @@ public class MainActivity extends AppCompatActivity
                         }
                     });
                 }
+
+
 
                 adapter = new Adapter(models, MainActivity.this);
 
