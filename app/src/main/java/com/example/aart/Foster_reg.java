@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -119,9 +120,11 @@ public class Foster_reg extends AppCompatActivity
                     return;
                 }
 
-                firebaseAuth.createUserWithEmailAndPassword(memail,mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                firebaseAuth.createUserWithEmailAndPassword(memail,mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -155,5 +158,12 @@ public class Foster_reg extends AppCompatActivity
                 startActivity(new Intent(Foster_reg.this, LoginPage.class));
             }
         });
+    }
+
+    private void addUser(String name, String email, long mobileNo){
+        Fosterdetails fosterdetails1 = new Fosterdetails(name, email, mobileNo);
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String uid = firebaseUser.getUid();
+        FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child("Uid").setValue(fosterdetails1);
     }
 }

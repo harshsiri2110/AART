@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity
         {
             getMenuInflater().inflate(R.menu.nav_menu_login, menu);
         }
-
+        //getMenuInflater().inflate(R.menu.filter_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
