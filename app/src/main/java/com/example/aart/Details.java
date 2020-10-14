@@ -139,7 +139,7 @@ public class Details extends AppCompatActivity {
                                                 //description.setText(currModel.getDescription());
 
 
-                                                adapter.addFrag(new AboutMe(currModel.getDescription(),"Tanya","1234567896"),"About Me");
+                                                adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),"1234567896"),"About Me");
                                                 adapter.addFrag(new MedicalDetails(currModel.getMedical()),"Medical History");
 
                                                 for (ImageUrl currUri : currModel.getImageList())
