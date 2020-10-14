@@ -134,7 +134,7 @@ public class Foster_reg extends AppCompatActivity
                             addUser(mname,memail,mnumber);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
-                        }
+                            }
                         else {
                             Toast.makeText(Foster_reg.this, "Error!", Toast.LENGTH_SHORT).show();
                         }
