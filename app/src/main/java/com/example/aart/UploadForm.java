@@ -25,6 +25,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,12 +52,14 @@ public class UploadForm extends AppCompatActivity
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
+    String fosterName;
 
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
     ImageSlider imgView;
 
     StorageReference storageReference;
+    FirebaseAuth firebaseAuth;
 
     List<Uri> imageUriList = new ArrayList<Uri>();
 
@@ -99,6 +102,7 @@ public class UploadForm extends AppCompatActivity
         model = new Model();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
 
         reff.addValueEventListener(new ValueEventListener()
         {
@@ -146,6 +150,21 @@ public class UploadForm extends AppCompatActivity
                 model.setSpeciesText(txtSpecies.getText().toString());
                 model.setID(UUID.randomUUID().toString());
 
+
+                reff2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot)
+                    {
+                        fosterName = snapshot.child(firebaseAuth.getCurrentUser().getUid()).child("name").getValue().toString();
+                        model.setFosterName(fosterName);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -179,7 +198,6 @@ public class UploadForm extends AppCompatActivity
     private void FileChooser()
     {
         Intent intent = new Intent();
-
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);

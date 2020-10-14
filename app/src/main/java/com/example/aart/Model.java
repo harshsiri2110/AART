@@ -16,8 +16,15 @@ public class Model {
    private String speciesText;
    private String ID;
    private String medical;
+   private String fosterName;
 
+    public String getFosterName() {
+        return fosterName;
+    }
 
+    public void setFosterName(String fosterName) {
+        this.fosterName = fosterName;
+    }
 
     public Model(List<ImageUrl> imageList, String title, String ageText, String genderText, String locationText) {
         this.imageList = imageList;
