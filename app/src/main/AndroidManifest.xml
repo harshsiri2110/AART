@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_aart_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FilterPage"></activity>
         <activity android:name=".LoginPage" />
         <activity android:name=".FirstPage">
             <intent-filter>

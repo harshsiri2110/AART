@@ -58,7 +58,7 @@ public class LoginPage extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginPage.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","LoginPage"));
                         }
                         else{
                             Toast.makeText(LoginPage.this, "The username or password is incorrect or the user does not exist", Toast.LENGTH_SHORT).show();

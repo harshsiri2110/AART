@@ -34,7 +34,7 @@ public class FirstPage extends AppCompatActivity {
         dogSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstPage.this,MainActivity.class));
+                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage"));
             }
         });
 

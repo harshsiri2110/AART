@@ -15,5 +15,4 @@
         app:showAsAction="always"
         android:icon="@drawable/filter_icon2"
         />
-
 </menu>
