@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -53,7 +54,7 @@ public class UploadForm extends AppCompatActivity
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
-    String fosterName;
+    String fosterName, timeStamp;
 
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
@@ -104,8 +105,11 @@ public class UploadForm extends AppCompatActivity
 
         model = new Model();
 
+        timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+
 
         reff2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -174,7 +178,7 @@ public class UploadForm extends AppCompatActivity
                 model.setID(UUID.randomUUID().toString());
                 model.setFosterName(fosterName);
 
-                reff.addValueEventListener(new ValueEventListener() {
+               /* reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         maxId = snapshot.getChildrenCount();
@@ -182,13 +186,14 @@ public class UploadForm extends AppCompatActivity
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
-                });
+                });*/
 
                 currId = maxId + 1;
 
-                reff.child(String.valueOf(currId)).setValue(model);
+                /*reff.child(String.valueOf(currId)).setValue(model);*/
+
+                reff.child(timeStamp).setValue(model);
 
                 if(!imageUriList.isEmpty())
                 {
@@ -243,7 +248,7 @@ public class UploadForm extends AppCompatActivity
     public void uploadPicture(Uri imgUri)
     {
         final String randomKey= UUID.randomUUID().toString();
-        final StorageReference storageRef = storageReference.child(String.valueOf(maxId+1)).child("images" + randomKey);
+        final StorageReference storageRef = storageReference.child(timeStamp).child("images" + randomKey);
 
         storageRef.putFile(imgUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
@@ -257,7 +262,7 @@ public class UploadForm extends AppCompatActivity
                             @Override
                             public void onSuccess(Uri uri)
                             {
-                                reff.child(String.valueOf(currId)).child("images").push().setValue(new ImageUrl(uri.toString()));
+                                reff.child(timeStamp).child("images").push().setValue(new ImageUrl(uri.toString()));
                             }
                         });
                     }
