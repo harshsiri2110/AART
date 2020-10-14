@@ -89,13 +89,17 @@ public class Foster_reg extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                fosterdetails.setName(name.getText().toString());
-                fosterdetails.setMobileNo(Long.parseLong(number.getText().toString()));
+
+                final String mname = name.getText().toString();
+                final long mnumber = Long.parseLong(number.getText().toString());
+
+                fosterdetails.setName(mname);
+                fosterdetails.setMobileNo(mnumber);
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
                 currId = maxId + 1;
 
-                String memail= email.getText().toString().trim();
+                final String memail= email.getText().toString().trim();
                 String mpassword = password.getText().toString().trim();
                 String mConfirmPass = confirmPassword.getText().toString().trim();
 
@@ -127,6 +131,7 @@ public class Foster_reg extends AppCompatActivity
                     {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
+                            addUser(mname,memail,mnumber);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         }
@@ -164,6 +169,6 @@ public class Foster_reg extends AppCompatActivity
         Fosterdetails fosterdetails1 = new Fosterdetails(name, email, mobileNo);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String uid = firebaseUser.getUid();
-        FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child("Uid").setValue(fosterdetails1);
+        FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child(uid).setValue(fosterdetails1);
     }
 }

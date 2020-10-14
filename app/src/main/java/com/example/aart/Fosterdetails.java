@@ -4,6 +4,8 @@ public class Fosterdetails
 {
     private String name;
     private String email;
+    private String password;
+    private long mobileNo;
 
     public Fosterdetails(String name, String email, long mobileNo)
     {
@@ -11,9 +13,6 @@ public class Fosterdetails
         this.email = email;
         this.mobileNo = mobileNo;
     }
-
-    private String password;
-    private long mobileNo;
 
     public Fosterdetails(String name, String email, String password, long mobileNo)
     {
