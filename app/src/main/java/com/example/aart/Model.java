@@ -46,6 +46,7 @@ public class Model {
         imageList = new ArrayList<>();
         description= "";
         medical = "No medical history found :(";
+        fosterName = "No foster found :(";
     }
 
     public String getID() {
