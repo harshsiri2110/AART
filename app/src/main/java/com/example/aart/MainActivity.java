@@ -361,7 +361,8 @@ public class MainActivity extends AppCompatActivity
             }
             case R.id.menu_profile:
             {
-                Toast.makeText(this, "Profile not made", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+                //Toast.makeText(this, "Profile nmade", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.menu_register:
