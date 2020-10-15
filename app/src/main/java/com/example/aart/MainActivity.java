@@ -40,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -166,49 +167,6 @@ public class MainActivity extends AppCompatActivity
         {
             age3 = 1;
         }
-
-
-        /*for(Model currModel : models)
-        {
-            if(species>0)
-            {
-                if(species == 1) {
-                    if(!currModel.getSpeciesText().equals("Dog"))
-                    {
-                        models.remove(currModel);
-                    }
-                }
-
-                if(species == 2) {
-                    if(!currModel.getSpeciesText().equals("Cat"))
-                    {
-                        models.remove(currModel);
-                    }
-                }
-            }
-
-            if(gender>0)
-            {
-                if(gender == 1) {
-                    if(!currModel.getGender().equals("Male"))
-                    {
-                        models.remove(currModel);
-                    }
-                }
-
-                if(species == 2) {
-                    if(!currModel.getGender().equals("Female"))
-                    {
-                        models.remove(currModel);
-                    }
-                }
-            }
-        }*/
-
-        /*finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);*/
     }
 
     private void refreshList()
@@ -222,6 +180,9 @@ public class MainActivity extends AppCompatActivity
     private void showCards()
     {
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+
+        HashMap<Character,Integer> hm = new HashMap<>();
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -260,27 +221,56 @@ public class MainActivity extends AppCompatActivity
                                             if (species > 0) {
                                                 if (species == 1) {
                                                     if (currModel.getSpeciesText().equals("Dog")) {
-                                                        models.add(currModel);
+                                                        if (gender > 0) {
+                                                            if (gender == 1) {
+                                                                if (currModel.getGender().equals("Male")) {
+                                                                    models.add(currModel);
+                                                                }
+                                                            }
+
+                                                            if (gender == 2) {
+                                                                if (currModel.getGender().equals("Female")) {
+                                                                    models.add(currModel);
+                                                                }
+                                                            }
+                                                        } else {
+                                                            models.add(currModel);
+                                                        }
                                                     }
                                                 }
 
                                                 if (species == 2) {
                                                     if (currModel.getSpeciesText().equals("Cat")) {
-                                                        models.add(currModel);
+                                                        if (gender > 0) {
+                                                            if (gender == 1) {
+                                                                if (currModel.getGender().equals("Male")) {
+                                                                    models.add(currModel);
+                                                                }
+                                                            }
+
+                                                            if (gender == 2) {
+                                                                if (currModel.getGender().equals("Female")) {
+                                                                    models.add(currModel);
+                                                                }
+                                                            }
+                                                        } else {
+                                                            models.add(currModel);
+                                                        }
                                                     }
                                                 }
-                                            }
+                                            } else {
 
-                                            if (gender > 0) {
-                                                if (gender == 1) {
-                                                    if (currModel.getGender().equals("Male")) {
-                                                        models.add(currModel);
+                                                if (gender > 0) {
+                                                    if (gender == 1) {
+                                                        if (currModel.getGender().equals("Male")) {
+                                                            models.add(currModel);
+                                                        }
                                                     }
-                                                }
 
-                                                if (gender == 2) {
-                                                    if (currModel.getGender().equals("Female")) {
-                                                        models.add(currModel);
+                                                    if (gender == 2) {
+                                                        if (currModel.getGender().equals("Female")) {
+                                                            models.add(currModel);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -289,6 +279,7 @@ public class MainActivity extends AppCompatActivity
                                         {
                                             models.add(currModel);
                                         }
+
 
                                         //Collections.sort(models, Collections.<Model>reverseOrder());
 
