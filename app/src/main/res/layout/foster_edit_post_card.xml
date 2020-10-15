@@ -120,10 +120,10 @@
                 android:layout_height="35dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/edit1"
+                android:src="@drawable/edit_post"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="57dp"
+                android:layout_marginRight="65dp"
                 android:layout_marginBottom="10dp"
 
                 />
@@ -134,7 +134,7 @@
                 android:layout_height="35dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/delete"
+                android:src="@drawable/delete_post"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"

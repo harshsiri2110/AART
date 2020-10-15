@@ -55,6 +55,7 @@
         android:layout_marginTop="10dp"
         android:descendantFocusability="blocksDescendants"
         android:id="@+id/profile_listView"
+        android:scrollbars="none"
         />
     </RelativeLayout>
 
