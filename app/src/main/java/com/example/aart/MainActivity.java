@@ -181,9 +181,6 @@ public class MainActivity extends AppCompatActivity
     {
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-        HashMap<Character,Integer> hm = new HashMap<>();
-
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
@@ -298,7 +295,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-                adapter = new Adapter(models, MainActivity.this);
+                adapter = new Adapter(models, MainActivity.this,R.layout.temp_cards);
 
                 adapter.notifyDataSetChanged();
 

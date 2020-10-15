@@ -57,6 +57,8 @@ public class Foster_Profile extends AppCompatActivity {
                 fosterName = currFoster.getName();
                 name.setText(fosterName);
                 email.setText(currFoster.getEmail());
+
+                showCards();
             }
 
             @Override
@@ -71,6 +73,8 @@ public class Foster_Profile extends AppCompatActivity {
         {
             models.clear();
         }
+
+
     }
 
     private void showCards()
@@ -91,6 +95,7 @@ public class Foster_Profile extends AppCompatActivity {
 
                             currModel = currPostSnap.getValue(Model.class);
 
+                            assert currModel != null;
                             if (fosterName.equals(currModel.getFosterName()))
                             {
                                 imgCount = Integer.MIN_VALUE;
@@ -119,7 +124,7 @@ public class Foster_Profile extends AppCompatActivity {
                     });
                 }
 
-                adapter = new Adapter(models, Foster_Profile.this);
+                adapter = new Adapter(models, Foster_Profile.this,R.layout.foster_edit_post_card);
 
                 adapter.notifyDataSetChanged();
 

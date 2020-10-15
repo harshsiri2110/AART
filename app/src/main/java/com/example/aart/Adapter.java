@@ -28,11 +28,13 @@ public class Adapter extends BaseAdapter {
     private List<Model> models;
     private LayoutInflater layoutInflater;
     private Context context;
+    private int cardLayout;
 
 
-    public Adapter(List<Model> models, Context context) {
+    public Adapter(List<Model> models, Context context, int cardLayout) {
         this.models = models;
         this.context = context;
+        this.cardLayout = cardLayout;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Adapter extends BaseAdapter {
 
         layoutInflater = LayoutInflater.from(context);
        // View view = layoutInflater.inflate(R.layout.activity_cards,null);
-        View view = layoutInflater.inflate(R.layout.temp_cards,null);
+        View view = layoutInflater.inflate(cardLayout,null);
 
         ImageSlider imageSlider;
 
