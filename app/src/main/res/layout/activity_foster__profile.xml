@@ -11,9 +11,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/doggo1"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"/>
 
     <TextView
