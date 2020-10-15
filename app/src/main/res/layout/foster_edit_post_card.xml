@@ -116,28 +116,28 @@
 
             <ImageButton
                 android:id="@+id/editPost"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/edit1"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="80dp"
+                android:layout_marginRight="57dp"
                 android:layout_marginBottom="10dp"
 
                 />
 
             <ImageButton
                 android:id="@+id/deletePost"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/delete"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"/>
 
 
