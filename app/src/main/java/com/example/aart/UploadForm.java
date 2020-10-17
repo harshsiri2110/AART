@@ -175,7 +175,8 @@ public class UploadForm extends AppCompatActivity
                 model.setDescription(description.getText().toString());
                 model.setMedical(medical.getText().toString());
                 model.setSpeciesText(txtSpecies.getText().toString());
-                model.setID(UUID.randomUUID().toString());
+                model.setID(timeStamp);
+                //model.setID(UUID.randomUUID().toString());
                 model.setFosterName(fosterName);
 
                /* reff.addValueEventListener(new ValueEventListener() {

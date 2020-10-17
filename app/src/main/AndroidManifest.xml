@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aart">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_aart"
@@ -11,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_aart_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Foster_Profile"></activity>
+        <activity android:name=".UpdatePost"></activity>
+        <activity android:name=".Foster_Profile" />
         <activity android:name=".FilterPage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".FirstPage">
@@ -27,5 +26,7 @@
         <activity android:name=".Cards" />
         <activity android:name=".MainActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

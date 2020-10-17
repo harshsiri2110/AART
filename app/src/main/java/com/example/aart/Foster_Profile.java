@@ -28,11 +28,11 @@ public class Foster_Profile extends AppCompatActivity {
 
     TextView name, email;
     ListView fosterPosts;
-    Adapter adapter;
+    AdapterFosterProfile adapter;
 
     String fosterName;
 
-    String userId;
+    String userId,postID;
 
     FirebaseAuth firebaseAuth;
     DatabaseReference reference;
@@ -41,6 +41,8 @@ public class Foster_Profile extends AppCompatActivity {
     int postCount, imgCount;
 
     Model currModel = new Model();
+
+    DataSnapshot selectedPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +130,7 @@ public class Foster_Profile extends AppCompatActivity {
                     });
                 }
 
-                adapter = new Adapter(models, Foster_Profile.this,R.layout.foster_edit_post_card);
+                adapter = new AdapterFosterProfile(models, Foster_Profile.this,R.layout.foster_edit_post_card);
 
                 adapter.notifyDataSetChanged();
 

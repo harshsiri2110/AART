@@ -114,7 +114,7 @@
                 android:text="Kothrud, Pune"
                 android:textSize="15sp" />
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/editPost"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -126,7 +126,8 @@
                 android:layout_marginRight="65dp"
                 android:layout_marginBottom="10dp"
 
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="65dp" />
 
             <ImageButton
                 android:id="@+id/deletePost"
@@ -138,7 +139,83 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp" />-->
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="65dp"
+                android:layout_marginBottom="10dp"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/edit_post"
+                    android:scaleType="centerCrop"
+                    android:layout_alignBottom="@+id/card_update_post"
+                    android:layout_alignTop="@+id/card_update_post"
+                    android:layout_alignLeft="@+id/card_update_post"
+                    android:layout_alignRight="@+id/card_update_post"
+                    android:layout_alignStart="@+id/card_update_post"
+                    android:layout_alignEnd="@+id/card_update_post" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/card_update_post"
+                    android:gravity="center_horizontal"
+                    android:singleLine="true"
+                    android:textColor="#ffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/delete_post"
+                    android:scaleType="centerCrop"
+                    android:layout_alignBottom="@+id/card_delete_post"
+                    android:layout_alignTop="@+id/card_delete_post"
+                    android:layout_alignLeft="@+id/card_delete_post"
+                    android:layout_alignRight="@+id/card_delete_post"
+                    android:layout_alignStart="@+id/card_delete_post"
+                    android:layout_alignEnd="@+id/card_delete_post" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/card_delete_post"
+                    android:gravity="center_horizontal"
+                    android:singleLine="true"
+                    android:textColor="#ffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    />
+
+            </RelativeLayout>
+
+
 
 
         </RelativeLayout>
