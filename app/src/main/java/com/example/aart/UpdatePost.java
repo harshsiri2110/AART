@@ -1,10 +1,14 @@
 package com.example.aart;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,13 +17,18 @@ import android.widget.RadioGroup;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class UpdatePost extends AppCompatActivity {
 
@@ -89,6 +98,15 @@ public class UpdatePost extends AppCompatActivity {
             female.toggle();
         }
 
+        selectImages.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FileChooser();
+            }
+        });
+
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(timestamp).child("images");
 
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -113,5 +131,76 @@ public class UpdatePost extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void FileChooser()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Pictures"),1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK )
+        {
+            if(data.getClipData() != null)
+            {
+                int totalItemsSelected = data.getClipData().getItemCount();
+
+                for (int i = 0; i < totalItemsSelected; i++)
+                {
+                    //imageUriList.add(data.getClipData().getItemAt(i).getUri());
+                    //previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
+                }
+            }
+            else if(data.getData() != null)
+            {
+                //imageUriList.add(data.getData());
+                //previewImages.add(new SlideModel(data.getData().toString(), ScaleTypes.CENTER_INSIDE));
+            }
+
+            //imgView.setImageList(previewImages, ScaleTypes.FIT);
+        }
+    }
+
+    public void uploadPicture(Uri imgUri)
+    {
+        final String randomKey= UUID.randomUUID().toString();
+        //final StorageReference storageRef = storageReference.child(timeStamp).child("images" + randomKey);
+
+        /*storageRef.putFile(imgUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                    {
+                        // Get a URL to the uploaded content
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                        {
+                            @Override
+                            public void onSuccess(Uri uri)
+                            {
+                                reff.child(timeStamp).child("images").push().setValue(new ImageUrl(uri.toString()));
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception exception)
+                    {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
+
+         */
     }
 }
