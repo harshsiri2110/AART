@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Model {
 
-   private List<ImageUrl>imageList;
+   private ArrayList<ImageUrl>imageList;
    private String title;
    private String description;
    private String ageText;
@@ -26,7 +26,7 @@ public class Model {
         this.fosterName = fosterName;
     }
 
-    public Model(List<ImageUrl> imageList, String title, String ageText, String genderText, String locationText) {
+    public Model(ArrayList<ImageUrl> imageList, String title, String ageText, String genderText, String locationText) {
         this.imageList = imageList;
         this.title = title;
         this.ageText = ageText;
@@ -57,11 +57,11 @@ public class Model {
         this.ID = ID;
     }
 
-    public List<ImageUrl> getImageList() {
+    public ArrayList<ImageUrl> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<ImageUrl> imageList) {
+    public void setImageList(ArrayList<ImageUrl> imageList) {
         this.imageList = imageList;
     }
 

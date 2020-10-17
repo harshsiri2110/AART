@@ -90,10 +90,17 @@ public class AdapterFosterProfile extends BaseAdapter {
         updatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String postTimestamp = models.get(position).getID();
 
                 Intent intent = new Intent(context,UpdatePost.class);
-                intent.putExtra("postTimestamp",postTimestamp);
+                intent.putExtra("species",models.get(position).getSpeciesText() );
+                intent.putExtra("title",models.get(position).getTitle() );
+                intent.putExtra("age",models.get(position).getAge() );
+                intent.putExtra("gender",models.get(position).getGender() );
+                intent.putExtra("location",models.get(position).getLocation() );
+                intent.putExtra("desc",models.get(position).getDescription() );
+                intent.putExtra("medical",models.get(position).getMedical() );
+                intent.putExtra("timestamp",models.get(position).getID());
+
                 context.startActivity(intent);
             }
         });
