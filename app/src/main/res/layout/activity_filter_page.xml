@@ -226,8 +226,8 @@
         android:layout_marginTop="100dp"
         android:layout_marginLeft="310dp"
         >
-
     </TextView>
+
     </androidx.cardview.widget.CardView>
 
     <Button
