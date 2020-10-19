@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Medical Information"
+        android:textColor="#000000"
         android:paddingLeft="16dp"
         android:textSize="18sp"
         android:id="@+id/medicalText"/>

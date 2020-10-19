@@ -102,7 +102,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/grey_font"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColor="#ffff"
         android:text="Register as Foster"
         android:textSize="22sp">
     </Button>
@@ -112,6 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:textColor="@color/colorPrimaryDark"
         android:background="@android:color/transparent"
         android:text="Already registered? Login here"
         android:textStyle="italic"

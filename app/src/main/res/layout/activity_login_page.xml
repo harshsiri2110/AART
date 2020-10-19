@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounded"
             android:layout_centerInParent="true"
-            android:backgroundTint="@color/grey_font"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="#ffff"
             android:text="LOGIN"
             android:textSize="22sp">
          </Button>
@@ -72,6 +73,7 @@
         android:layout_centerInParent="true"
         android:background="@android:color/transparent"
         android:text="New here? Create Account"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="italic"
         android:textAllCaps="false"
         android:textSize="20sp" />

@@ -21,7 +21,7 @@ public class FilterPage extends AppCompatActivity {
 
     Intent intent;
 
-    CheckBox checkBox1,checkBox2,checkBox3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,7 @@ public class FilterPage extends AppCompatActivity {
         speciesGroup = findViewById(R.id.filter_species_group);
         genderGroup = findViewById(R.id.filter_gender_group);
 
-        checkBox1 = findViewById(R.id.checkBox1);
-        checkBox2 = findViewById(R.id.checkBox2);
-        checkBox3 = findViewById(R.id.checkBox3);
+
 
         intent = new Intent(getApplicationContext(),MainActivity.class);
 
@@ -61,7 +59,7 @@ public class FilterPage extends AppCompatActivity {
                     intent.putExtra("Gender", "-1");
                 }
 
-                if(checkBox1.isChecked())
+               /* if(checkBox1.isChecked())
                 {
                     intent.putExtra("Age1","true");
                 }
@@ -87,7 +85,7 @@ public class FilterPage extends AppCompatActivity {
                 else
                 {
                     intent.putExtra("Age3","false");
-                }
+                }*/
 
                 intent.putExtra("Activity","Filter");
 

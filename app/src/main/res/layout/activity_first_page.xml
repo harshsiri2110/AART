@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/grey_font"
+        android:textColor="#ffff"
         android:text="New user? Register"
         android:textSize="15sp">
     </Button>
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="#E1E1E1"
+        android:backgroundTint="#5FADD1"
         android:text="Existing user? Login"
         android:textSize="15sp">
     </Button>

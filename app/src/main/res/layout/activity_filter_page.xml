@@ -4,31 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     tools:context=".FilterPage">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Species:"
-            android:textSize="25sp"
+    <TextView
+        android:id="@+id/filter_species_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:text=""
+        android:textSize="25sp" />
 
-            android:id="@+id/filter_species_text"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/filter_card1"
+        android:layout_marginTop="40dp">
 
-        <RadioGroup
-            android:layout_width="wrap_content"
+    <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_toRightOf="@+id/filter_species_text"
+            android:layout_below="@+id/filter_species_text"
             android:id="@+id/filter_species_group"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
             >
 
             <RadioButton
                 android:id="@+id/filter_dogSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
-
                 android:text="Dog"
                 android:textSize="22sp" />
 
@@ -38,27 +47,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
                 android:text="Cat"
                 android:textSize="22sp" />
         </RadioGroup>
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/filter_card2"
+        android:layout_below="@+id/filter_card1"
+        android:layout_marginTop="40dp"
+        >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Gender:"
+            android:text="Gender"
             android:textSize="25sp"
-            android:layout_marginTop="7dp"
-            android:layout_below="@+id/filter_species_text"
-            android:id="@+id/filter_gender_text"/>
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/filter_card1"
+            android:gravity="center_horizontal"
+            android:id="@+id/filter_gender_text"
+            android:textColor="@color/colorPrimary"/>
 
         <RadioGroup
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_toRightOf="@+id/filter_gender_text"
-            android:layout_below="@+id/filter_species_text"
-            android:layout_marginTop="8dp"
+            android:layout_below="@+id/filter_gender_text"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
             android:id="@+id/filter_gender_group"
             >
 
@@ -66,9 +84,8 @@
                 android:id="@+id/filter_maleSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="17dp"
-
                 android:text="Male"
                 android:textSize="22sp" />
 
@@ -78,62 +95,154 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="20dp"
                 android:text="Female"
                 android:textSize="22sp" />
         </RadioGroup>
 
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_below="@+id/filter_card2"
+        android:id="@+id/filter_card3"
+        android:layout_marginTop="40dp">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Age:"
+            android:text="Age"
             android:textSize="25sp"
-            android:layout_marginTop="7dp"
-            android:layout_below="@+id/filter_gender_text"
-            android:id="@+id/filter_age_text"/>
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/filter_card2"
+            android:gravity="center_horizontal"
+            android:id="@+id/filter_age_text"
+            android:textColor="@color/colorPrimary"/>
 
-        <CheckBox
-            android:id="@+id/checkBox1"
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkBox1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="0-3 Months"-->
+<!--            android:layout_below="@+id/filter_age_text"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            />-->
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkBox2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="4-12 Months"-->
+<!--            android:layout_below="@+id/checkBox1"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            />-->
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkBox3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="> 1 Year"-->
+<!--            android:layout_below="@+id/checkBox2"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            />-->
+
+    <SeekBar
+        android:id="@+id/seekBar3"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="80dp"
+        android:max="4"
+        android:progress="0"
+        android:layout_below="@+id/filter_age_text"
+        />
+
+        <TextView
+            android:id="@+id/seekBar_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0-3 Months"
-            android:layout_below="@+id/filter_age_text"
-            android:textSize="20sp"
+            android:layout_below="@+id/seekBar3"
+            android:text="1 month"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="5dp"
-            />
+            android:textSize="13sp">
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4-12 Months"
-            android:layout_below="@+id/filter_age_text"
-            android:layout_toRightOf="@+id/checkBox1"
-            android:textSize="20sp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            />
+        </TextView>
 
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="> 1 Year"
-            android:layout_below="@+id/filter_age_text"
-            android:layout_toRightOf="@+id/checkBox2"
-            android:textSize="20sp"
-            />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:id="@+id/seekBar_text2"
+        android:text="3 months"
+        android:textSize="13sp"
+        android:layout_toRightOf="@+id/seekBar_text1"
+        android:layout_marginLeft="70dp"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar3"
+        android:layout_marginTop="100dp"
+        android:id="@+id/seekBar_text3"
+        android:text="6 months"
+        android:textSize="13sp"
+        android:layout_toRightOf="@+id/seekBar_text2"
+        android:layout_marginLeft="145dp"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar3"
+        android:id="@+id/seekBar_text4"
+        android:layout_marginTop="100dp"
+        android:text="12 months"
+        android:textSize="13sp"
+        android:layout_toRightOf="@+id/seekBar_text3"
+        android:layout_marginLeft="220dp"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar3"
+        android:id="@+id/seekBar_text5"
+        android:text="Older"
+        android:textSize="13sp"
+        android:layout_toRightOf="@+id/seekBar_text4"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="300dp"
+        >
+
+    </TextView>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/checkBox3"
+        android:layout_below="@+id/filter_card3"
         android:layout_centerHorizontal="true"
         android:text="Apply"
+        android:textColor="#ffff"
+        android:textSize="20sp"
         android:background="@drawable/button_rounded"
         android:id="@+id/filter_apply_button"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         />
+
 
 
 </RelativeLayout>
