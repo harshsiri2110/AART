@@ -224,7 +224,7 @@
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text4"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="310dp"
         >
 
     </TextView>
