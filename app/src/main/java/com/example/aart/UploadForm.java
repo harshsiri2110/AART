@@ -179,21 +179,6 @@ public class UploadForm extends AppCompatActivity
                 //model.setID(UUID.randomUUID().toString());
                 model.setFosterName(fosterName);
 
-               /* reff.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        maxId = snapshot.getChildrenCount();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });*/
-
-                currId = maxId + 1;
-
-                /*reff.child(String.valueOf(currId)).setValue(model);*/
-
                 reff.child(timeStamp).setValue(model);
 
                 if(!imageUriList.isEmpty())

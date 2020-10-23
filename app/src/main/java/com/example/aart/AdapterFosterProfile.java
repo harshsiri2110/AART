@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -14,6 +16,9 @@ import androidx.core.content.ContextCompat;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +61,8 @@ public class AdapterFosterProfile extends BaseAdapter {
         ImageSlider imageSlider;
 
         TextView title, ageText, genderText, locationText,updatePost,deletePost;
+
+        final DatabaseReference dtbReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
         imageSlider = view.findViewById(R.id.image);
 
@@ -102,6 +109,19 @@ public class AdapterFosterProfile extends BaseAdapter {
                 intent.putExtra("timestamp",models.get(position).getID());
 
                 context.startActivity(intent);
+            }
+        });
+
+        deletePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dtbReff.child(models.get(position).getID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        context.startActivity(new Intent(context,Foster_Profile.class));
+                    }
+                });
             }
         });
 

@@ -312,7 +312,6 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
 
         startActivity(new Intent(getApplicationContext(),FirstPage.class));
-
     }
 
     @Override

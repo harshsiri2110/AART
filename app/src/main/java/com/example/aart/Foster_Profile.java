@@ -161,4 +161,12 @@ public class Foster_Profile extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+
+        startActivity(new Intent(Foster_Profile.this, MainActivity.class).putExtra("Activity","Foster_Profile"));
+
     }
+
+}

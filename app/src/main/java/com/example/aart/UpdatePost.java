@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class UpdatePost extends AppCompatActivity {
@@ -35,13 +37,18 @@ public class UpdatePost extends AppCompatActivity {
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupdate, selectImages;
 
-    DatabaseReference reff;
+    DatabaseReference reff,reff2;
 
     String species,title,gender,location_text,age,desc,medical_text,timestamp;
 
     ArrayList<SlideModel> imageList = new ArrayList<>();
 
-    RadioButton male,female,dog,cat;
+    ArrayList<ImageUrl> imgUrls = new ArrayList<>();
+
+    RadioButton male,female,dog,cat,txtGender,txtSpecies;
+
+    RadioGroup radioGenderGroup, radioSpeciesGroup;
+
     ImageSlider imgView;
 
     @Override
@@ -57,6 +64,9 @@ public class UpdatePost extends AppCompatActivity {
 
         btnupdate = (Button)findViewById(R.id.update_btnupdate);
         selectImages = (Button) findViewById(R.id.update_selectImages);
+
+        radioGenderGroup = findViewById(R.id.update_speciesSelect);
+        radioSpeciesGroup = findViewById(R.id.update_radioGroup);
 
         male = findViewById(R.id.update_radioMale);
         female = findViewById(R.id.update_radioFemale);
@@ -106,18 +116,21 @@ public class UpdatePost extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                FileChooser();
+                //FileChooser();
             }
         });
 
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(timestamp).child("images");
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(timestamp);
 
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot currImg : snapshot.getChildren())
                 {
-                    String uri = currImg.getValue(ImageUrl.class).getUri();
+                    ImageUrl tmp = currImg.getValue(ImageUrl.class);
+                    imgUrls.add(tmp);
+                    String uri = tmp.getUri();
                     imageList.add(new SlideModel(uri, ScaleTypes.CENTER_INSIDE));
 
                     if(imageList.size() == snapshot.getChildrenCount())
@@ -130,6 +143,38 @@ public class UpdatePost extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        btnupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Model model = new Model();
+
+                int selectedId = radioGenderGroup.getCheckedRadioButtonId();
+                txtGender = (RadioButton) findViewById(selectedId);
+
+                selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
+                txtSpecies= (RadioButton)findViewById(selectedId);
+                //model.setID(UUID.randomUUID().toString());
+
+                reff2.child("age").setValue(txtAge.getText().toString());
+                reff2.child("description").setValue(description.getText().toString());
+                reff2.child("gender").setValue(txtGender.getText().toString());
+                reff2.child("location").setValue(location.getText().toString());
+                reff2.child("medical").setValue(medical.getText().toString());
+                reff2.child("speciesText").setValue(txtSpecies.getText().toString());
+                reff2.child("title").setValue(txtTitle.getText().toString());
+
+                startActivity(new Intent(getApplicationContext(),Foster_Profile.class));
+                /*if(!imageUriList.isEmpty())
+                {
+                    for(int i = 0 ; i < imageUriList.size();i++)
+                    {
+                        uploadPicture(imageUriList.get(i));
+                    }
+                }*/
             }
         });
 
