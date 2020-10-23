@@ -34,7 +34,9 @@ public class UpdatePost extends AppCompatActivity {
 
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupdate, selectImages;
+
     DatabaseReference reff;
+
     String species,title,gender,location_text,age,desc,medical_text,timestamp;
 
     ArrayList<SlideModel> imageList = new ArrayList<>();
@@ -80,6 +82,7 @@ public class UpdatePost extends AppCompatActivity {
         txtAge.setText(age);
         location.setText(location_text);
 
+
         if(species.equals("Dog"))
         {
             dog.toggle();
@@ -116,7 +119,6 @@ public class UpdatePost extends AppCompatActivity {
                 {
                     String uri = currImg.getValue(ImageUrl.class).getUri();
                     imageList.add(new SlideModel(uri, ScaleTypes.CENTER_INSIDE));
-
 
                     if(imageList.size() == snapshot.getChildrenCount())
                     {
@@ -169,7 +171,10 @@ public class UpdatePost extends AppCompatActivity {
         }
     }
 
-    public void uploadPicture(Uri imgUri)
+
+
+/*
+     public void uploadPicture(Uri imgUri)
     {
         final String randomKey= UUID.randomUUID().toString();
         //final StorageReference storageRef = storageReference.child(timeStamp).child("images" + randomKey);
@@ -201,6 +206,6 @@ public class UpdatePost extends AppCompatActivity {
                     }
                 });
 
-         */
-    }
+
+    }*/
 }

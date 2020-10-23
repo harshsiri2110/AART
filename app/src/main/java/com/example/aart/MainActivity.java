@@ -293,8 +293,6 @@ public class MainActivity extends AppCompatActivity
                     });
                 }
 
-
-
                 adapter = new Adapter(models, MainActivity.this,R.layout.temp_cards);
 
                 adapter.notifyDataSetChanged();
