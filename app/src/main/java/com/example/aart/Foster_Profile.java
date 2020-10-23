@@ -2,6 +2,7 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,12 +38,13 @@ public class Foster_Profile extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference reference;
 
+    SwipeRefreshLayout pullToRefresh;
+
     List<Model> models ;
+    List<String> postList = new ArrayList<>();
     int postCount, imgCount;
 
     Model currModel = new Model();
-
-    DataSnapshot selectedPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,26 @@ public class Foster_Profile extends AppCompatActivity {
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
         fosterPosts = findViewById(R.id.profile_listView);
+        fosterPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Foster_Profile.this,Details.class);
+                intent.putExtra("selectedCard",i);
+                startActivity(intent);
+            }
+        });
+
+        pullToRefresh = findViewById(R.id.foster_profile_swipeRefresh);
+
+        pullToRefresh.setDistanceToTriggerSync(500);
+
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Foster");
@@ -81,6 +103,14 @@ public class Foster_Profile extends AppCompatActivity {
         {
             models.clear();
         }
+    }
+
+    private void refreshList()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     private void showCards()
@@ -116,8 +146,11 @@ public class Foster_Profile extends AppCompatActivity {
                                     adapter.notifyDataSetChanged();
 
                                     if (currModel.getImageList().size() == imgCount) {
-                                        models.add(currModel);
-                                        adapter.notifyDataSetChanged();
+                                        if(!postList.contains(currModel.getID())) {
+                                            postList.add(currModel.getID());
+                                            models.add(currModel);
+                                            adapter.notifyDataSetChanged();
+                                        }
                                     }
                                 }
                             }

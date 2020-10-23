@@ -19,6 +19,8 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,8 @@ public class AdapterFosterProfile extends BaseAdapter {
         TextView title, ageText, genderText, locationText,updatePost,deletePost;
 
         final DatabaseReference dtbReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         imageSlider = view.findViewById(R.id.image);
 
@@ -119,6 +123,7 @@ public class AdapterFosterProfile extends BaseAdapter {
                 dtbReff.child(models.get(position).getID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        storageReference.child(models.get(position).getID()).delete();
                         context.startActivity(new Intent(context,Foster_Profile.class));
                     }
                 });

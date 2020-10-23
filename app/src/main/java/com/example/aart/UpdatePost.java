@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -37,32 +38,38 @@ public class UpdatePost extends AppCompatActivity {
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupdate, selectImages;
 
-    DatabaseReference reff,reff2;
+    DatabaseReference reff, reff2;
+    StorageReference storageReference;
 
-    String species,title,gender,location_text,age,desc,medical_text,timestamp;
+    List<Uri> imageUriList = new ArrayList<>();
+
+    String species, title, gender, location_text, age, desc, medical_text, timestamp;
 
     ArrayList<SlideModel> imageList = new ArrayList<>();
 
     ArrayList<ImageUrl> imgUrls = new ArrayList<>();
 
-    RadioButton male,female,dog,cat,txtGender,txtSpecies;
+    RadioButton male, female, dog, cat, txtGender, txtSpecies;
 
     RadioGroup radioGenderGroup, radioSpeciesGroup;
+    List<SlideModel> previewImages = new ArrayList<SlideModel>();
 
-    ImageSlider imgView;
+    ImageSlider imgView, newImgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_post);
 
-        description = (EditText)findViewById(R.id.update_postDescription);
-        medical= (EditText)findViewById(R.id.update_medicalDetails);
-        txtTitle = (EditText)findViewById(R.id.update_txttitle);
-        txtAge = (EditText)findViewById(R.id.update_txtage);
-        location = (EditText)findViewById(R.id.update_location);
+        storageReference = FirebaseStorage.getInstance().getReference();
 
-        btnupdate = (Button)findViewById(R.id.update_btnupdate);
+        description = (EditText) findViewById(R.id.update_postDescription);
+        medical = (EditText) findViewById(R.id.update_medicalDetails);
+        txtTitle = (EditText) findViewById(R.id.update_txttitle);
+        txtAge = (EditText) findViewById(R.id.update_txtage);
+        location = (EditText) findViewById(R.id.update_location);
+
+        btnupdate = (Button) findViewById(R.id.update_btnupdate);
         selectImages = (Button) findViewById(R.id.update_selectImages);
 
         radioGenderGroup = findViewById(R.id.update_speciesSelect);
@@ -74,6 +81,7 @@ public class UpdatePost extends AppCompatActivity {
         cat = findViewById(R.id.update_CatSelect);
 
         imgView = (ImageSlider) findViewById(R.id.update_imgView);
+        newImgView = (ImageSlider) findViewById(R.id.update_imgViewAdd);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -93,30 +101,22 @@ public class UpdatePost extends AppCompatActivity {
         location.setText(location_text);
 
 
-        if(species.equals("Dog"))
-        {
+        if (species.equals("Dog")) {
             dog.toggle();
-        }
-        else
-        {
+        } else {
             cat.toggle();
         }
 
-        if(gender.equals("Male"))
-        {
+        if (gender.equals("Male")) {
             male.toggle();
-        }
-        else
-        {
+        } else {
             female.toggle();
         }
 
-        selectImages.setOnClickListener(new View.OnClickListener()
-        {
+        selectImages.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                //FileChooser();
+            public void onClick(View view) {
+                FileChooser();
             }
         });
 
@@ -126,16 +126,14 @@ public class UpdatePost extends AppCompatActivity {
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot currImg : snapshot.getChildren())
-                {
+                for (DataSnapshot currImg : snapshot.getChildren()) {
                     ImageUrl tmp = currImg.getValue(ImageUrl.class);
                     imgUrls.add(tmp);
                     String uri = tmp.getUri();
                     imageList.add(new SlideModel(uri, ScaleTypes.CENTER_INSIDE));
 
-                    if(imageList.size() == snapshot.getChildrenCount())
-                    {
-                        imgView.setImageList(imageList,ScaleTypes.FIT);
+                    if (imageList.size() == snapshot.getChildrenCount()) {
+                        imgView.setImageList(imageList, ScaleTypes.FIT);
                     }
                 }
             }
@@ -150,13 +148,11 @@ public class UpdatePost extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Model model = new Model();
-
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 
-                selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
-                txtSpecies= (RadioButton)findViewById(selectedId);
+                selectedId = radioSpeciesGroup.getCheckedRadioButtonId();
+                txtSpecies = (RadioButton) findViewById(selectedId);
                 //model.setID(UUID.randomUUID().toString());
 
                 reff2.child("age").setValue(txtAge.getText().toString());
@@ -167,90 +163,75 @@ public class UpdatePost extends AppCompatActivity {
                 reff2.child("speciesText").setValue(txtSpecies.getText().toString());
                 reff2.child("title").setValue(txtTitle.getText().toString());
 
-                startActivity(new Intent(getApplicationContext(),Foster_Profile.class));
-                /*if(!imageUriList.isEmpty())
+                startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+                if(!imageUriList.isEmpty())
                 {
                     for(int i = 0 ; i < imageUriList.size();i++)
                     {
                         uploadPicture(imageUriList.get(i));
                     }
-                }*/
+                }
             }
         });
 
     }
 
-    private void FileChooser()
-    {
+    private void FileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Pictures"),1);
+        startActivityForResult(Intent.createChooser(intent, "Select Pictures"), 1);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1 && resultCode == RESULT_OK )
-        {
-            if(data.getClipData() != null)
-            {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            if (data.getClipData() != null) {
                 int totalItemsSelected = data.getClipData().getItemCount();
 
-                for (int i = 0; i < totalItemsSelected; i++)
-                {
-                    //imageUriList.add(data.getClipData().getItemAt(i).getUri());
-                    //previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
+                for (int i = 0; i < totalItemsSelected; i++) {
+                    imageUriList.add(data.getClipData().getItemAt(i).getUri());
+                    previewImages.add(new SlideModel(data.getClipData().getItemAt(i).getUri().toString(), ScaleTypes.CENTER_INSIDE));
                 }
-            }
-            else if(data.getData() != null)
-            {
-                //imageUriList.add(data.getData());
-                //previewImages.add(new SlideModel(data.getData().toString(), ScaleTypes.CENTER_INSIDE));
+            } else if (data.getData() != null) {
+                imageUriList.add(data.getData());
+                previewImages.add(new SlideModel(data.getData().toString(), ScaleTypes.CENTER_INSIDE));
             }
 
-            //imgView.setImageList(previewImages, ScaleTypes.FIT);
+            newImgView.setImageList(previewImages, ScaleTypes.FIT);
         }
     }
 
+    public void uploadPicture(Uri imgUri) {
+        final String randomKey = UUID.randomUUID().toString();
+        final StorageReference storageRef = storageReference.child(timestamp).child("images" + randomKey);
 
+        final DatabaseReference postsReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-/*
-     public void uploadPicture(Uri imgUri)
-    {
-        final String randomKey= UUID.randomUUID().toString();
-        //final StorageReference storageRef = storageReference.child(timeStamp).child("images" + randomKey);
-
-        /*storageRef.putFile(imgUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
-                {
+        storageRef.putFile(imgUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                    {
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                        {
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
-                            public void onSuccess(Uri uri)
-                            {
-                                reff.child(timeStamp).child("images").push().setValue(new ImageUrl(uri.toString()));
+                            public void onSuccess(Uri uri) {
+                                postsReff.child(timestamp).child("images").push().setValue(new ImageUrl(uri.toString()));
                             }
                         });
                     }
                 })
-                .addOnFailureListener(new OnFailureListener()
-                {
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception exception)
-                    {
+                    public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
                         // ...
                     }
                 });
 
 
-    }*/
-}
+        }
+    }

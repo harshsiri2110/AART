@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity
         //Swipe Refresh for cards
         pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
 
+        pullToRefresh.setDistanceToTriggerSync(500);
+
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
