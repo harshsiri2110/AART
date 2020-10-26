@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    android:text="Name:"
+                    android:hint="Name"
                     android:textColor="#000000"
                     android:textSize="22dp"></EditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="Email ID:"
+                    android:hint="Email ID"
                     android:textColor="#000000"
                     android:textSize="22dp"></EditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="Mobile Number:"
+                    android:hint="Mobile Number"
                     android:textColor="#000000"
                     android:textSize="22dp"></EditText>
             </com.google.android.material.textfield.TextInputLayout>

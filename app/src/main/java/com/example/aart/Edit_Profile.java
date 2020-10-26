@@ -17,6 +17,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
+
+
         profilePic = findViewById(R.id.edit_profile_photo);
 
         c1 = (ImageButton) findViewById(R.id.cat_profile1);
@@ -25,8 +27,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         c4 = (ImageButton) findViewById(R.id.cat_profile4);
         d1 = (ImageButton) findViewById(R.id.dog_profile1);
         d2 = (ImageButton) findViewById(R.id.dog_profile2);
-        d2 = (ImageButton) findViewById(R.id.dog_profile3);
-        d2 = (ImageButton) findViewById(R.id.dog_profile4);
+        d3 = (ImageButton) findViewById(R.id.dog_profile3);
+        d4 = (ImageButton) findViewById(R.id.dog_profile4);
 
         c1.setOnClickListener(this);
         c2.setOnClickListener(this);
@@ -67,6 +69,9 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.dog_profile4:
                 profilePic.setImageResource(R.drawable.d4);
+                break;
+
+            default:
                 break;
         }
     }
