@@ -266,7 +266,8 @@
                 android:background="@drawable/button_rounded"
                 android:text="Update"
                 android:textSize="22sp"
-                android:textColor="#ffff">
+                android:textColor="#ffff"
+                >
 
             </Button>
 
