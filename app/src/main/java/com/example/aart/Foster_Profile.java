@@ -189,7 +189,8 @@ public class Foster_Profile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId()== R.id.profile_edit){
-            Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Foster_Profile.this, Edit_Profile.class));
+            //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
