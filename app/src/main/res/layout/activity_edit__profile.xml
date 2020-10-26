@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".Foster_reg">
+    tools:context=".Edit_Profile">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
