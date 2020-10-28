@@ -70,6 +70,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         mobileNumber = String.valueOf(bundle.getLong("mobileNumber"));
         profilePicture = bundle.getInt("profilePic");
 
+        profilePic.setImageResource(profilePicture);
+
         editName.setText(name);
         editEmail.setText(email);
         editNumber.setText(mobileNumber);
@@ -81,7 +83,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 reference.child("name").setValue(editName.getText().toString());
                 reference.child("email").setValue(editEmail.getText().toString());
-                reference.child("mobileNo").setValue(editNumber.getText().toString());
+                reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
                 reference.child("profilePic").setValue(profilePicture);
                 startActivity(new Intent(Edit_Profile.this, Foster_Profile.class));
             }

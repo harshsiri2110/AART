@@ -201,35 +201,35 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
         {
             case R.id.cat_prof1:
                 selectedImage = R.drawable.c1;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.cat_prof2:
                 selectedImage = R.drawable.c2;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.cat_prof3:
                 selectedImage = R.drawable.c3;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.cat_prof4:
                 selectedImage = R.drawable.c4;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.dog_prof1:
                 selectedImage = R.drawable.d1;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.dog_prof2:
                 selectedImage = R.drawable.d2;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.dog_prof3:
                 selectedImage = R.drawable.d3;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
             case R.id.dog_prof4:
                 selectedImage = R.drawable.d4;
-                profilePic.setImageResource(selectedImage);
+                profilePic.setImageResource((int)selectedImage);
                 break;
 
             default:

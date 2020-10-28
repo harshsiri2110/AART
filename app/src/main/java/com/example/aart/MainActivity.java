@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
-                        menu.findItem(R.id.profile_icon).setIcon(fosterdetails.getProfilePic());
+                        menu.findItem(R.id.profile_icon).setIcon((int)fosterdetails.getProfilePic());
                         menu.findItem(R.id.profile_icon).setVisible(true);
                     }
 
