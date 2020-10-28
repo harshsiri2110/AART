@@ -72,8 +72,8 @@ public class UpdatePost extends AppCompatActivity {
         btnupdate = (Button) findViewById(R.id.update_btnupdate);
         selectImages = (Button) findViewById(R.id.update_selectImages);
 
-        radioGenderGroup = findViewById(R.id.update_speciesSelect);
-        radioSpeciesGroup = findViewById(R.id.update_radioGroup);
+        radioSpeciesGroup = findViewById(R.id.update_speciesSelect);
+        radioGenderGroup = findViewById(R.id.update_radioGroup);
 
         male = findViewById(R.id.update_radioMale);
         female = findViewById(R.id.update_radioFemale);
