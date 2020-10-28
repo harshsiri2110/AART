@@ -54,7 +54,7 @@ public class UploadForm extends AppCompatActivity
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
-    String fosterName, timeStamp;
+    String fosterEmail,fosterName, timeStamp;
 
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
@@ -119,9 +119,9 @@ public class UploadForm extends AppCompatActivity
 
                 Fosterdetails currFoster = snapshot.child(currUser).getValue(Fosterdetails.class);
 
+                fosterEmail = currFoster.getEmail();
                 fosterName = currFoster.getName();
 
-                Log.d("TEST","The foster name is "+fosterName);
                 //model.setFosterName(fosterName);
             }
 
@@ -177,6 +177,7 @@ public class UploadForm extends AppCompatActivity
                 model.setSpeciesText(txtSpecies.getText().toString());
                 model.setID(timeStamp);
                 //model.setID(UUID.randomUUID().toString());
+                model.setfosterEmail(fosterEmail);
                 model.setFosterName(fosterName);
 
                 reff.child(timeStamp).setValue(model);

@@ -33,7 +33,7 @@ public class Foster_Profile extends AppCompatActivity {
     ListView fosterPosts;
     AdapterFosterProfile adapter;
 
-    String fosterName;
+    String fosterEmail;
 
     String userId,postID;
 
@@ -90,9 +90,9 @@ public class Foster_Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Fosterdetails currFoster = snapshot.child(userId).getValue(Fosterdetails.class);
-                fosterName = currFoster.getName();
-                name.setText(fosterName);
-                email.setText(currFoster.getEmail());
+                fosterEmail = currFoster.getEmail();
+                name.setText(currFoster.getName());
+                email.setText(fosterEmail);
                 circleImageView.setImageResource(currFoster.getProfilePic());
 
                 showCards();
@@ -139,7 +139,7 @@ public class Foster_Profile extends AppCompatActivity {
                             currModel = currPostSnap.getValue(Model.class);
 
                             assert currModel != null;
-                            if (fosterName.equals(currModel.getFosterName()))
+                            if (fosterEmail.equals(currModel.getfosterEmail()))
                             {
                                 imgCount = Integer.MIN_VALUE;
                                 imgCount = (int) imgSnapshot.getChildrenCount();

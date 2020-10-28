@@ -150,7 +150,6 @@ public class Details extends AppCompatActivity {
                                                     {
                                                         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 
-
                                                         viewPager.setAdapter(adapter);
 
                                                         tabLayout.setupWithViewPager(viewPager);

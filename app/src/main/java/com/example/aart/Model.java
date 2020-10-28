@@ -16,7 +16,16 @@ public class Model {
    private String speciesText;
    private String ID;
    private String medical;
+   private String fosterEmail;
    private String fosterName;
+
+    public String getfosterEmail() {
+        return fosterEmail;
+    }
+
+    public void setfosterEmail(String fosterEmail) {
+        this.fosterEmail = fosterEmail;
+    }
 
     public String getFosterName() {
         return fosterName;
@@ -46,7 +55,7 @@ public class Model {
         images = new ArrayList<>();
         description= "";
         medical = "No medical history found :(";
-        fosterName = "No foster found :(";
+        fosterEmail = "No foster found :(";
     }
 
     public String getID() {
