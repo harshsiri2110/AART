@@ -33,7 +33,9 @@ public class Foster_Profile extends AppCompatActivity {
     ListView fosterPosts;
     AdapterFosterProfile adapter;
 
-    String fosterEmail;
+    String fosterName = "", fosterEmail = "";
+    long fosterNumber = 0;
+    Fosterdetails fosterdetails;
 
     String userId,postID;
 
@@ -46,7 +48,7 @@ public class Foster_Profile extends AppCompatActivity {
 
     List<Model> models ;
     List<String> postList = new ArrayList<>();
-    int postCount, imgCount;
+    int postCount, imgCount, profilePic;
 
     Model currModel = new Model();
 
@@ -89,11 +91,15 @@ public class Foster_Profile extends AppCompatActivity {
         reference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Fosterdetails currFoster = snapshot.child(userId).getValue(Fosterdetails.class);
-                fosterEmail = currFoster.getEmail();
-                name.setText(currFoster.getName());
-                email.setText(fosterEmail);
-                circleImageView.setImageResource(currFoster.getProfilePic());
+                fosterdetails = snapshot.child(userId).getValue(Fosterdetails.class);
+                fosterName = fosterdetails.getName();
+                fosterEmail = fosterdetails.getEmail();
+                fosterNumber = fosterdetails.getMobileNo();
+                profilePic = fosterdetails.getProfilePic();
+
+                name.setText(fosterName);
+                email.setText(fosterdetails.getEmail());
+                circleImageView.setImageResource(fosterdetails.getProfilePic());
 
                 showCards();
             }
@@ -139,7 +145,7 @@ public class Foster_Profile extends AppCompatActivity {
                             currModel = currPostSnap.getValue(Model.class);
 
                             assert currModel != null;
-                            if (fosterEmail.equals(currModel.getfosterEmail()))
+                            if (fosterName.equals(currModel.getFosterName()))
                             {
                                 imgCount = Integer.MIN_VALUE;
                                 imgCount = (int) imgSnapshot.getChildrenCount();
@@ -196,7 +202,7 @@ public class Foster_Profile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId()== R.id.profile_edit){
-            startActivity(new Intent(Foster_Profile.this, Edit_Profile.class));
+            startActivity(new Intent(Foster_Profile.this, Edit_Profile.class).putExtra("name", fosterName).putExtra("email", fosterEmail).putExtra("mobileNumber", fosterNumber).putExtra("profilePic", profilePic));
             //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
         }
 

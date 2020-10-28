@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         >
 
         <LinearLayout
@@ -24,7 +25,8 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/d4">
+                android:src="@drawable/d4"
+                >
             </de.hdodenhof.circleimageview.CircleImageView>
 
             <RelativeLayout
@@ -119,7 +121,9 @@
                     android:layout_marginTop="20dp"
                     android:hint="Name"
                     android:textColor="#000000"
-                    android:textSize="22dp"></EditText>
+                    android:textSize="22dp">
+
+                </EditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +138,9 @@
                     android:layout_marginTop="10dp"
                     android:hint="Email ID"
                     android:textColor="#000000"
-                    android:textSize="22dp"></EditText>
+                    android:textSize="22dp">
+
+                </EditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -149,7 +155,9 @@
                     android:layout_marginTop="10dp"
                     android:hint="Mobile Number"
                     android:textColor="#000000"
-                    android:textSize="22dp"></EditText>
+                    android:textSize="22dp">
+
+                </EditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -161,10 +169,12 @@
                 android:background="@drawable/button_rounded"
                 android:text="Apply"
                 android:textColor="#ffff"
-                android:textSize="22sp"></Button>
+                android:textSize="22sp">
+
+            </Button>
 
             <Button
-                android:id="@+id/btndelete_profile"
+                android:id="@+id/edit_profile_btndelete"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -173,7 +183,9 @@
                 android:backgroundTint="#DA2D2D"
                 android:text="Delete Profile"
                 android:textColor="#ffff"
-                android:textSize="22sp"></Button>
+                android:textSize="22sp">
+
+            </Button>
 
         </LinearLayout>
 
