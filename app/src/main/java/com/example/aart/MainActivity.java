@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.constraintlayout.solver.widgets.Snapshot;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,11 +48,12 @@ import java.util.concurrent.CountDownLatch;
 
 public class MainActivity extends AppCompatActivity
 {
-
     //ViewPager viewPager;
     ListView listView;
     Adapter adapter;
     List<Model> models;
+
+    int foster_profile_pic = 0;
 
     int imgCount;
     int postCount;
@@ -66,7 +69,8 @@ public class MainActivity extends AppCompatActivity
 
     int species = 0, gender = 0, age1 = 0, age2 = 0, age3 = 0;
 
-    DatabaseReference reference;
+    DatabaseReference reference, userRef;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity
         {
             models.clear();
         }
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         showCards();
 
@@ -317,7 +323,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -327,12 +333,54 @@ public class MainActivity extends AppCompatActivity
         else
         {
             getMenuInflater().inflate(R.menu.nav_menu_login, menu);
+            FirebaseUser usr = firebaseAuth.getCurrentUser();
+            if(usr != null) {
+                final String uid = usr.getUid();
+                userRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
+                        menu.findItem(R.id.profile_icon).setIcon(fosterdetails.getProfilePic());
+                        menu.findItem(R.id.profile_icon).setVisible(true);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
         }
         //getMenuInflater().inflate(R.menu.filter_menu, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
+   /* @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
 
+        invalidateOptionsMenu();
+        FirebaseUser usr = firebaseAuth.getCurrentUser();
+        if(usr != null) {
+            final String uid = usr.getUid();
+            userRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
+                    menu.findItem(R.id.profile_icon).setIcon(fosterdetails.getProfilePic());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -346,7 +394,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), LoginPage.class));
                 break;
             }
-            case R.id.menu_profile:
+            case R.id.profile_icon:
             {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
                 //Toast.makeText(this, "Profile nmade", Toast.LENGTH_SHORT).show();
