@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Foster_Profile extends AppCompatActivity {
 
     TextView name, email;
@@ -39,6 +41,8 @@ public class Foster_Profile extends AppCompatActivity {
     DatabaseReference reference;
 
     SwipeRefreshLayout pullToRefresh;
+
+    CircleImageView circleImageView;
 
     List<Model> models ;
     List<String> postList = new ArrayList<>();
@@ -62,6 +66,8 @@ public class Foster_Profile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        circleImageView = findViewById(R.id.foster_profile_profile_photo);
 
         pullToRefresh = findViewById(R.id.foster_profile_swipeRefresh);
 
@@ -87,6 +93,7 @@ public class Foster_Profile extends AppCompatActivity {
                 fosterName = currFoster.getName();
                 name.setText(fosterName);
                 email.setText(currFoster.getEmail());
+                circleImageView.setImageResource(currFoster.getProfilePic());
 
                 showCards();
             }

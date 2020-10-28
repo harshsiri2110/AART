@@ -18,7 +18,6 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
 
-
         profilePic = findViewById(R.id.edit_profile_photo);
 
         c1 = (ImageButton) findViewById(R.id.cat_profile1);

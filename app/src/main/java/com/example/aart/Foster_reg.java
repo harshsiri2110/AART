@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -27,8 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Foster_reg extends AppCompatActivity
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class Foster_reg extends AppCompatActivity implements View.OnClickListener
 {
+
+    ImageButton c1,c2,c3,c4,d1,d2,d3,d4;
+    CircleImageView profilePic;
 
     EditText name,number,email,password,confirmPassword;
 
@@ -36,6 +42,8 @@ public class Foster_reg extends AppCompatActivity
     DatabaseReference reference;
     Fosterdetails fosterdetails;
     FirebaseAuth firebaseAuth;
+
+    int selectedImage = R.drawable.c1;
 
     long maxId = 0;
     long currId;
@@ -68,6 +76,26 @@ public class Foster_reg extends AppCompatActivity
             finish();
         }
 
+        profilePic = findViewById(R.id.foster_reg_profile_photo);
+
+        c1 = (ImageButton) findViewById(R.id.cat_prof1);
+        c2 = (ImageButton) findViewById(R.id.cat_prof2);
+        c3 = (ImageButton) findViewById(R.id.cat_prof3);
+        c4 = (ImageButton) findViewById(R.id.cat_prof4);
+        d1 = (ImageButton) findViewById(R.id.dog_prof1);
+        d2 = (ImageButton) findViewById(R.id.dog_prof2);
+        d3 = (ImageButton) findViewById(R.id.dog_prof3);
+        d4 = (ImageButton) findViewById(R.id.dog_prof4);
+
+        c1.setOnClickListener(this);
+        c2.setOnClickListener(this);
+        c3.setOnClickListener(this);
+        c4.setOnClickListener(this);
+        d1.setOnClickListener(this);
+        d2.setOnClickListener(this);
+        d3.setOnClickListener(this);
+        d4.setOnClickListener(this);
+
 
         reference.addValueEventListener(new ValueEventListener()
         {
@@ -97,6 +125,7 @@ public class Foster_reg extends AppCompatActivity
                 fosterdetails.setMobileNo(mnumber);
                 fosterdetails.setEmail(email.getText().toString());
                 fosterdetails.setPassword(password.getText().toString());
+                fosterdetails.setProfilePic(selectedImage);
                 currId = maxId + 1;
 
                 final String memail= email.getText().toString().trim();
@@ -131,7 +160,7 @@ public class Foster_reg extends AppCompatActivity
                     {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
-                            addUser(mname,memail,mnumber);
+                            addUser(mname,memail,mnumber,selectedImage);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                             }
@@ -165,8 +194,51 @@ public class Foster_reg extends AppCompatActivity
         });
     }
 
-    private void addUser(String name, String email, long mobileNo){
-        Fosterdetails fosterdetails1 = new Fosterdetails(name, email, mobileNo);
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId())
+        {
+            case R.id.cat_prof1:
+                selectedImage = R.drawable.c1;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.cat_prof2:
+                selectedImage = R.drawable.c2;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.cat_prof3:
+                selectedImage = R.drawable.c3;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.cat_prof4:
+                selectedImage = R.drawable.c4;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.dog_prof1:
+                selectedImage = R.drawable.d1;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.dog_prof2:
+                selectedImage = R.drawable.d2;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.dog_prof3:
+                selectedImage = R.drawable.d3;
+                profilePic.setImageResource(selectedImage);
+                break;
+            case R.id.dog_prof4:
+                selectedImage = R.drawable.d4;
+                profilePic.setImageResource(selectedImage);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void addUser(String name, String email, long mobileNo, int selectedImg){
+        Fosterdetails fosterdetails1 = new Fosterdetails(name, email, mobileNo, selectedImg);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String uid = firebaseUser.getUid();
         FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child(uid).setValue(fosterdetails1);
