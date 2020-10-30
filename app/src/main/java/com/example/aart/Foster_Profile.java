@@ -145,7 +145,7 @@ public class Foster_Profile extends AppCompatActivity {
                             currModel = currPostSnap.getValue(Model.class);
 
                             assert currModel != null;
-                            if (fosterName.equals(currModel.getFosterName()))
+                            if (fosterEmail.equals(currModel.getfosterEmail()))
                             {
                                 imgCount = Integer.MIN_VALUE;
                                 imgCount = (int) imgSnapshot.getChildrenCount();
