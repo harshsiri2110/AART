@@ -77,24 +77,23 @@
 
             <EditText
                 android:id="@+id/txtage"
-                android:layout_width="175dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Age"
-                android:inputType="textCapSentences" />
+                android:hint="Age (Number)"
+                android:inputType="number|numberDecimal" />
             <Spinner
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_toRightOf="@+id/txtage"
                 android:id="@+id/dropdown_age"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 >
-
             </Spinner>
 
             </RelativeLayout>
@@ -233,7 +232,9 @@
                 android:textSize="15sp"
                 android:layout_below="@+id/imgupload"
 
-                ></TextView>
+                >
+
+            </TextView>
 
                 <Button
                     android:id="@+id/selectImages"

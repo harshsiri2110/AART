@@ -57,7 +57,7 @@ public class UploadForm extends AppCompatActivity
     EditText txtTitle, txtAge, location, description, medical;
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
-    String fosterEmail,fosterName, timeStamp;
+    String fosterEmail, fosterName, timeStamp, age_dropdown;
 
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
@@ -117,7 +117,7 @@ public class UploadForm extends AppCompatActivity
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
 
-        ArrayAdapter <String> adapter = new ArrayAdapter<String> (UploadForm.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Age));
+        ArrayAdapter <String> adapter = new ArrayAdapter <String> (UploadForm.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Age));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -180,7 +180,7 @@ public class UploadForm extends AppCompatActivity
                 txtSpecies= (RadioButton)findViewById(selectedId);
 
                 model.setTitle(txtTitle.getText().toString());
-                model.setAge(txtAge.getText().toString());
+                model.setAge(txtAge.getText().toString() + " " + spinner.getSelectedItem().toString());
                 model.setLocation(location.getText().toString());
                 model.setGender(txtGender.getText().toString());
                 model.setDescription(description.getText().toString());

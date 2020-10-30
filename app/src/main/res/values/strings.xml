@@ -8,9 +8,11 @@
         <item>
             Months
         </item>
+
         <item>
             Year(s)
         </item>
+
     </string-array>
 
 </resources>

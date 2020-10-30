@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -40,6 +42,8 @@ public class UpdatePost extends AppCompatActivity {
 
     DatabaseReference reff, reff2;
     StorageReference storageReference;
+
+    Spinner spinner;
 
     List<Uri> imageUriList = new ArrayList<>();
 
@@ -71,6 +75,8 @@ public class UpdatePost extends AppCompatActivity {
 
         btnupdate = (Button) findViewById(R.id.update_btnupdate);
         selectImages = (Button) findViewById(R.id.update_selectImages);
+
+        spinner = (Spinner)findViewById(R.id.update_dropdown_age);
 
         radioSpeciesGroup = findViewById(R.id.update_speciesSelect);
         radioGenderGroup = findViewById(R.id.update_radioGroup);
@@ -119,6 +125,10 @@ public class UpdatePost extends AppCompatActivity {
                 FileChooser();
             }
         });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter <String> (UpdatePost.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Age));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(timestamp).child("images");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(timestamp);
