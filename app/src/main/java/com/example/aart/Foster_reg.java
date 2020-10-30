@@ -70,11 +70,11 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser()!= null)
+        /*if(firebaseAuth.getCurrentUser()!= null)
         {
             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_Reg"));
             finish();
-        }
+        }*/
 
         profilePic = findViewById(R.id.foster_reg_profile_photo);
 

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -92,10 +93,21 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference.removeValue();
-                firebaseAuth.signOut();
-                firebaseAuth.getCurrentUser().delete();
-                startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                firebaseAuth.signOut();
+                                startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                            }
+                        });
+                    }
+                });
+
+
             }
         });
     }
