@@ -85,7 +85,26 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:hint="Age (Number)"
-                android:inputType="number|numberDecimal" />
+                android:inputType="number|numberDecimal"
+                android:visibility="invisible"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txtAge2"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:ems="10"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="Age (Number)"
+
+                        android:inputType="number|numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
             <Spinner
                 android:layout_width="140dp"
                 android:layout_height="42dp"
