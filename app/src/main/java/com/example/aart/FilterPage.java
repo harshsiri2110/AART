@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 public class FilterPage extends AppCompatActivity {
 
@@ -18,6 +20,8 @@ public class FilterPage extends AppCompatActivity {
     RadioButton selectedButton;
 
     Button applyButton;
+
+    SeekBar seekBar;
 
     Intent intent;
 
@@ -31,7 +35,7 @@ public class FilterPage extends AppCompatActivity {
         speciesGroup = findViewById(R.id.filter_species_group);
         genderGroup = findViewById(R.id.filter_gender_group);
 
-
+        seekBar = findViewById(R.id.seekBar3);
 
         intent = new Intent(getApplicationContext(),MainActivity.class);
 
@@ -59,33 +63,23 @@ public class FilterPage extends AppCompatActivity {
                     intent.putExtra("Gender", "-1");
                 }
 
-               /* if(checkBox1.isChecked())
-                {
-                    intent.putExtra("Age1","true");
-                }
-                else
-                {
-                    intent.putExtra("Age1","false");
-                }
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        Toast.makeText(getApplicationContext(), i , Toast.LENGTH_SHORT).show();
+                    }
 
-                if(checkBox2.isChecked())
-                {
-                    intent.putExtra("Age2","true");
-                }
-                else
-                {
-                    intent.putExtra("Age2","false");
-                }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
 
+                    }
 
-                if(checkBox3.isChecked())
-                {
-                    intent.putExtra("Age3","true");
-                }
-                else
-                {
-                    intent.putExtra("Age3","false");
-                }*/
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
 
                 intent.putExtra("Activity","Filter");
 

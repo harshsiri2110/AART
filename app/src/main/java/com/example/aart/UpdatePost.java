@@ -100,10 +100,12 @@ public class UpdatePost extends AppCompatActivity {
         desc = bundle.getString("desc");
         timestamp = bundle.getString("timestamp");
 
+        String[] ageSplit = age.split(" ");
+
         description.setText(desc);
         medical.setText(medical_text);
         txtTitle.setText(title);
-        txtAge.setText(age);
+        txtAge.setText(ageSplit[0]);
         location.setText(location_text);
 
 
@@ -165,7 +167,7 @@ public class UpdatePost extends AppCompatActivity {
                 txtSpecies = (RadioButton) findViewById(selectedId);
                 //model.setID(UUID.randomUUID().toString());
 
-                reff2.child("age").setValue(txtAge.getText().toString());
+                reff2.child("age").setValue(txtAge.getText().toString()+" "+spinner.getSelectedItem().toString());
                 reff2.child("description").setValue(description.getText().toString());
                 reff2.child("gender").setValue(txtGender.getText().toString());
                 reff2.child("location").setValue(location.getText().toString());

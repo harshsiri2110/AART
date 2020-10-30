@@ -103,9 +103,7 @@ public class MainActivity extends AppCompatActivity
         {
             filter_species = bundle.getString("Species");
             filter_gender = bundle.getString("Gender");
-            filter_age1 = bundle.getString("Age1");
-            filter_age2 = bundle.getString("Age2");
-            filter_age3 = bundle.getString("Age3");
+
 
             filter_on = true;
 
@@ -159,21 +157,6 @@ public class MainActivity extends AppCompatActivity
         else if(filter_gender.equals("Female"))
         {
             gender = 2;
-        }
-
-        if(filter_age1.equals("true"))
-        {
-            age1 = 1;
-        }
-
-        if(filter_age2.equals("true"))
-        {
-            age2 = 1;
-        }
-
-        if(filter_age3.equals("true"))
-        {
-            age3 = 1;
         }
     }
 
