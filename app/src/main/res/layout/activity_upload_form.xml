@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtage"
+                android:id="@+id/txtage2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtAge2"
+                        android:id="@+id/txtage"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -108,7 +108,7 @@
             <Spinner
                 android:layout_width="140dp"
                 android:layout_height="42dp"
-                android:layout_toRightOf="@+id/txtage"
+                android:layout_toRightOf="@+id/txtage2"
                 android:id="@+id/dropdown_age"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
