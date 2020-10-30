@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -36,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -59,6 +62,8 @@ public class UploadForm extends AppCompatActivity
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
     ImageSlider imgView;
+
+    Spinner spinner;
 
     StorageReference storageReference;
     FirebaseAuth firebaseAuth;
@@ -101,6 +106,8 @@ public class UploadForm extends AppCompatActivity
 
         imgView = (ImageSlider) findViewById(R.id.imgView);
 
+        spinner =(Spinner) findViewById(R.id.dropdown_age);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         model = new Model();
@@ -109,6 +116,10 @@ public class UploadForm extends AppCompatActivity
 
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+
+        ArrayAdapter <String> adapter = new ArrayAdapter<String> (UploadForm.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Age));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
 
         reff2.addListenerForSingleValueEvent(new ValueEventListener() {

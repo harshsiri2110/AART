@@ -93,6 +93,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 reference.removeValue();
+                firebaseAuth.signOut();
                 firebaseAuth.getCurrentUser().delete();
                 startActivity(new Intent(Edit_Profile.this, FirstPage.class));
             }

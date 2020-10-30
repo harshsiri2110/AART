@@ -71,9 +71,13 @@
             android:layout_height="wrap_content"
             >
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/txtage"
-                android:layout_width="match_parent"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -82,7 +86,22 @@
                 android:focusableInTouchMode="true"
                 android:hint="Age"
                 android:inputType="textCapSentences" />
+            <Spinner
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/txtage"
+                android:id="@+id/dropdown_age"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                >
+
+            </Spinner>
+
+            </RelativeLayout>
+
         </com.google.android.material.textfield.TextInputLayout>
+
+
        <RadioGroup
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
