@@ -28,7 +28,7 @@ public class Details extends AppCompatActivity {
 
     DatabaseReference reference;
 
-    int selectedCard = 0;
+    String selectedCard = "";
 
     Model currModel = new Model();
 
@@ -60,7 +60,7 @@ public class Details extends AppCompatActivity {
         imageSlider = findViewById(R.id.images);
 
         Bundle bundle = getIntent().getExtras();
-        selectedCard = bundle.getInt("selectedCard");
+        selectedCard = bundle.getString("selectedCard");
 
         getDetails(selectedCard);
 
@@ -96,84 +96,64 @@ public class Details extends AppCompatActivity {
         }
     }
 
-    private void getDetails(final int position)
+    private void getDetails(String position)
     {
-        reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
+        reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts").child(position);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int count = 0;
-                for(DataSnapshot currPost: snapshot.getChildren()){
-                    if(count != position){
-                        count++;
-                        continue;
-                    }
-                    else {
-                        DatabaseReference currRef = currPost.getRef();
-                        currRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                currModel = snapshot.getValue(Model.class);
 
-                                snapshot.getRef().child("images").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+                currModel = snapshot.getValue(Model.class);
 
-                                        int imgCount;
-                                        imgCount = (int)imgSnapshot.getChildrenCount();
-                                        //Log.d("TEST","Images count - "+imgCount);
-                                        List<SlideModel> slideModels = new ArrayList<>();
+                snapshot.getRef().child("images").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
 
-                                        for(DataSnapshot currImgSnap : imgSnapshot.getChildren())
-                                        {
-                                            ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
+                        int imgCount;
+                        imgCount = (int)imgSnapshot.getChildrenCount();
+                        //Log.d("TEST","Images count - "+imgCount);
+                        List<SlideModel> slideModels = new ArrayList<>();
 
-                                            currModel.getImageList().add(currImg);
+                        for(DataSnapshot currImgSnap : imgSnapshot.getChildren())
+                        {
+                            ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
 
-                                            if(currModel.getImageList().size() == imgCount)
-                                            {
-                                                title.setText(currModel.getTitle());
-                                                age.setText(currModel.getAge());
-                                                gender.setText(currModel.getGender());
-                                                location.setText(currModel.getLocation());
-                                                //description.setText(currModel.getDescription());
+                            currModel.getImageList().add(currImg);
 
-                                                adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),"1234567896"),"About Me");
-                                                adapter.addFrag(new MedicalDetails(currModel.getMedical()),"Medical History");
+                            if(currModel.getImageList().size() == imgCount)
+                            {
+                                title.setText(currModel.getTitle());
+                                age.setText(currModel.getAge());
+                                gender.setText(currModel.getGender());
+                                location.setText(currModel.getLocation());
+                                //description.setText(currModel.getDescription());
 
-                                                for (ImageUrl currUri : currModel.getImageList())
-                                                {
-                                                    //Log.d("TEST","Inside Adapter!, Uri - "+currUri.getUri());
-                                                    slideModels.add(new SlideModel(currUri.getUri(), ScaleTypes.CENTER_INSIDE));
+                                adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),"1234567896"),"About Me");
+                                adapter.addFrag(new MedicalDetails(currModel.getMedical()),"Medical History");
 
-                                                    if(slideModels.size() == currModel.getImageList().size())
-                                                    {
-                                                        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
+                                for (ImageUrl currUri : currModel.getImageList())
+                                {
+                                    //Log.d("TEST","Inside Adapter!, Uri - "+currUri.getUri());
+                                    slideModels.add(new SlideModel(currUri.getUri(), ScaleTypes.CENTER_INSIDE));
 
-                                                        viewPager.setAdapter(adapter);
+                                    if(slideModels.size() == currModel.getImageList().size())
+                                    {
+                                        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 
-                                                        tabLayout.setupWithViewPager(viewPager);
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        viewPager.setAdapter(adapter);
+
+                                        tabLayout.setupWithViewPager(viewPager);
                                     }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
+                                }
                             }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        break;
+                        }
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
