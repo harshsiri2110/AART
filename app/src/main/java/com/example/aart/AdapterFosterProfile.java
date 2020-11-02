@@ -3,6 +3,7 @@ package com.example.aart;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class AdapterFosterProfile extends BaseAdapter {
 
         final DatabaseReference dtbReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-        final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
 
         imageSlider = view.findViewById(R.id.image);
 
@@ -134,7 +135,16 @@ public class AdapterFosterProfile extends BaseAdapter {
                         dtbReff.child(models.get(position).getID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                storageReference.child(models.get(position).getID()).delete();
+                                for(ImageUrl img : models.get(position).getImageList())
+                                {
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(img.getUri());
+                                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("TEST","Image deleted!");
+                                        }
+                                    });
+                                }
                                 context.startActivity(new Intent(context,Foster_Profile.class));
                             }
                         });

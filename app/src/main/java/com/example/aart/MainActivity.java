@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
 
         if(firebaseAuth.getCurrentUser() == null)
         {
-            addPostButton.setEnabled(false);
+            addPostButton.setVisibility(View.INVISIBLE);
         }
 
 

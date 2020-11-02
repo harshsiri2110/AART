@@ -164,28 +164,33 @@
         android:layout_below="@+id/filter_age_text"
         />
 
+       <!-- <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">-->
+
+
         <TextView
             android:id="@+id/seekBar_text0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/seekBar3"
-            android:text="None"
+            android:text="None       1 month      3 months     6 months    12 months     Older"
             android:layout_marginTop="100dp"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
-            android:textSize="13sp">
-
+            android:textSize="13sp"
+            android:layout_gravity="start"
+            android:singleLine="true">
         </TextView>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/seekBar_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/seekBar3"
             android:text="1 month"
             android:layout_marginTop="100dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/seekBar_text0"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:textSize="13sp">
 
         </TextView>
@@ -198,8 +203,8 @@
         android:text="3 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text1"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
+        android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
         >
 
     </TextView>
@@ -207,14 +212,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar3"
         android:layout_marginTop="100dp"
         android:id="@+id/seekBar_text3"
         android:text="6 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text2"
-        android:layout_marginStart="178dp"
-        android:layout_marginLeft="178dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         >
 
     </TextView>
@@ -222,14 +226,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar3"
+
         android:id="@+id/seekBar_text4"
         android:layout_marginTop="100dp"
         android:text="12 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text3"
-        android:layout_marginStart="245dp"
-        android:layout_marginLeft="245dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
         >
 
     </TextView>
@@ -237,17 +241,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar3"
         android:id="@+id/seekBar_text5"
         android:text="Older"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text4"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="320dp"
-        android:layout_marginLeft="320dp"
-
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="end"
         >
     </TextView>
+        </RelativeLayout>-->
 
     </androidx.cardview.widget.CardView>
 
