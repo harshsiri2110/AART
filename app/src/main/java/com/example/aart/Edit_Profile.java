@@ -1,7 +1,9 @@
 package com.example.aart;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,11 +32,14 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth firebaseAuth;
 
     String name, email, mobileNumber;
+    AlertDialog.Builder bob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
+
+        bob = new AlertDialog.Builder(Edit_Profile.this);
 
         profilePic = findViewById(R.id.edit_profile_photo);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -77,6 +82,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         editEmail.setText(email);
         editNumber.setText(mobileNumber);
 
+
+
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child(firebaseAuth.getCurrentUser().getUid());
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -93,21 +100,38 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                bob.setMessage("Are you sure you want to delete?");
+                bob.setTitle("Confirm Delete Profile");
+                bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onClick(final DialogInterface dialog, int which) {
 
-                        firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+
                             @Override
                             public void onSuccess(Void aVoid) {
-                                firebaseAuth.signOut();
-                                startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+
+                                firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        dialog.dismiss();
+                                        firebaseAuth.signOut();
+                                        startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                                    }
+                                });
                             }
                         });
                     }
                 });
+                bob.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
 
-
+                    }
+                });
+                AlertDialog alertDialog = bob.create();
+                alertDialog.show();
             }
         });
     }
