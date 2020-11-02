@@ -49,7 +49,7 @@
             android:layout_margin="20dp"
             app:layout_anchor="@id/listView"
             app:layout_anchorGravity="bottom|right|end"
-
+            android:visibility="invisible"
             />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

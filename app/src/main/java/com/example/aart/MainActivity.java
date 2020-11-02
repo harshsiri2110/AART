@@ -14,6 +14,7 @@ import android.animation.ArgbEvaluator;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
-        ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
+        final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
         Glide.with(this).load(R.drawable.loading_bar2).into(listPlaceholder);
 
         listView.setEmptyView(listPlaceholder);
@@ -100,12 +101,10 @@ public class MainActivity extends AppCompatActivity
 
         if(firebaseAuth.getCurrentUser() == null)
         {
-            addPostButton.setVisibility(View.INVISIBLE);
+            addPostButton.setEnabled(false);
         }
-        else
-        {
-            addPostButton.setVisibility(View.VISIBLE);
-        }
+
+
 
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +154,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -207,6 +208,8 @@ public class MainActivity extends AppCompatActivity
 
                             currModel = currPostSnap.getValue(Model.class);
 
+
+
                             imgCount = Integer.MIN_VALUE;
                             imgCount = (int)imgSnapshot.getChildrenCount();
                             //Log.d("TEST","Images count - "+imgCount);
@@ -221,6 +224,7 @@ public class MainActivity extends AppCompatActivity
 
                                 if(currModel.getImageList().size() == imgCount)
                                 {
+
                                     if(!postList.contains(currModel.getID())) {
 
                                         postList.add(currModel.getID());
@@ -311,6 +315,18 @@ public class MainActivity extends AppCompatActivity
 
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
+
+                adapter.registerDataSetObserver(new DataSetObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if(!listView.getAdapter().isEmpty())
+                        {
+                            addPostButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
             }
 
             @Override
@@ -347,6 +363,7 @@ public class MainActivity extends AppCompatActivity
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
                         menu.findItem(R.id.profile_icon).setIcon((int)fosterdetails.getProfilePic());
                         menu.findItem(R.id.profile_icon).setVisible(true);
+
                     }
 
                     @Override
