@@ -1,6 +1,7 @@
 package com.example.aart;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -31,6 +33,8 @@ public class AdapterFosterProfile extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
     private int cardLayout;
+
+    AlertDialog.Builder bob;
 
     public AdapterFosterProfile(List<Model> models, Context context, int cardLayout) {
         this.models = models;
@@ -119,14 +123,31 @@ public class AdapterFosterProfile extends BaseAdapter {
         deletePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                dtbReff.child(models.get(position).getID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                bob = new AlertDialog.Builder(context);
+                bob.setMessage("Are you sure you want to delete?");
+                bob.setTitle("Delete Post");
+                bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        storageReference.child(models.get(position).getID()).delete();
-                        context.startActivity(new Intent(context,Foster_Profile.class));
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                        dtbReff.child(models.get(position).getID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                storageReference.child(models.get(position).getID()).delete();
+                                context.startActivity(new Intent(context,Foster_Profile.class));
+                            }
+                        });
                     }
                 });
+                bob.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = bob.create();
+                alertDialog.show();
             }
         });
 
