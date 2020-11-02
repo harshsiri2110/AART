@@ -25,7 +25,7 @@ public class FilterPage extends AppCompatActivity {
 
     Intent intent;
 
-
+    int progress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,25 @@ public class FilterPage extends AppCompatActivity {
         intent = new Intent(getApplicationContext(),MainActivity.class);
 
         applyButton = findViewById(R.id.filter_apply_button);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                // Toast.makeText(getApplicationContext(), i , Toast.LENGTH_SHORT).show();
+                progress = i;
+                Log.d("TEST", "onProgressChanged: " + i );
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(getApplicationContext(), progress , Toast.LENGTH_SHORT).show();
+            }
+        });
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,24 +81,6 @@ public class FilterPage extends AppCompatActivity {
                 {
                     intent.putExtra("Gender", "-1");
                 }
-
-                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        Toast.makeText(getApplicationContext(), i , Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-
 
                 intent.putExtra("Activity","Filter");
 

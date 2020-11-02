@@ -4,32 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="25dp"
+    android:padding="20dp"
     tools:context=".FilterPage">
-
-    <TextView
-        android:id="@+id/filter_species_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:text=""
-        android:textSize="25sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:id="@+id/filter_card1"
         android:layout_marginTop="40dp">
+
+        <TextView
+            android:id="@+id/filter_species_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:text="Want to Adopt"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp" />
 
     <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/filter_species_text"
+            android:layout_marginTop="20dp"
             android:id="@+id/filter_species_group"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:gravity="center"
             >
 
@@ -37,8 +39,7 @@
                 android:id="@+id/filter_dogSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Dog"
+                android:text="A Dog"
                 android:textSize="22sp" />
 
             <RadioButton
@@ -47,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="10dp"
-                android:text="Cat"
+                android:text="A Cat"
                 android:textSize="22sp" />
         </RadioGroup>
     </androidx.cardview.widget.CardView>
@@ -157,10 +158,24 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_marginTop="80dp"
-        android:max="4"
+        android:layout_gravity="center_horizontal"
+        android:max="5"
         android:progress="0"
         android:layout_below="@+id/filter_age_text"
         />
+
+        <TextView
+            android:id="@+id/seekBar_text0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBar3"
+            android:text="None"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="13sp">
+
+        </TextView>
 
         <TextView
             android:id="@+id/seekBar_text1"
@@ -169,7 +184,8 @@
             android:layout_below="@+id/seekBar3"
             android:text="1 month"
             android:layout_marginTop="100dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
             android:textSize="13sp">
 
         </TextView>
@@ -182,7 +198,8 @@
         android:text="3 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text1"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
         >
 
     </TextView>
@@ -196,7 +213,8 @@
         android:text="6 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text2"
-        android:layout_marginLeft="150dp"
+        android:layout_marginStart="178dp"
+        android:layout_marginLeft="178dp"
         >
 
     </TextView>
@@ -210,7 +228,8 @@
         android:text="12 months"
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text3"
-        android:layout_marginLeft="230dp"
+        android:layout_marginStart="245dp"
+        android:layout_marginLeft="245dp"
         >
 
     </TextView>
@@ -224,7 +243,9 @@
         android:textSize="13sp"
         android:layout_toRightOf="@+id/seekBar_text4"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="310dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginLeft="320dp"
+
         >
     </TextView>
 
