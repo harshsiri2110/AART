@@ -30,6 +30,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
 
     SwipeRefreshLayout pullToRefresh;
 
+    FloatingActionButton addPostButton;
+
     List<String> postList = new ArrayList<>();
     boolean filter_on = false;
 
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity
 
         listView.setEmptyView(listPlaceholder);
 
+        addPostButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+
         models = new ArrayList<>();
 
         if(!models.isEmpty())
@@ -92,6 +97,22 @@ public class MainActivity extends AppCompatActivity
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() == null)
+        {
+            addPostButton.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            addPostButton.setVisibility(View.VISIBLE);
+        }
+
+        addPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), UploadForm.class));
+            }
+        });
 
         showCards();
 
