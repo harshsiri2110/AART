@@ -19,7 +19,7 @@ public class FilterPage extends AppCompatActivity {
 
     RadioButton selectedButton;
 
-    Button applyButton;
+    Button applyButton,clearButton;
 
     SeekBar seekBar;
 
@@ -40,6 +40,7 @@ public class FilterPage extends AppCompatActivity {
         intent = new Intent(getApplicationContext(),MainActivity.class);
 
         applyButton = findViewById(R.id.filter_apply_button);
+        clearButton = findViewById(R.id.filter_clear_button);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -92,9 +93,19 @@ public class FilterPage extends AppCompatActivity {
                 }
 
                 intent.putExtra("Activity","Filter");
+                intent.putExtra("Filter","on");
 
                 startActivity(intent);
 
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra("Activity","Filter");
+                intent.putExtra("Filter","off");
+                startActivity(intent);
             }
         });
 

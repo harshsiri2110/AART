@@ -105,8 +105,6 @@ public class MainActivity extends AppCompatActivity
             addPostButton.setVisibility(View.INVISIBLE);
         }
 
-
-
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 
         activity = bundle.getString("Activity");
 
-        if(activity.equals("Filter"))
+        if(activity.equals("Filter") && bundle.getString("Filter").equals("on"))
         {
             filter_species = bundle.getString("Species");
             filter_gender = bundle.getString("Gender");
@@ -153,7 +151,8 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,Details.class);
-                intent.putExtra("selectedCard",postList.get(i));
+                //intent.putExtra("selectedCard",postList.get(i));
+                intent.putExtra("selectedCard",models.get(i).getID());
                 startActivity(intent);
             }
         });
@@ -162,14 +161,14 @@ public class MainActivity extends AppCompatActivity
     private void filter_list()
     {
         switch (filter_species) {
-            case "Dog":
+            case "A Dog":
                 species = 1;
                 break;
-            case "Cat":
+            case "A Cat":
                 species = 2;
                 break;
             case "Both":
-                species = 0;
+                species = 3;
                 break;
         }
 
@@ -194,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
     }
 
-    private void filter_all_attribures(int species,int gender, int age)
+    private void filter_all_attributes(int species,int gender, int age)
     {
         if (species == 1) {
             filter_gender_and_age(gender,age);
@@ -202,10 +201,10 @@ public class MainActivity extends AppCompatActivity
         else if (species == 2) {
             filter_gender_and_age(gender,age);
         }
-        /*else if (species == 3)
+        else if (species == 3)
         {
             filter_gender_and_age(gender,age);
-        }*/
+        }
     }
 
     private void filter_gender_and_age(int gender, int age)
@@ -220,9 +219,9 @@ public class MainActivity extends AppCompatActivity
                 filter_cards_age(age);
             }
         }
-        /*else if (gender == 3) {
+        else if (gender == 3) {
             filter_cards_age(age);
-        }*/
+        }
     }
 
     private void filter_species_and_age(int species, int age)
@@ -237,10 +236,10 @@ public class MainActivity extends AppCompatActivity
                 filter_cards_age(age);
             }
         }
-        /*else if (species == 3)
+        else if (species == 3)
         {
             filter_cards_age(age);
-        }*/
+        }
     }
 
     private void filter_species_and_gender(int gender, int species)
@@ -257,14 +256,14 @@ public class MainActivity extends AppCompatActivity
                     filter_cards_gender(gender);
             }
         }
-        /*else if (species == 3)
+        else if (species == 3)
         {
             if (gender > 0) {
                 filter_cards_gender(gender);
             } else {
                 models.add(currModel);
             }
-        }*/
+        }
 
     }
 
@@ -315,21 +314,21 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void filter_cards_species(int mspecies)
+    private void filter_cards_species(int species)
     {
-        if (mspecies == 1) {
+        if (species == 1) {
             if (currModel.getSpeciesText().equals("Dog")) {
                 models.add(currModel);
             }
         }
-        else if (mspecies == 2) {
+        else if (species == 2) {
             if (currModel.getSpeciesText().equals("Cat")) {
                 models.add(currModel);
             }
         }
-        /*else if (mspecies == 3) {
+        else if (species == 3) {
                 models.add(currModel);
-        }*/
+        }
     }
 
     private void filter_cards_gender(int mgender)
@@ -344,9 +343,9 @@ public class MainActivity extends AppCompatActivity
                 models.add(currModel);
             }
         }
-        /*else if (mgender == 3) {
+        else if (mgender == 3) {
                 models.add(currModel);
-        }*/
+        }
     }
 
     private void showCards()
@@ -381,7 +380,6 @@ public class MainActivity extends AppCompatActivity
 
                                 if(currModel.getImageList().size() == imgCount)
                                 {
-
                                     if(!postList.contains(currModel.getID())) {
 
                                         postList.add(currModel.getID());
@@ -397,95 +395,10 @@ public class MainActivity extends AppCompatActivity
                                             curr_age_in_months = Float.parseFloat(ageText[0])*12;
                                         }
 
-                                        //models.add(currModel);
-                                        /*if(filter_on) {
-                                            if (species > 0) {
-                                                if (species == 1) {
-                                                    if (currModel.getSpeciesText().equals("Dog")) {
-                                                        if (gender > 0) {
-                                                            if (gender == 1) {
-                                                                if (currModel.getGender().equals("Male")) {
-                                                                    models.add(currModel);
-
-                                                                }
-                                                            }
-
-                                                            if (gender == 2) {
-                                                                if (currModel.getGender().equals("Female")) {
-                                                                    models.add(currModel);
-                                                                }
-                                                            }
-                                                        } else {
-                                                            models.add(currModel);
-                                                        }
-                                                    }
-                                                }
-                                                else if (species == 2) {
-                                                    if (currModel.getSpeciesText().equals("Cat")) {
-                                                        if (gender > 0) {
-                                                            if (gender == 1) {
-                                                                if (currModel.getGender().equals("Male")) {
-                                                                    models.add(currModel);
-                                                                }
-                                                            }
-
-                                                            if (gender == 2) {
-                                                                if (currModel.getGender().equals("Female")) {
-                                                                    models.add(currModel);
-                                                                }
-                                                            }
-                                                        } else {
-                                                            models.add(currModel);
-                                                        }
-                                                    }
-                                                }
-                                                else if (species == 3)
-                                                {
-                                                    if (gender > 0) {
-                                                        if (gender == 1) {
-                                                            if (currModel.getGender().equals("Male")) {
-                                                                models.add(currModel);
-                                                            }
-                                                        }
-
-                                                        if (gender == 2) {
-                                                            if (currModel.getGender().equals("Female")) {
-                                                                models.add(currModel);
-                                                            }
-                                                        }
-                                                    } else {
-                                                        models.add(currModel);
-                                                    }
-                                                }
-                                            } else {
-
-                                                if (gender > 0) {
-                                                    if (gender == 1) {
-                                                        if (currModel.getGender().equals("Male")) {
-                                                            models.add(currModel);
-                                                        }
-                                                    }
-
-                                                    if (gender == 2) {
-                                                        if (currModel.getGender().equals("Female")) {
-                                                            models.add(currModel);
-                                                        }
-                                                    }
-                                                    if (gender == 3) {
-                                                            models.add(currModel);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            models.add(currModel);
-                                        }*/
-
                                         if(filter_on)
                                         {
                                             if(species > 0 && gender > 0 && filter_age > 0){
-                                                filter_all_attribures(species,gender,filter_age);
+                                                filter_all_attributes(species,gender,filter_age);
                                             }
                                             else if(gender > 0 && filter_age > 0)
                                             {
@@ -507,7 +420,7 @@ public class MainActivity extends AppCompatActivity
                                             {
                                                 filter_cards_gender(gender);
                                             }
-                                            else if(filter_age > 0 )
+                                            else if(filter_age >= 0 )
                                             {
                                                 filter_cards_age(filter_age);
                                             }

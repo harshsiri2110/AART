@@ -298,6 +298,19 @@
             android:layout_marginTop="50dp"
             />
 
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filter_card3"
+            android:layout_gravity="center_horizontal"
+            android:text="Clear Filters"
+            android:textColor="#ffff"
+            android:textSize="20sp"
+            android:background="@drawable/button_rounded"
+            android:id="@+id/filter_clear_button"
+            android:layout_marginTop="20dp"
+            />
+
         </LinearLayout>
 
     </ScrollView>
