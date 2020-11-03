@@ -64,28 +64,29 @@
         android:gravity="center"
         android:textColor="#000000"/>
 
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="#BBDEEF"
+        android:text="Existing user? Login"
+        android:textSize="15sp">
+    </Button>
 
     <Button
         android:id="@+id/btnreg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button_rounded"
         android:textColor="#ffff"
         android:text="New user? Register"
         android:textSize="15sp">
     </Button>
 
-    <Button
-        android:id="@+id/btnlogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="#BBDEEF"
-        android:text="Existing user? Login"
-        android:textSize="15sp">
-    </Button>
+
 
         </LinearLayout>
 

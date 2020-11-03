@@ -1,13 +1,24 @@
 package com.example.aart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FirstPage extends AppCompatActivity {
     Button regbtn, getLoginbtn;
@@ -15,6 +26,8 @@ public class FirstPage extends AppCompatActivity {
     ImageButton dogSelect;
     int backButtonCount = 0;
 
+    FirebaseAuth firebaseAuth;
+    DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +36,14 @@ public class FirstPage extends AppCompatActivity {
         regbtn = findViewById(R.id.btnreg);
         dogSelect = findViewById(R.id.dogSelect);
         getLoginbtn = findViewById(R.id.btnlogin);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() != null){
+            regbtn.setVisibility(View.INVISIBLE);
+            regbtn.setEnabled(false);
+            getLoginbtn.setText("Sign in with another account");
+        }
 
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +66,8 @@ public class FirstPage extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     public void onBackPressed() {
 
@@ -60,5 +83,45 @@ public class FirstPage extends AppCompatActivity {
             Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
             backButtonCount++;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() != null)
+        {
+            getMenuInflater().inflate(R.menu.first_page_profile, menu);
+            FirebaseUser usr = firebaseAuth.getCurrentUser();
+                final String uid = usr.getUid();
+                userRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
+                        menu.findItem(R.id.first_page_profile_icon).setIcon((int)fosterdetails.getProfilePic());
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+        }
+        //getMenuInflater().inflate(R.menu.filter_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.first_page_profile_icon: {
+                startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
