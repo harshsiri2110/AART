@@ -82,6 +82,15 @@ public class FilterPage extends AppCompatActivity {
                     intent.putExtra("Gender", "-1");
                 }
 
+                if(progress == 0)
+                {
+                    intent.putExtra("Age", "-1");
+                }
+                else
+                {
+                    intent.putExtra("Age", progress);
+                }
+
                 intent.putExtra("Activity","Filter");
 
                 startActivity(intent);

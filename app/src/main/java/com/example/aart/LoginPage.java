@@ -33,13 +33,6 @@ public class LoginPage extends AppCompatActivity {
         Createbtn = findViewById(R.id.btncreate);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser()!= null)
-        {
-            Toast.makeText(getApplicationContext(), "User already logged in", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_Reg"));
-            finish();
-        }
-
 
         Loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

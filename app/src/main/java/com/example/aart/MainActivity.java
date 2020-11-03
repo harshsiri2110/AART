@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
     List<Model> models;
 
     int foster_profile_pic = 0;
-
+    float curr_age_in_months = 0;
     int imgCount;
     int postCount;
 
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity
 
     Model currModel = new Model();
 
-    String filter_species,filter_gender,filter_age1,filter_age2,filter_age3,activity ="";
+    String filter_species,filter_gender,activity ="";
 
-    int species = 0, gender = 0, age1 = 0, age2 = 0, age3 = 0;
+    int species = 0, gender = 0,filter_age;
 
     DatabaseReference reference, userRef;
     FirebaseAuth firebaseAuth;
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity
 
         listView.setEmptyView(listPlaceholder);
 
+        //Floating button
         addPostButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
 
         models = new ArrayList<>();
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity
 
         showCards();
 
+
+        //Activity data
         Bundle bundle = getIntent().getExtras();
 
         activity = bundle.getString("Activity");
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         {
             filter_species = bundle.getString("Species");
             filter_gender = bundle.getString("Gender");
-
+            filter_age = bundle.getInt("Age");
 
             filter_on = true;
 
@@ -154,31 +157,32 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     private void filter_list()
     {
-
-        if(filter_species.equals("Dog"))
-        {
-            species = 1;
+        switch (filter_species) {
+            case "Dog":
+                species = 1;
+                break;
+            case "Cat":
+                species = 2;
+                break;
+            case "Both":
+                species = 0;
+                break;
         }
-        else if(filter_species.equals("Cat"))
-        {
-            species = 2;
-        }
 
-
-        if(filter_gender.equals("Male"))
-        {
-            gender = 1;
-        }
-        else if(filter_gender.equals("Female"))
-        {
-            gender = 2;
+        switch (filter_gender) {
+            case "Male":
+                gender = 1;
+                break;
+            case "Female":
+                gender = 2;
+                break;
+            case "Both":
+                gender = 0;
+                break;
         }
     }
 
@@ -188,6 +192,161 @@ public class MainActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
+    }
+
+    private void filter_all_attribures(int species,int gender, int age)
+    {
+        if (species == 1) {
+            filter_gender_and_age(gender,age);
+        }
+        else if (species == 2) {
+            filter_gender_and_age(gender,age);
+        }
+        /*else if (species == 3)
+        {
+            filter_gender_and_age(gender,age);
+        }*/
+    }
+
+    private void filter_gender_and_age(int gender, int age)
+    {
+        if (gender == 1) {
+            if (currModel.getGender().equals("Male")) {
+                filter_cards_age(age);
+            }
+        }
+        else if (gender == 2) {
+            if (currModel.getGender().equals("Female")) {
+                filter_cards_age(age);
+            }
+        }
+        /*else if (gender == 3) {
+            filter_cards_age(age);
+        }*/
+    }
+
+    private void filter_species_and_age(int species, int age)
+    {
+        if (species == 1) {
+            if (currModel.getSpeciesText().equals("Dog")) {
+                filter_cards_age(age);
+            }
+        }
+        else if (species == 2) {
+            if (currModel.getSpeciesText().equals("Cat")) {
+                filter_cards_age(age);
+            }
+        }
+        /*else if (species == 3)
+        {
+            filter_cards_age(age);
+        }*/
+    }
+
+    private void filter_species_and_gender(int gender, int species)
+    {
+        if (species == 1) {
+            if (currModel.getSpeciesText().equals("Dog")) {
+
+                    filter_cards_gender(gender);
+
+            }
+        }
+        else if (species == 2) {
+            if (currModel.getSpeciesText().equals("Cat")) {
+                    filter_cards_gender(gender);
+            }
+        }
+        /*else if (species == 3)
+        {
+            if (gender > 0) {
+                filter_cards_gender(gender);
+            } else {
+                models.add(currModel);
+            }
+        }*/
+
+    }
+
+    private void filter_cards_age(int mAge)
+    {
+        switch (mAge)
+        {
+            case 0:
+            {
+                models.add(currModel);
+                break;
+            }
+            case 1:
+            {
+                if(curr_age_in_months <= 1f) {
+                    models.add(currModel);
+                }
+                break;
+            }
+            case 2:
+            {
+                if(curr_age_in_months <= 3f) {
+                    models.add(currModel);
+                }
+                break;
+            }
+            case 3:
+            {
+                if(curr_age_in_months <= 6f) {
+                    models.add(currModel);
+                }
+                break;
+            }
+            case 4:
+            {
+                if(curr_age_in_months <= 12f) {
+                    models.add(currModel);
+                }
+                break;
+            }
+            case 5:
+            {
+                if(curr_age_in_months > 12f) {
+                    models.add(currModel);
+                }
+                break;
+            }
+        }
+    }
+
+    private void filter_cards_species(int mspecies)
+    {
+        if (mspecies == 1) {
+            if (currModel.getSpeciesText().equals("Dog")) {
+                models.add(currModel);
+            }
+        }
+        else if (mspecies == 2) {
+            if (currModel.getSpeciesText().equals("Cat")) {
+                models.add(currModel);
+            }
+        }
+        /*else if (mspecies == 3) {
+                models.add(currModel);
+        }*/
+    }
+
+    private void filter_cards_gender(int mgender)
+    {
+        if (mgender == 1) {
+            if (currModel.getGender().equals("Male")) {
+                models.add(currModel);
+            }
+        }
+        else if (mgender == 2) {
+            if (currModel.getGender().equals("Female")) {
+                models.add(currModel);
+            }
+        }
+        /*else if (mgender == 3) {
+                models.add(currModel);
+        }*/
     }
 
     private void showCards()
@@ -208,8 +367,6 @@ public class MainActivity extends AppCompatActivity
 
                             currModel = currPostSnap.getValue(Model.class);
 
-
-
                             imgCount = Integer.MIN_VALUE;
                             imgCount = (int)imgSnapshot.getChildrenCount();
                             //Log.d("TEST","Images count - "+imgCount);
@@ -229,8 +386,19 @@ public class MainActivity extends AppCompatActivity
 
                                         postList.add(currModel.getID());
 
+                                        String[] ageText = currModel.getAge().split(" ");
+
+                                        if(ageText[1].equals("Months"))
+                                        {
+                                            curr_age_in_months = Float.parseFloat(ageText[0]);
+                                        }
+                                        else if(ageText[1].equals("Year(s)"))
+                                        {
+                                            curr_age_in_months = Float.parseFloat(ageText[0])*12;
+                                        }
+
                                         //models.add(currModel);
-                                        if(filter_on) {
+                                        /*if(filter_on) {
                                             if (species > 0) {
                                                 if (species == 1) {
                                                     if (currModel.getSpeciesText().equals("Dog")) {
@@ -238,6 +406,7 @@ public class MainActivity extends AppCompatActivity
                                                             if (gender == 1) {
                                                                 if (currModel.getGender().equals("Male")) {
                                                                     models.add(currModel);
+
                                                                 }
                                                             }
 
@@ -251,8 +420,7 @@ public class MainActivity extends AppCompatActivity
                                                         }
                                                     }
                                                 }
-
-                                                if (species == 2) {
+                                                else if (species == 2) {
                                                     if (currModel.getSpeciesText().equals("Cat")) {
                                                         if (gender > 0) {
                                                             if (gender == 1) {
@@ -271,6 +439,24 @@ public class MainActivity extends AppCompatActivity
                                                         }
                                                     }
                                                 }
+                                                else if (species == 3)
+                                                {
+                                                    if (gender > 0) {
+                                                        if (gender == 1) {
+                                                            if (currModel.getGender().equals("Male")) {
+                                                                models.add(currModel);
+                                                            }
+                                                        }
+
+                                                        if (gender == 2) {
+                                                            if (currModel.getGender().equals("Female")) {
+                                                                models.add(currModel);
+                                                            }
+                                                        }
+                                                    } else {
+                                                        models.add(currModel);
+                                                    }
+                                                }
                                             } else {
 
                                                 if (gender > 0) {
@@ -285,15 +471,47 @@ public class MainActivity extends AppCompatActivity
                                                             models.add(currModel);
                                                         }
                                                     }
+                                                    if (gender == 3) {
+                                                            models.add(currModel);
+                                                    }
                                                 }
                                             }
                                         }
                                         else
                                         {
                                             models.add(currModel);
+                                        }*/
+
+                                        if(filter_on)
+                                        {
+                                            if(species > 0 && gender > 0 && filter_age > 0){
+                                                filter_all_attribures(species,gender,filter_age);
+                                            }
+                                            else if(gender > 0 && filter_age > 0)
+                                            {
+                                                filter_gender_and_age(gender,filter_age);
+                                            }
+                                            else if(species > 0 && filter_age > 0)
+                                            {
+                                                filter_species_and_age(species,filter_age);
+                                            }
+                                            else if(species > 0 && gender > 0)
+                                            {
+                                                filter_species_and_gender(species,gender);
+                                            }
+                                            else if(species > 0 )
+                                            {
+                                                filter_cards_species(species);
+                                            }
+                                            else if(gender > 0)
+                                            {
+                                                filter_cards_gender(gender);
+                                            }
+                                            else if(filter_age > 0 )
+                                            {
+                                                filter_cards_age(filter_age);
+                                            }
                                         }
-
-
                                         //Collections.sort(models, Collections.<Model>reverseOrder());
 
                                         adapter.notifyDataSetChanged();
