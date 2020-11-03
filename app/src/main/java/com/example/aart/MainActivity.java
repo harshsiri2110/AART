@@ -512,6 +512,10 @@ public class MainActivity extends AppCompatActivity
                                                 filter_cards_age(filter_age);
                                             }
                                         }
+                                        else
+                                        {
+                                            models.add(currModel);
+                                        }
                                         //Collections.sort(models, Collections.<Model>reverseOrder());
 
                                         adapter.notifyDataSetChanged();
