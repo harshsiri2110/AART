@@ -81,10 +81,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ;
-
-
-
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
@@ -113,6 +109,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), UploadForm.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
             }
         });
 
@@ -491,6 +488,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
 
         startActivity(new Intent(getApplicationContext(),FirstPage.class));
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
     @Override
@@ -539,34 +537,40 @@ public class MainActivity extends AppCompatActivity
             case R.id.menu_sign_in:
             {
                 startActivity(new Intent(getApplicationContext(), LoginPage.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 break;
             }
             case R.id.profile_icon:
             {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
                 //Toast.makeText(this, "Profile nmade", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.menu_register:
             {
                 startActivity(new Intent(getApplicationContext(), Foster_reg.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 break;
             }
             case R.id.menu_logout:
             {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), FirstPage.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 finish();
                 break;
             }
             case R.id.menu_upload:
             {
                 startActivity(new Intent(getApplicationContext(), UploadForm.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
                 break;
             }
             case R.id.filter_icon:
             {
                 startActivity(new Intent(getApplicationContext(), FilterPage.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
                 break;
             }
         }

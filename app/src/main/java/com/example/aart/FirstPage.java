@@ -57,6 +57,7 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Dog"));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -64,6 +65,7 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Cat"));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -71,6 +73,7 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this, LoginPage.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
             }
         });
     }
@@ -127,6 +130,7 @@ public class FirstPage extends AppCompatActivity {
         switch (id) {
             case R.id.first_page_profile_icon: {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
                 break;
             }
         }

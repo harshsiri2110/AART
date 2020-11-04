@@ -56,6 +56,7 @@ public class Foster_Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foster__profile);
+
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
         fosterPosts = findViewById(R.id.profile_listView);
@@ -203,6 +204,7 @@ public class Foster_Profile extends AppCompatActivity {
 
         if(item.getItemId()== R.id.profile_edit){
             startActivity(new Intent(Foster_Profile.this, Edit_Profile.class).putExtra("name", fosterName).putExtra("email", fosterEmail).putExtra("mobileNumber", fosterNumber).putExtra("profilePic", profilePic));
+            overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
             //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
         }
 
@@ -213,7 +215,6 @@ public class Foster_Profile extends AppCompatActivity {
     public void onBackPressed() {
 
         startActivity(new Intent(Foster_Profile.this, MainActivity.class).putExtra("Activity","Foster_Profile"));
-
+        //overridePendingTransition(R.anim.slide_in_bottom,R.anim.slide_out_bottom);
     }
-
 }
