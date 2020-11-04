@@ -89,6 +89,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnEdit.setEnabled(false);
                 reference.child("name").setValue(editName.getText().toString());
                 reference.child("email").setValue(editEmail.getText().toString());
                 reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
@@ -100,6 +101,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnDeleteProfile.setEnabled(false);
                 bob.setMessage("Are you sure you want to delete?");
                 bob.setTitle("Confirm Delete Profile");
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

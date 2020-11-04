@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     float curr_age_in_months = 0;
     int imgCount;
     int postCount;
+    int i = 1,j=1;
 
     SwipeRefreshLayout pullToRefresh;
 
@@ -131,6 +132,20 @@ public class MainActivity extends AppCompatActivity
             filter_list();
         }
 
+        if(activity.equals("FirstPage"))
+        {
+            filter_species = bundle.getString("FirstFilter");
+            filter_on = true;
+            if(filter_species.equals("Dog"))
+            {
+                species = 1;
+            }
+            else if(filter_species.equals("Cat"))
+            {
+                species = 2;
+            }
+        }
+
         //Swipe Refresh for cards
         pullToRefresh = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
 
@@ -180,7 +195,7 @@ public class MainActivity extends AppCompatActivity
                 gender = 2;
                 break;
             case "Both":
-                gender = 0;
+                gender = 3;
                 break;
         }
     }
@@ -242,27 +257,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void filter_species_and_gender(int gender, int species)
+    private void filter_species_and_gender(int species, int gender)
     {
         if (species == 1) {
             if (currModel.getSpeciesText().equals("Dog")) {
-
-                    filter_cards_gender(gender);
-
+                Log.d("TEST","Calling filter_species_and_gender with species as Dog");
+                filter_cards_gender(gender);
             }
         }
         else if (species == 2) {
             if (currModel.getSpeciesText().equals("Cat")) {
+                Log.d("TEST","Calling filter_species_and_gender with species as Cat");
                     filter_cards_gender(gender);
             }
         }
         else if (species == 3)
         {
-            if (gender > 0) {
-                filter_cards_gender(gender);
-            } else {
-                models.add(currModel);
-            }
+            filter_cards_gender(gender);
         }
 
     }
@@ -331,19 +342,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void filter_cards_gender(int mgender)
+    private void filter_cards_gender(int gender)
     {
-        if (mgender == 1) {
+        if (gender == 1) {
             if (currModel.getGender().equals("Male")) {
                 models.add(currModel);
             }
         }
-        else if (mgender == 2) {
+        else if (gender == 2) {
             if (currModel.getGender().equals("Female")) {
                 models.add(currModel);
             }
         }
-        else if (mgender == 3) {
+        else if (gender == 3) {
                 models.add(currModel);
         }
     }
@@ -397,6 +408,8 @@ public class MainActivity extends AppCompatActivity
 
                                         if(filter_on)
                                         {
+                                            Log.d("TEST", i++ +" species = "+species+" , gender = "+gender+" , age = "+filter_age);
+                                            Log.d("TEST", j++ +" species = "+currModel.getSpeciesText()+" , gender = "+currModel.getGender()+" , age = "+currModel.getAge());
                                             if(species > 0 && gender > 0 && filter_age > 0){
                                                 filter_all_attributes(species,gender,filter_age);
                                             }
@@ -410,6 +423,7 @@ public class MainActivity extends AppCompatActivity
                                             }
                                             else if(species > 0 && gender > 0)
                                             {
+                                                Log.d("TEST","Calling filter_species_and_gender");
                                                 filter_species_and_gender(species,gender);
                                             }
                                             else if(species > 0 )
@@ -512,31 +526,6 @@ public class MainActivity extends AppCompatActivity
 
         return super.onCreateOptionsMenu(menu);
     }
-
-   /* @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-
-        invalidateOptionsMenu();
-        FirebaseUser usr = firebaseAuth.getCurrentUser();
-        if(usr != null) {
-            final String uid = usr.getUid();
-            userRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
-                    menu.findItem(R.id.profile_icon).setIcon(fosterdetails.getProfilePic());
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-
-        return super.onPrepareOptionsMenu(menu);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

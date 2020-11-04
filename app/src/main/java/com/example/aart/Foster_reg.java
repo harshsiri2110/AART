@@ -117,6 +117,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onClick(View view)
             {
+                submit.setEnabled(false);
 
                 final String mname = name.getText().toString();
                 final long mnumber = Long.parseLong(number.getText().toString());

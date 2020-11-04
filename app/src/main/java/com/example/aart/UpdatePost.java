@@ -160,6 +160,8 @@ public class UpdatePost extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                btnupdate.setEnabled(false);
+
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 

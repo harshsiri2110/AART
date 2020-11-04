@@ -173,6 +173,8 @@ public class UploadForm extends AppCompatActivity
             @Override
             public void onClick(View view){
 
+                btnupload.setEnabled(false);
+
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
 

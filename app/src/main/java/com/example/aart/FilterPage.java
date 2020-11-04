@@ -65,6 +65,8 @@ public class FilterPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                applyButton.setEnabled(false);
+
                 if(speciesGroup.getCheckedRadioButtonId() != -1) {
                     selectedButton = (RadioButton) findViewById(speciesGroup.getCheckedRadioButtonId());
                     intent.putExtra("Species", selectedButton.getText());

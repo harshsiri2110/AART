@@ -67,7 +67,7 @@ public class AdapterFosterProfile extends BaseAdapter {
 
         ImageSlider imageSlider;
 
-        TextView title, ageText, genderText, locationText,updatePost,deletePost;
+        final TextView title, ageText, genderText, locationText,updatePost,deletePost;
 
         final DatabaseReference dtbReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
@@ -124,6 +124,8 @@ public class AdapterFosterProfile extends BaseAdapter {
         deletePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                deletePost.setEnabled(false);
                 bob = new AlertDialog.Builder(context);
                 bob.setMessage("Are you sure you want to delete?");
                 bob.setTitle("Delete Post");

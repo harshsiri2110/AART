@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class FirstPage extends AppCompatActivity {
     Button regbtn, getLoginbtn;
     Button loginbtn;
-    ImageButton dogSelect;
+    ImageButton dogSelect,catSelect;
     int backButtonCount = 0;
 
     FirebaseAuth firebaseAuth;
@@ -35,6 +35,7 @@ public class FirstPage extends AppCompatActivity {
         setContentView(R.layout.activity_first_page);
         regbtn = findViewById(R.id.btnreg);
         dogSelect = findViewById(R.id.dogSelect);
+        catSelect = findViewById(R.id.first_page_CatSelect);
         getLoginbtn = findViewById(R.id.btnlogin);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -55,7 +56,14 @@ public class FirstPage extends AppCompatActivity {
         dogSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage"));
+                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Dog"));
+            }
+        });
+
+        catSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Cat"));
             }
         });
 
