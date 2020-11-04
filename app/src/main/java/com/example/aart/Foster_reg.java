@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
@@ -58,6 +59,8 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
         fosterdetails = new Fosterdetails();
 
         reference= FirebaseDatabase.getInstance().getReference().child("Foster");
+
+        final LoadingDialog loadingDialog = new LoadingDialog(Foster_reg.this);
 
         name = findViewById(R.id.fosterName);
         number = findViewById(R.id.num);
@@ -118,6 +121,15 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
             public void onClick(View view)
             {
                 submit.setEnabled(false);
+                loadingDialog.startLoadingDialog();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
 
                 final String mname = name.getText().toString();
                 final long mnumber = Long.parseLong(number.getText().toString());
@@ -161,6 +173,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
                     {
                         if(task.isSuccessful()){
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
+
                             addUser(mname,memail,mnumber,selectedImage);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));

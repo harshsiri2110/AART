@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
+
+        final LoadingDialog loadingDialog = new LoadingDialog(Edit_Profile.this);
 
         bob = new AlertDialog.Builder(Edit_Profile.this);
 
@@ -90,10 +93,21 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 btnEdit.setEnabled(false);
+
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
+
                 reference.child("name").setValue(editName.getText().toString());
                 reference.child("email").setValue(editEmail.getText().toString());
                 reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
                 reference.child("profilePic").setValue(profilePicture);
+
                 startActivity(new Intent(Edit_Profile.this, Foster_Profile.class));
             }
         });
@@ -102,6 +116,15 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 btnDeleteProfile.setEnabled(false);
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
+
                 bob.setMessage("Are you sure you want to delete?");
                 bob.setTitle("Confirm Delete Profile");
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

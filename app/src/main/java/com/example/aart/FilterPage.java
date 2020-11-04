@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ public class FilterPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_page);
+
+        final LoadingDialog loadingDialog = new LoadingDialog(FilterPage.this);
 
         speciesGroup = findViewById(R.id.filter_species_group);
         genderGroup = findViewById(R.id.filter_gender_group);
@@ -66,6 +69,14 @@ public class FilterPage extends AppCompatActivity {
             public void onClick(View view) {
 
                 applyButton.setEnabled(false);
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
 
                 if(speciesGroup.getCheckedRadioButtonId() != -1) {
                     selectedButton = (RadioButton) findViewById(speciesGroup.getCheckedRadioButtonId());

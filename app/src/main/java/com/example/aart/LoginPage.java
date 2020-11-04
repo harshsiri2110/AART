@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        final LoadingDialog loadingDialog = new LoadingDialog(LoginPage.this);
+
         email= findViewById(R.id.Lemail);
         password = findViewById(R.id.Lpass);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -39,6 +42,14 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
 
                 Loginbtn.setEnabled(false);
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
 
                 String memail= email.getText().toString().trim();
                 String mpassword = password.getText().toString().trim();
@@ -64,6 +75,7 @@ public class LoginPage extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginPage.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","LoginPage"));
+
                         }
                         else{
                             Toast.makeText(LoginPage.this, "The username or password is incorrect or the user does not exist", Toast.LENGTH_SHORT).show();

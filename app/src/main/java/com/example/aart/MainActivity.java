@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
     float curr_age_in_months = 0;
     int imgCount;
     int postCount;
-    int i = 1,j=1;
 
     SwipeRefreshLayout pullToRefresh;
 
@@ -81,6 +80,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ;
+
+
 
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
@@ -408,8 +411,7 @@ public class MainActivity extends AppCompatActivity
 
                                         if(filter_on)
                                         {
-                                            Log.d("TEST", i++ +" species = "+species+" , gender = "+gender+" , age = "+filter_age);
-                                            Log.d("TEST", j++ +" species = "+currModel.getSpeciesText()+" , gender = "+currModel.getGender()+" , age = "+currModel.getAge());
+
                                             if(species > 0 && gender > 0 && filter_age > 0){
                                                 filter_all_attributes(species,gender,filter_age);
                                             }

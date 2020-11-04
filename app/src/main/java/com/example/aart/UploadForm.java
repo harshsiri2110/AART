@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,6 +91,8 @@ public class UploadForm extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
+
+        final LoadingDialog loadingDialog = new LoadingDialog(UploadForm.this);
         storageReference = FirebaseStorage.getInstance().getReference();
 
         description = (EditText)findViewById(R.id.postDescription);
@@ -174,6 +177,14 @@ public class UploadForm extends AppCompatActivity
             public void onClick(View view){
 
                 btnupload.setEnabled(false);
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                }, 2000);
 
                 int selectedId = radioGenderGroup.getCheckedRadioButtonId();
                 txtGender = (RadioButton) findViewById(selectedId);
