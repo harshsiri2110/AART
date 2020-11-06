@@ -109,10 +109,7 @@ public class MainActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() == null)
-        {
-            addPostButton.setVisibility(View.INVISIBLE);
-        }
+
 
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -499,6 +496,10 @@ public class MainActivity extends AppCompatActivity
                         if(!listView.getAdapter().isEmpty())
                         {
                             addPostButton.setVisibility(View.VISIBLE);
+                            if(firebaseAuth.getCurrentUser() == null)
+                            {
+                                addPostButton.setVisibility(View.INVISIBLE);
+                            }
                         }
                     }
                 });

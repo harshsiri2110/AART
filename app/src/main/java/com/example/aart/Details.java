@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.transition.ChangeBounds;
+import androidx.transition.Transition;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -40,11 +43,17 @@ public class Details extends AppCompatActivity {
     ViewPager viewPager;
     ViewPagerAdapter adapter;
 
+    @Override
+    public void supportFinishAfterTransition() {
+        super.supportFinishAfterTransition();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
