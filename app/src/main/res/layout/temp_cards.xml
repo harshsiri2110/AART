@@ -52,6 +52,7 @@
                 android:text="Brown and White Indie Puppy"
                 android:textColor="#262626"
                 android:textSize="16sp"
+                android:transitionName="homepage_card_title_transition"
                 android:textStyle="italic" />
 
             <ImageView
@@ -61,6 +62,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/main_activity_image_slider"
+                android:transitionName="homepage_card_age_icon_transition"
                 android:src="@drawable/age" />
 
             <TextView
@@ -71,6 +73,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/ageIcon"
                 android:text="3 months"
+                android:transitionName="homepage_card_age_text_transition"
                 android:textSize="15sp" />
 
             <ImageView
@@ -81,6 +84,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_toRightOf="@+id/main_activity_image_slider"
+                android:transitionName="homepage_card_gender_icon_transition"
                 android:src="@drawable/gender2" />
 
             <TextView
@@ -91,6 +95,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="41dp"
                 android:layout_toRightOf="@+id/genderIcon"
+                android:transitionName="homepage_card_gender_text_transition"
                 android:text="male"
                 android:textSize="15sp" />
 
@@ -102,6 +107,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_toRightOf="@id/main_activity_image_slider"
+                android:transitionName="homepage_card_location_icon_transition"
                 android:src="@drawable/location" />
 
             <TextView
@@ -111,6 +117,7 @@
                 android:layout_below="@+id/genderText"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="45dp"
+                android:transitionName="homepage_card_location_text_transition"
                 android:layout_toRightOf="@id/locationIcon"
                 android:text="Kothrud, Pune"
                 android:textSize="15sp" />

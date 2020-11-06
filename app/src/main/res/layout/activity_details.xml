@@ -37,6 +37,7 @@ tools:context=".Cards">
         android:text="Brown and white Indie Puppy"
         android:textColor="#262626"
         android:textSize="20sp"
+        android:transitionName="homepage_card_location_text_transition"
         android:textStyle="italic"
         />
 
@@ -49,6 +50,7 @@ tools:context=".Cards">
             android:layout_below="@+id/images"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="47dp"
+            android:transitionName="homepage_card_age_icon_transition"
             />
 
         <TextView
@@ -60,6 +62,7 @@ tools:context=".Cards">
             android:layout_marginTop="51dp"
             android:text="3 months"
             android:textSize="15sp"
+            android:transitionName="homepage_card_age_text_transition"
             />
 
         <ImageView
@@ -70,6 +73,7 @@ tools:context=".Cards">
             android:layout_below="@+id/images"
             android:layout_marginTop="47dp"
             android:layout_marginLeft="137dp"
+            android:transitionName="homepage_card_gender_icon_transition"
             />
 
         <TextView
@@ -80,6 +84,7 @@ tools:context=".Cards">
             android:layout_marginLeft="163dp"
             android:layout_marginTop="51dp"
             android:text="male"
+            android:transitionName="homepage_card_gender_text_transition"
             android:textSize="15sp"
             />
 
@@ -90,6 +95,7 @@ tools:context=".Cards">
             android:id="@+id/locationIcon"
             android:layout_below="@+id/images"
             android:layout_marginTop="47dp"
+            android:transitionName="homepage_card_location_icon_transition"
             android:layout_marginLeft="237dp"
             />
 
@@ -101,7 +107,9 @@ tools:context=".Cards">
             android:layout_marginTop="51dp"
             android:text="Kothrud, Pune"
             android:textSize="15sp"
-            android:id="@+id/locationText"/>
+            android:id="@+id/locationText"
+            android:transitionName="homepage_card_location_text_transition"
+            />
 
        <!-- <TextView
             android:layout_width="wrap_content"
