@@ -161,6 +161,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
 
                             addUser(mname, memail, mnumber, selectedImage);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_REG"));
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         } else {
                             Toast.makeText(Foster_reg.this, "Email already exists. Please try another email.", Toast.LENGTH_SHORT).show();
@@ -173,6 +174,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Foster_reg.this, LoginPage.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
     }

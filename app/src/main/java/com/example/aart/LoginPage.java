@@ -76,7 +76,7 @@ public class LoginPage extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginPage.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","LoginPage"));
-
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         }
                         else{
                             Toast.makeText(LoginPage.this, "The username or password is incorrect or the user does not exist", Toast.LENGTH_SHORT).show();
@@ -90,6 +90,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginPage.this, Foster_reg.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }
         });
 

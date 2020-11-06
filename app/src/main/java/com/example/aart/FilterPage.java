@@ -110,7 +110,7 @@ public class FilterPage extends AppCompatActivity {
                 intent.putExtra("Filter","on");
 
                 startActivity(intent);
-                overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
             }
         });
@@ -121,7 +121,7 @@ public class FilterPage extends AppCompatActivity {
                 intent.putExtra("Activity","Filter");
                 intent.putExtra("Filter","off");
                 startActivity(intent);
-                overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }
         });
 
@@ -130,6 +130,6 @@ public class FilterPage extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }
