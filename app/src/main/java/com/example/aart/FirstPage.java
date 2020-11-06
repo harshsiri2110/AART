@@ -46,6 +46,7 @@ public class FirstPage extends AppCompatActivity {
             getLoginbtn.setText("Sign in with another account");
         }
 
+
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +112,7 @@ public class FirstPage extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
                         menu.findItem(R.id.first_page_profile_icon).setIcon((int)fosterdetails.getProfilePic());
+                        menu.findItem(R.id.first_page_logout).setVisible(true);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -128,11 +130,21 @@ public class FirstPage extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.first_page_profile_icon: {
+            case R.id.first_page_profile_icon:
+                {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
-                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
                 break;
-            }
+                 }
+                case R.id.first_page_logout:
+                    {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(), FirstPage.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    finish();
+                    break;
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }
