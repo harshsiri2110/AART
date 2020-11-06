@@ -204,7 +204,14 @@ public class UploadForm extends AppCompatActivity
                 model.setfosterEmail(fosterEmail);
                 model.setFosterName(fosterName);
 
-                reff.child(timeStamp).setValue(model);
+                reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
+                        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+                    }
+                });
 
                 if(!imageUriList.isEmpty())
                 {
@@ -213,9 +220,9 @@ public class UploadForm extends AppCompatActivity
                         uploadPicture(imageUriList.get(i));
                     }
                 }
-                Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
+
+
             }
         }));
     }
@@ -287,5 +294,11 @@ public class UploadForm extends AppCompatActivity
                         // ...
                     }
                 });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
     }
 }

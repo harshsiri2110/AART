@@ -212,9 +212,8 @@ public class Foster_Profile extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-
-        startActivity(new Intent(Foster_Profile.this, MainActivity.class).putExtra("Activity","Foster_Profile"));
-        //overridePendingTransition(R.anim.slide_in_bottom,R.anim.slide_out_bottom);
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
     }
 }
