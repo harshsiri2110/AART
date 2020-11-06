@@ -86,8 +86,6 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         editEmail.setText(email);
         editNumber.setText(mobileNumber);
 
-
-
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child(firebaseAuth.getCurrentUser().getUid());
 
         btnEdit.setOnClickListener(new View.OnClickListener() {

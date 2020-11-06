@@ -30,6 +30,8 @@ public class Adapter extends BaseAdapter {
     private Context context;
     private int cardLayout;
 
+    public ImageSlider imageSlider;
+    public TextView title, ageText, genderText, locationText;
 
     public Adapter(List<Model> models, Context context, int cardLayout) {
         this.models = models;
@@ -59,11 +61,7 @@ public class Adapter extends BaseAdapter {
        // View view = layoutInflater.inflate(R.layout.activity_cards,null);
         View view = layoutInflater.inflate(cardLayout,null);
 
-        ImageSlider imageSlider;
-
-        TextView title, ageText, genderText, locationText;
-
-        imageSlider = view.findViewById(R.id.image);
+        imageSlider = view.findViewById(R.id.main_activity_image_slider);
 
         title = view.findViewById(R.id.title);
         ageText = view.findViewById(R.id.ageText);

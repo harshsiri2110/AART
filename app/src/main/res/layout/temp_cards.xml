@@ -30,7 +30,7 @@
                 android:background="#effifb"/>-->
 
             <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/image"
+                android:id="@+id/main_activity_image_slider"
                 android:layout_width="220dp"
                 android:layout_height="200dp"
                 android:background="#FBFBFB"
@@ -38,13 +38,15 @@
                 app:iss_auto_cycle="false"
                 app:iss_corner_radius="5"
                 app:iss_delay="10"
-                app:iss_period="1000" />
+                app:iss_period="1000"
+                android:transitionName="homepage_card_images"
+                />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image"
+                android:layout_below="@+id/main_activity_image_slider"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Brown and White Indie Puppy"
@@ -58,7 +60,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_toRightOf="@+id/image"
+                android:layout_toRightOf="@+id/main_activity_image_slider"
                 android:src="@drawable/age" />
 
             <TextView
@@ -78,7 +80,7 @@
                 android:layout_below="@+id/ageIcon"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
-                android:layout_toRightOf="@+id/image"
+                android:layout_toRightOf="@+id/main_activity_image_slider"
                 android:src="@drawable/gender2" />
 
             <TextView
@@ -99,7 +101,7 @@
                 android:layout_below="@+id/genderIcon"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
-                android:layout_toRightOf="@id/image"
+                android:layout_toRightOf="@id/main_activity_image_slider"
                 android:src="@drawable/location" />
 
             <TextView

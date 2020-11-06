@@ -21,6 +21,9 @@ tools:context=".Cards">
     app:iss_corner_radius="5"
     app:iss_delay="10"
     app:iss_period="1000"
+
+    android:transitionName="homepage_card_images"
+
     />
 
 

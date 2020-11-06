@@ -1,11 +1,13 @@
 package com.example.aart;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.constraintlayout.solver.widgets.Snapshot;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -31,6 +33,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity
     ListView listView;
     Adapter adapter;
     List<Model> models;
+
+    ImageSlider mainActImageSlider;
 
     int foster_profile_pic = 0;
     float curr_age_in_months = 0;
@@ -81,6 +86,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
@@ -169,7 +176,12 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this,Details.class);
                 //intent.putExtra("selectedCard",postList.get(i));
                 intent.putExtra("selectedCard",models.get(i).getID());
-                startActivity(intent);
+
+                mainActImageSlider = view.findViewById(R.id.main_activity_image_slider);
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,mainActImageSlider,"homepage_card_images");
+
+                startActivity(intent, options.toBundle());
             }
         });
     }
