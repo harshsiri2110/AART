@@ -41,7 +41,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Loginbtn.setEnabled(false);
+                //Loginbtn.setEnabled(false);
                 loadingDialog.startLoadingDialog();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {

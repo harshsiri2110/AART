@@ -211,10 +211,14 @@ public class MainActivity extends AppCompatActivity
     private void filter_all_attributes(int species,int gender, int age)
     {
         if (species == 1) {
-            filter_gender_and_age(gender,age);
+            if (currModel.getSpeciesText().equals("Dog")) {
+                filter_gender_and_age(gender, age);
+            }
         }
         else if (species == 2) {
-            filter_gender_and_age(gender,age);
+            if (currModel.getSpeciesText().equals("Cat")) {
+                filter_gender_and_age(gender, age);
+            }
         }
         else if (species == 3)
         {
