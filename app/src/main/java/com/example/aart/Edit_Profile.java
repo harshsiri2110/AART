@@ -39,6 +39,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final LoadingDialog loadingDialog = new LoadingDialog(Edit_Profile.this);
 

@@ -20,6 +20,7 @@ public class Cards extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cards);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /*ImageSlider imageSlider = findViewById(R.id.image);
 

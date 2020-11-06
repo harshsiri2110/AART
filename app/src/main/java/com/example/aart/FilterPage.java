@@ -32,6 +32,7 @@ public class FilterPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_page);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final LoadingDialog loadingDialog = new LoadingDialog(FilterPage.this);
 

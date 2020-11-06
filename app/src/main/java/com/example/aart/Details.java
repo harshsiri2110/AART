@@ -46,6 +46,8 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         title = findViewById(R.id.details_title);
         age = findViewById(R.id.ageText);
         gender = findViewById(R.id.genderText);

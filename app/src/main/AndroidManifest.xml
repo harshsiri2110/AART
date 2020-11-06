@@ -11,11 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_aart_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Edit_Profile"></activity>
-        <activity android:name=".UpdatePost" />
-        <activity android:name=".Foster_Profile" />
-        <activity android:name=".FilterPage" />
-        <activity android:name=".LoginPage" />
+        <activity android:name=".Edit_Profile"
+            android:parentActivityName=".Foster_Profile">
+        </activity>
+        <activity android:name=".UpdatePost"
+            android:parentActivityName=".Foster_Profile">
+        </activity>
+        <activity android:name=".Foster_Profile"
+            android:parentActivityName=".Cards">
+        </activity>
+        <activity android:name=".FilterPage"
+            android:parentActivityName=".Cards">
+        </activity>
+        <activity android:name=".LoginPage"
+            android:parentActivityName=".FirstPage">
+        </activity>
         <activity android:name=".FirstPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +33,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Foster_reg" />
-        <activity android:name=".Details" />
-        <activity android:name=".UploadForm" />
-        <activity android:name=".Cards" />
+        <activity android:name=".Foster_reg"
+            android:parentActivityName=".FirstPage">
+        </activity>
+        <activity android:name=".Details"
+            android:parentActivityName=".Cards">
+        </activity>
+        <activity android:name=".UploadForm"
+            android:parentActivityName=".Cards">
+        </activity>
+        <activity android:name=".Cards"
+            android:parentActivityName=".FirstPage">
+        </activity>
         <activity android:name=".MainActivity" />
     </application>
 

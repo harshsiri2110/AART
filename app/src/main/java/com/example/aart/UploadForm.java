@@ -91,6 +91,7 @@ public class UploadForm extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final LoadingDialog loadingDialog = new LoadingDialog(UploadForm.this);
         storageReference = FirebaseStorage.getInstance().getReference();

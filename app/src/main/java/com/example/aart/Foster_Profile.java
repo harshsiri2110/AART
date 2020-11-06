@@ -56,6 +56,7 @@ public class Foster_Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foster__profile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
