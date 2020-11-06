@@ -44,6 +44,8 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
     Fosterdetails fosterdetails;
     FirebaseAuth firebaseAuth;
 
+    boolean emailUnique = true;
+
     int selectedImage = R.drawable.c1;
 
     long maxId = 0;
@@ -58,7 +60,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
 
         fosterdetails = new Fosterdetails();
 
-        reference= FirebaseDatabase.getInstance().getReference().child("Foster");
+        reference= FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
 
         final LoadingDialog loadingDialog = new LoadingDialog(Foster_reg.this);
 
@@ -99,28 +101,12 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
         d3.setOnClickListener(this);
         d4.setOnClickListener(this);
 
-
-        reference.addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                maxId = snapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
-
-            }
-        });
-
         submit.setOnClickListener((new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                submit.setEnabled(false);
+                //submit.setEnabled(false);
                 loadingDialog.startLoadingDialog();
 
                 Handler handler = new Handler();
@@ -142,7 +128,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
                 currId = maxId + 1;
 
                 final String memail= email.getText().toString().trim();
-                String mpassword = password.getText().toString().trim();
+                final String mpassword = password.getText().toString().trim();
                 String mConfirmPass = confirmPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(memail)){
@@ -166,38 +152,20 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
                     return;
                 }
 
-                firebaseAuth.createUserWithEmailAndPassword(memail,mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                {
+                firebaseAuth.createUserWithEmailAndPassword(memail, mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if(task.isSuccessful()){
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
 
-                            addUser(mname,memail,mnumber,selectedImage);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_REG"));
+                            addUser(mname, memail, mnumber, selectedImage);
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_REG"));
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
-                            }
-                        else {
-                            Toast.makeText(Foster_reg.this, "Error!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Foster_reg.this, "Email already exists. Please try another email.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                /*reference.child(String.valueOf(maxId+1)).setValue(fosterdetails)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void Void) {
-                        Toast.makeText(Foster_reg.this,"Data inserted!",Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Foster_reg.this,"Data NOT inserted!",Toast.LENGTH_LONG).show();
-                    }
-                });*/
-                //startActivity(new Intent(Foster_reg.this,MainActivity.class));
             }
         }));
         login.setOnClickListener(new View.OnClickListener() {
