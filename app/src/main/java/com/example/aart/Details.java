@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.transition.ChangeBounds;
 import androidx.transition.Transition;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
@@ -53,7 +54,10 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-
+        if(Build.VERSION.SDK_INT > 21) {
+            getWindow().setSharedElementEnterTransition(new android.transition.ChangeBounds().setDuration(500));
+            getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(500));
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
