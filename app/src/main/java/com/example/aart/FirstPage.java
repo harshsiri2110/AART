@@ -136,6 +136,7 @@ public class FirstPage extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
                 break;
                  }
+
                 case R.id.first_page_logout:
                     {
                     FirebaseAuth.getInstance().signOut();
