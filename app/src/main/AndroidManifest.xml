@@ -28,12 +28,15 @@
         </activity>
 
         <activity android:name=".FirstPage">
+
+        </activity>
+        <activity android:name=".SplashScreen"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Foster_reg"
             android:parentActivityName=".FirstPage">
         </activity>

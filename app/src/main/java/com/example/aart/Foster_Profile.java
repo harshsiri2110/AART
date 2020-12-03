@@ -230,7 +230,7 @@ public class Foster_Profile extends AppCompatActivity {
 
         if(item.getItemId()== R.id.profile_edit){
             startActivity(new Intent(Foster_Profile.this, Edit_Profile.class).putExtra("name", fosterName).putExtra("email", fosterEmail).putExtra("mobileNumber", fosterNumber).putExtra("profilePic", profilePic));
-            overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
         }
 
@@ -240,6 +240,6 @@ public class Foster_Profile extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

@@ -3,6 +3,7 @@ package com.example.aart;
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItem;
@@ -19,7 +20,9 @@ import android.app.Application;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -190,6 +194,7 @@ public class MainActivity extends AppCompatActivity
 
         //On card click listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
@@ -197,21 +202,29 @@ public class MainActivity extends AppCompatActivity
                 //intent.putExtra("selectedCard",postList.get(i));
                 intent.putExtra("selectedCard",models.get(i).getID());
 
+                if(Build.VERSION.SDK_INT > 21) {
+                    Pair<View, String>[] pairs = new Pair[8];
 
-                Pair<View,String>[] pairs = new Pair[8];
+                    pairs[0] = Pair.create(view.findViewById(R.id.main_activity_image_slider), "homepage_card_images");
+                    pairs[1] = Pair.create(view.findViewById(R.id.ageIcon), "homepage_card_age_icon_transition");
+                    pairs[2] = Pair.create(view.findViewById(R.id.ageText), "homepage_card_age_text_transition");
+                    pairs[3] = Pair.create(view.findViewById(R.id.genderIcon), "homepage_card_gender_icon_transition");
+                    pairs[4] = Pair.create(view.findViewById(R.id.genderText), "homepage_card_gender_text_transition");
+                    pairs[5] = Pair.create(view.findViewById(R.id.locationIcon), "homepage_card_location_icon_transition");
+                    pairs[6] = Pair.create(view.findViewById(R.id.locationText), "homepage_card_location_text_transition");
+                    pairs[7] = Pair.create(view.findViewById(R.id.title), "homepage_card_title_transition");
 
-                pairs[0] = Pair.create(view.findViewById(R.id.main_activity_image_slider),"homepage_card_images");
-                pairs[1] = Pair.create(view.findViewById(R.id.ageIcon),"homepage_card_age_icon_transition");
-                pairs[2] = Pair.create(view.findViewById(R.id.ageText),"homepage_card_age_text_transition");
-                pairs[3] = Pair.create(view.findViewById(R.id.genderIcon),"homepage_card_gender_icon_transition");
-                pairs[4] = Pair.create(view.findViewById(R.id.genderText),"homepage_card_gender_text_transition");
-                pairs[5] = Pair.create(view.findViewById(R.id.locationIcon),"homepage_card_location_icon_transition");
-                pairs[6] = Pair.create(view.findViewById(R.id.locationText),"homepage_card_location_text_transition");
-                pairs[7] = Pair.create(view.findViewById(R.id.title),"homepage_card_title_transition");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, pairs);
 
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,pairs);
+                    getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
+                    getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(500));
 
-                startActivity(intent, options.toBundle());
+                    startActivity(intent, options.toBundle());
+                }
+                else
+                {
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -594,7 +607,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.profile_icon:
             {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
-                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 //Toast.makeText(this, "Profile nmade", Toast.LENGTH_SHORT).show();
                 break;
             }
@@ -615,13 +628,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.menu_upload:
             {
                 startActivity(new Intent(getApplicationContext(), UploadForm.class));
-                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             }
             case R.id.filter_icon:
             {
                 startActivity(new Intent(getApplicationContext(), FilterPage.class));
-                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             }
         }
