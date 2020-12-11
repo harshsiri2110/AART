@@ -94,8 +94,6 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
