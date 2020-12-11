@@ -49,16 +49,11 @@
         >
     </TextView>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
         android:id="@+id/foster_profile_swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="50dp">
+        android:layout_height="wrap_content">
 
     <ListView
         android:layout_width="match_parent"
@@ -72,16 +67,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffff"
-                android:layout_gravity="bottom"
-                app:menu="@menu/bottom_navigation_menu"
-                android:id="@+id/bottom_nav_menu"
-                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-                />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 

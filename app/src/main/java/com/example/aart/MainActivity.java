@@ -94,28 +94,8 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_menu);
 
-        bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.bottom_nav_home:
-                        return true;
-
-                    case R.id.bottom_nav_favourite:
-                        return true;
-
-                    case R.id.bottom_nav_profile:
-                        startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
-                        overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
-                        return true;
-                }
-                return false;
-            }
-        });
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);

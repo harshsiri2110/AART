@@ -92,28 +92,6 @@ public class Foster_Profile extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         userId = firebaseUser.getUid();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_menu);
-
-        bottomNavigationView.setSelectedItemId(R.id.bottom_nav_profile);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.bottom_nav_home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","Foster_profile"));
-                        overridePendingTransition(R.anim.slide_out_right,R.anim.slide_in_left);
-                        return true;
-
-                    case R.id.bottom_nav_favourite:
-                        return true;
-
-                    case R.id.bottom_nav_profile:
-                        return true;
-                }
-                return false;
-            }
-        });
 
         reference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
