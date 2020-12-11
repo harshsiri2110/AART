@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
@@ -55,12 +56,13 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        /*if(Build.VERSION.SDK_INT > 21) {
+        if(Build.VERSION.SDK_INT > 21) {
             getWindow().setSharedElementEnterTransition(new android.transition.ChangeBounds().setDuration(300));
             getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
-        }*/
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         title = findViewById(R.id.details_title);
         age = findViewById(R.id.ageText);
@@ -183,9 +185,20 @@ public class Details extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        supportFinishAfterTransition();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

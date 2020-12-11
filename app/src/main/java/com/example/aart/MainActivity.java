@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Listview for cards
@@ -196,6 +195,7 @@ public class MainActivity extends AppCompatActivity
 
                     getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(300));
                     //getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
+                    //getWindow().setSharedElementReturnTransition();
 
                     startActivity(intent, options.toBundle());
                 }
@@ -613,6 +613,13 @@ public class MainActivity extends AppCompatActivity
             {
                 startActivity(new Intent(getApplicationContext(), FilterPage.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                break;
+            }
+
+            case android.R.id.home:
+            {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 break;
             }
         }

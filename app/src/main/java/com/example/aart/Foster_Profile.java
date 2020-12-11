@@ -206,10 +206,21 @@ public class Foster_Profile extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId()== R.id.profile_edit){
-            startActivity(new Intent(Foster_Profile.this, Edit_Profile.class).putExtra("name", fosterName).putExtra("email", fosterEmail).putExtra("mobileNumber", fosterNumber).putExtra("profilePic", profilePic));
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
+        switch(item.getItemId())
+        {
+
+            case R.id.profile_edit:
+                startActivity(new Intent(Foster_Profile.this, Edit_Profile.class).putExtra("name", fosterName).putExtra("email", fosterEmail).putExtra("mobileNumber", fosterNumber).putExtra("profilePic", profilePic));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                break;
+                //Toast.makeText(getApplicationContext(), "Edit post", Toast.LENGTH_SHORT).show();
+
+            case android.R.id.home:
+            {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);

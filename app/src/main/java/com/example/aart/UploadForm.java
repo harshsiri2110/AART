@@ -302,4 +302,17 @@ public class UploadForm extends AppCompatActivity
         super.finish();
         overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
