@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
@@ -54,10 +55,10 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        if(Build.VERSION.SDK_INT > 21) {
-            getWindow().setSharedElementEnterTransition(new android.transition.ChangeBounds().setDuration(500));
-            getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(500));
-        }
+        /*if(Build.VERSION.SDK_INT > 21) {
+            getWindow().setSharedElementEnterTransition(new android.transition.ChangeBounds().setDuration(300));
+            getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
+        }*/
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -176,6 +177,14 @@ public class Details extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
     }
 }

@@ -196,8 +196,8 @@ public class MainActivity extends AppCompatActivity
 
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, pairs);
 
-                    getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
-                    getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(500));
+                    getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(300));
+                    //getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
 
                     startActivity(intent, options.toBundle());
                 }
