@@ -83,7 +83,6 @@
         android:text="9876567893"
         android:id="@+id/fosterNumber"
         android:textColor="@color/colorPrimaryDark"/>
-
         </RelativeLayout>
 
     </LinearLayout>
