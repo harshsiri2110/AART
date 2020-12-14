@@ -27,12 +27,20 @@
             android:orientation="horizontal"
 
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category *:"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
 
             <RadioButton
                 android:id="@+id/dogSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Dog"
@@ -42,7 +50,7 @@
                 android:id="@+id/CatSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Cat"
@@ -61,7 +69,7 @@
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Title"
+                android:hint="Title*"
 
                 android:inputType="textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +109,7 @@
                         android:ems="10"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:hint="Age (Number)"
+                        android:hint="Age* (Number)"
 
                         android:inputType="number|numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -129,7 +137,7 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Gender:"
+              android:text="Gender *:"
               android:textSize="20sp"
               android:layout_marginBottom="10dp"
               android:layout_marginTop="10dp">
@@ -154,6 +162,7 @@
                android:layout_marginTop="10dp"
                android:text="Female"
                android:id="@+id/radioFemale"
+               android:layout_marginStart="40dp"
                android:textSize="20sp"
                >
 
@@ -172,14 +181,14 @@
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Location"
+                android:hint="Location*"
                 android:inputType="textCapSentences"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="Description*"
             android:textSize="20sp">
         </TextView>
 
@@ -237,7 +246,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Images:"
+                android:text="Upload Images *:"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -284,7 +293,11 @@
             >
         </com.denzcoskun.imageslider.ImageSlider>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fields marked * are mandatory."
+            android:textColor="#AE0000"/>
 
         <Button
             android:id="@+id/btnupload"
@@ -297,6 +310,7 @@
             android:textSize="22sp">
 
         </Button>
+
 
 
         </LinearLayout>
