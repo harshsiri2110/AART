@@ -1,5 +1,7 @@
 package com.example.aart;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -83,6 +85,15 @@ public class AboutMe extends Fragment {
         descriptionText.setText(description);
         fosterNameText.setText(foster_name);
         fosterNumberText.setText(foster_number);
+
+        fosterNumberText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel: +91" + foster_number));
+                startActivity(callIntent);
+            }
+        });
 
         return root;
     }
