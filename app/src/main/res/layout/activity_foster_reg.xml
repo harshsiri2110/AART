@@ -137,7 +137,7 @@
             android:ems="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:hint="Mobile Number"
+            android:hint="Mobile Number (Excluding +91)"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 

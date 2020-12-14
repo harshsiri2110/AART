@@ -22,6 +22,7 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.transition.ChangeBounds;
 import android.util.Log;
 import android.view.Display;
@@ -52,6 +53,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity
     int foster_profile_pic = 0;
     float curr_age_in_months = 0;
     int imgCount;
-    int postCount;
+    int postCount,dummy = 0;
 
     SwipeRefreshLayout pullToRefresh;
 
@@ -93,6 +95,19 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Collections.sort(models, new Comparator<Model>() {
+                    @Override
+                    public int compare(Model o1, Model o2) {
+                        return o2.getID().compareTo(o1.getID());
+                    }
+                });
+                adapter.notifyDataSetChanged();
+            }
+        }, 1000);
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
