@@ -11,6 +11,7 @@ import androidx.constraintlayout.solver.widgets.Snapshot;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity
     List<String> postList = new ArrayList<>();
     boolean filter_on = false;
 
+    TextView emptyListTextView;
+
     Model currModel = new Model();
 
     String filter_species,filter_gender,activity ="";
@@ -114,9 +117,10 @@ public class MainActivity extends AppCompatActivity
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
         Glide.with(this).load(R.drawable.loading_bar2).into(listPlaceholder);
 
+
         listView.setEmptyView(listPlaceholder);
 
-        final TextView emptyListTextView = findViewById(R.id.empty_list_text_view);
+        emptyListTextView = findViewById(R.id.empty_list_text_view);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -529,7 +533,16 @@ public class MainActivity extends AppCompatActivity
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
-                adapter.registerDataSetObserver(new DataSetObserver() {
+                if(adapter.getCount() > 0)
+                {
+                    addPostButton.setVisibility(View.VISIBLE);
+                    if(firebaseAuth.getCurrentUser() == null)
+                    {
+                        addPostButton.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                /*adapter.registerDataSetObserver(new DataSetObserver() {
                     @Override
                     public void onChanged() {
                         super.onChanged();
@@ -541,7 +554,9 @@ public class MainActivity extends AppCompatActivity
                                 addPostButton.setVisibility(View.INVISIBLE);
                             }
 
-                            if(dummy++ == 0)
+                            emptyListTextView.setVisibility(View.INVISIBLE);
+
+                            *//*if(dummy++ == 0)
                             {
                                 Collections.sort(models, new Comparator<Model>() {
                                     @Override
@@ -550,10 +565,10 @@ public class MainActivity extends AppCompatActivity
                                     }
                                 });
                                 adapter.notifyDataSetChanged();
-                            }
+                            }*//*
                         }
                     }
-                });
+                });*/
             }
 
             @Override
