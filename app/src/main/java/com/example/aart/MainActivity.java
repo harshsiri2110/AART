@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Handler handler = new Handler();
+        /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -107,13 +107,21 @@ public class MainActivity extends AppCompatActivity
                 });
                 adapter.notifyDataSetChanged();
             }
-        }, 1000);
+        }, 2000);*/
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
         Glide.with(this).load(R.drawable.loading_bar2).into(listPlaceholder);
 
         listView.setEmptyView(listPlaceholder);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                listPlaceholder.setImageResource(R.drawable.empty_list_3);
+            }
+        },3500);
 
         //Floating button
         addPostButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
@@ -528,10 +536,20 @@ public class MainActivity extends AppCompatActivity
                             {
                                 addPostButton.setVisibility(View.INVISIBLE);
                             }
+
+                            if(dummy++ == 0)
+                            {
+                                Collections.sort(models, new Comparator<Model>() {
+                                    @Override
+                                    public int compare(Model o1, Model o2) {
+                                        return o2.getID().compareTo(o1.getID());
+                                    }
+                                });
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                     }
                 });
-
             }
 
             @Override
@@ -539,6 +557,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
     }
 
     @Override
