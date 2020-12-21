@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -115,11 +116,14 @@ public class MainActivity extends AppCompatActivity
 
         listView.setEmptyView(listPlaceholder);
 
+        final TextView emptyListTextView = findViewById(R.id.empty_list_text_view);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                listPlaceholder.setImageResource(R.drawable.empty_list_3);
+                listPlaceholder.setImageResource(R.drawable.empty_list_2_removebg_preview);
+                emptyListTextView.setVisibility(View.VISIBLE);
             }
         },3500);
 

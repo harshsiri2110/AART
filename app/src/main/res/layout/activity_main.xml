@@ -9,11 +9,23 @@
     tools:context=".MainActivity"
     android:id="@+id/activity_main">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No search results found :("
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/listPlaceholder"
+        android:paddingBottom="150dp"
+        android:id="@+id/empty_list_text_view"
+        android:visibility="invisible"
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listPlaceholder"
         android:scaleType="fitCenter"/>
+
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefresh"
