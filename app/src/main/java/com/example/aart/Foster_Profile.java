@@ -169,6 +169,13 @@ public class Foster_Profile extends AppCompatActivity {
                                         if(!postList.contains(currModel.getID())) {
                                             postList.add(currModel.getID());
                                             models.add(currModel);
+                                            Collections.sort(models, new Comparator<Model>() {
+                                                @Override
+                                                public int compare(Model o1, Model o2) {
+                                                    return o2.getID().compareTo(o1.getID());
+                                                }
+                                            });
+
                                             adapter.notifyDataSetChanged();
                                         }
                                     }
