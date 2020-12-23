@@ -213,30 +213,8 @@ public class MainActivity extends AppCompatActivity
                 //intent.putExtra("selectedCard",postList.get(i));
                 intent.putExtra("selectedCard",models.get(i).getID());
 
-                if(Build.VERSION.SDK_INT > 21) {
-                    Pair<View, String>[] pairs = new Pair[8];
-
-                    pairs[0] = Pair.create(view.findViewById(R.id.main_activity_image_slider), "homepage_card_images");
-                    pairs[1] = Pair.create(view.findViewById(R.id.ageIcon), "homepage_card_age_icon_transition");
-                    pairs[2] = Pair.create(view.findViewById(R.id.ageText), "homepage_card_age_text_transition");
-                    pairs[3] = Pair.create(view.findViewById(R.id.genderIcon), "homepage_card_gender_icon_transition");
-                    pairs[4] = Pair.create(view.findViewById(R.id.genderText), "homepage_card_gender_text_transition");
-                    pairs[5] = Pair.create(view.findViewById(R.id.locationIcon), "homepage_card_location_icon_transition");
-                    pairs[6] = Pair.create(view.findViewById(R.id.locationText), "homepage_card_location_text_transition");
-                    pairs[7] = Pair.create(view.findViewById(R.id.title), "homepage_card_title_transition");
-
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, pairs);
-
-                    getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(300));
-                    //getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
-                    //getWindow().setSharedElementReturnTransition();
-
-                    startActivity(intent, options.toBundle());
-                }
-                else
-                {
-                    startActivity(intent);
-                }
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
     }
@@ -557,35 +535,6 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
 
-
-
-                /*adapter.registerDataSetObserver(new DataSetObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if(!listView.getAdapter().isEmpty())
-                        {
-                            addPostButton.setVisibility(View.VISIBLE);
-                            if(firebaseAuth.getCurrentUser() == null)
-                            {
-                                addPostButton.setVisibility(View.INVISIBLE);
-                            }
-
-                            emptyListTextView.setVisibility(View.INVISIBLE);
-
-                            *//*if(dummy++ == 0)
-                            {
-                                Collections.sort(models, new Comparator<Model>() {
-                                    @Override
-                                    public int compare(Model o1, Model o2) {
-                                        return o2.getID().compareTo(o1.getID());
-                                    }
-                                });
-                                adapter.notifyDataSetChanged();
-                            }*//*
-                        }
-                    }
-                });*/
             }
 
             @Override
