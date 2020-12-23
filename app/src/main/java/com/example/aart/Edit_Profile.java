@@ -147,7 +147,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
                 reference.child("profilePic").setValue(profilePicture);
 
-                startActivity(new Intent(Edit_Profile.this, MainActivity.class).putExtra("Activity","Edit_profile"));
+                startActivity(new Intent(Edit_Profile.this, FirstPage.class));
 
             }
         });
