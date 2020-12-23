@@ -134,6 +134,8 @@ public class MainActivity extends AppCompatActivity
             }
         },3500);
 
+
+
         //Floating button
         addPostButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
 
@@ -145,8 +147,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -515,7 +515,12 @@ public class MainActivity extends AppCompatActivity
                                             models.add(currModel);
                                         }
                                         //Collections.sort(models, Collections.<Model>reverseOrder());
-
+                                        Collections.sort(models, new Comparator<Model>() {
+                                            @Override
+                                            public int compare(Model o1, Model o2) {
+                                                return o2.getID().compareTo(o1.getID());
+                                            }
+                                        });
                                         adapter.notifyDataSetChanged();
                                     }
                                 }

@@ -161,7 +161,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
                             Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
 
                             addUser(mname, memail, mnumber, selectedImage);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity", "Foster_REG"));
+                            startActivity(new Intent(getApplicationContext(), FirstPage.class));
                             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                             //startActivity(new Intent(Foster_reg.this,MainActivity.class));
                         } else {
