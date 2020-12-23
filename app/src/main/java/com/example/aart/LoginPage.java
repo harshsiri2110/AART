@@ -76,7 +76,7 @@ public class LoginPage extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginPage.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("Activity","LoginPage"));
+                            startActivity(new Intent(getApplicationContext(), FirstPage.class));
                             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         }
                         else{

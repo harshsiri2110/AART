@@ -1,6 +1,7 @@
 package com.example.aart;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,8 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,6 +46,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     AlertDialog.Builder bob;
 
     View checkBoxView;
+
+    String user_email;
 
     boolean delete_user_posts = false;
 
@@ -104,6 +111,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
 
         name= bundle.getString("name");
         email = bundle.getString("email");
+        user_email = email;
         mobileNumber = String.valueOf(bundle.getLong("mobileNumber"));
         profilePicture = bundle.getInt("profilePic");
 
@@ -160,6 +168,25 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int which) {
+                        postsRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot post : snapshot.getChildren())
+                                {
+                                    Model currPost = post.getValue(Model.class);
+                                    if(user_email.equals(currPost.getfosterEmail()))
+                                    {
+                                        post.getRef().removeValue();
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                         reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
 
