@@ -70,7 +70,6 @@ public class UpdatePost extends AppCompatActivity {
 
         final LoadingDialog loadingDialog = new LoadingDialog(UpdatePost.this);
 
-
         storageReference = FirebaseStorage.getInstance().getReference();
 
         description = (EditText) findViewById(R.id.update_postDescription);

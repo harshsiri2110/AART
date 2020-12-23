@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -168,30 +171,44 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int which) {
-                        postsRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot post : snapshot.getChildren())
-                                {
-                                    Model currPost = post.getValue(Model.class);
-                                    if(user_email.equals(currPost.getfosterEmail()))
-                                    {
-                                        post.getRef().removeValue();
-                                        continue;
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
 
                         reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
 
                             @Override
                             public void onSuccess(Void aVoid) {
+                                postsRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for(DataSnapshot post : snapshot.getChildren())
+                                        {
+                                            final Model currPost = post.getValue(Model.class);
+                                            if(user_email.equals(currPost.getfosterEmail()))
+                                            {
+                                                post.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        for(ImageUrl img : currPost.getImageList())
+                                                        {
+                                                            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(img.getUri());
+                                                            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Toast.makeText(Edit_Profile.this, "Account and posts deleted!", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                                continue;
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
 
                                 firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -203,6 +220,9 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                                 });
                             }
                         });
+
+
+
                     }
                 });
                 bob.setNegativeButton("No", new DialogInterface.OnClickListener() {
