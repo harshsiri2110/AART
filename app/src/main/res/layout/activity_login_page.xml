@@ -5,10 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="225dp"
+    android:paddingTop="50dp"
     android:paddingRight="20dp"
     android:paddingLeft="20dp"
     tools:context=".LoginPage">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/login3"/>
 
     <com.google.android.material.textfield.TextInputLayout
     android:layout_width="match_parent"
