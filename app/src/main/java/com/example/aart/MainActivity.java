@@ -533,14 +533,22 @@ public class MainActivity extends AppCompatActivity
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
-                if(adapter.getCount() > 0)
-                {
-                    addPostButton.setVisibility(View.VISIBLE);
-                    if(firebaseAuth.getCurrentUser() == null)
-                    {
-                        addPostButton.setVisibility(View.INVISIBLE);
+                adapter.registerDataSetObserver(new DataSetObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if(!listView.getAdapter().isEmpty())
+                        {
+                            addPostButton.setVisibility(View.VISIBLE);
+                            if(firebaseAuth.getCurrentUser() == null)
+                            {
+                                addPostButton.setVisibility(View.INVISIBLE);
+                            }
+                        }
                     }
-                }
+                });
+
+
 
                 /*adapter.registerDataSetObserver(new DataSetObserver() {
                     @Override
