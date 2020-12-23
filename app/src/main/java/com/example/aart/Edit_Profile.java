@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -31,11 +33,16 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     EditText editName, editEmail, editNumber;
     Button btnEdit, btnDeleteProfile;
 
-    DatabaseReference reference;
+    DatabaseReference reference,postsRef;
+
     FirebaseAuth firebaseAuth;
 
     String name, email, mobileNumber;
     AlertDialog.Builder bob;
+
+    View checkBoxView;
+
+    boolean delete_user_posts = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,24 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnEdit = (Button)findViewById(R.id.edit_profile_btnapply);
         btnDeleteProfile = (Button)findViewById(R.id.edit_profile_btndelete);
 
+        checkBoxView = View.inflate(this,R.layout.delete_user_posts_confirmation_checkbox,null);
+        final CheckBox delete_posts_checkbox = checkBoxView.findViewById(R.id.user_posts_delete_confirmation_checkbox);
+
+        delete_posts_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    delete_user_posts = true;
+                }
+                else
+                {
+                    delete_user_posts = false;
+                }
+            }
+        });
+        delete_posts_checkbox.setText("Delete all my posts?");
+
         Bundle bundle = getIntent().getExtras();
 
         name= bundle.getString("name");
@@ -89,6 +114,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         editNumber.setText(mobileNumber);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("User").child(firebaseAuth.getCurrentUser().getUid());
+
+        postsRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +156,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
 
                 bob.setMessage("Are you sure you want to delete?");
                 bob.setTitle("Confirm Delete Profile");
+                bob.setView(checkBoxView);
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int which) {
