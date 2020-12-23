@@ -126,8 +126,11 @@ public class MainActivity extends AppCompatActivity
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                listPlaceholder.setImageResource(R.drawable.empty_list_2_removebg_preview);
-                emptyListTextView.setVisibility(View.VISIBLE);
+                if(listView.getAdapter().isEmpty())
+                {
+                    listPlaceholder.setImageResource(R.drawable.empty_list_2_removebg_preview);
+                    emptyListTextView.setVisibility(View.VISIBLE);
+                }
             }
         },3500);
 
@@ -544,6 +547,7 @@ public class MainActivity extends AppCompatActivity
                             {
                                 addPostButton.setVisibility(View.INVISIBLE);
                             }
+                            emptyListTextView.setEnabled(false);
                         }
                     }
                 });
