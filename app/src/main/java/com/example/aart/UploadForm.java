@@ -301,7 +301,7 @@ public class UploadForm extends AppCompatActivity
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.stationary_animation,R.anim.slide_out_bottom);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
     @Override
