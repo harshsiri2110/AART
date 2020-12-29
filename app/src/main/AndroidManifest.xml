@@ -44,7 +44,8 @@
             android:parentActivityName=".FirstPage">
         </activity>
         <activity android:name=".Details"
-            android:parentActivityName=".Cards">
+            android:parentActivityName=".Cards"
+            android:theme="@style/AppTheme.MyPostDetailsStyle">
         </activity>
         <activity android:name=".UploadForm"
             android:parentActivityName=".Cards">

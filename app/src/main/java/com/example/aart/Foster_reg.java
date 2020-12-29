@@ -61,6 +61,7 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foster_reg);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Register");
 
         fosterdetails = new Fosterdetails();
 

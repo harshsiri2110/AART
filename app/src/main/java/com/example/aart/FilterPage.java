@@ -35,6 +35,7 @@ public class FilterPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_page);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Filter");
 
         final LoadingDialog loadingDialog = new LoadingDialog(FilterPage.this);
 

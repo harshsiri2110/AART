@@ -28,6 +28,7 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Login");
 
         final LoadingDialog loadingDialog = new LoadingDialog(LoginPage.this);
 

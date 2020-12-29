@@ -62,6 +62,7 @@ public class Details extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
 
         title = findViewById(R.id.details_title);

@@ -67,6 +67,7 @@ public class UpdatePost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_post);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Update Post");
 
         final LoadingDialog loadingDialog = new LoadingDialog(UpdatePost.this);
 
