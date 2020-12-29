@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f7b439</color>
-    <color name="colorPrimaryDark">#E4A735</color><!--<color name="colorPrimary">#F3AA2A</color>
+    <color name="colorPrimary">#E4982C</color>
+    <color name="colorPrimaryDark">#C68324</color>
+    <!--<color name="colorPrimary">#f7b439</color>
+    <color name="colorPrimaryDark">#E4A735</color>-->
+    <!--<color name="colorPrimary">#F3AA2A</color>
     <color name="colorPrimaryDark">#D8982A</color>-->
     <!--<color name="colorPrimary">#0B7AAE</color>
     <color name="colorPrimaryDark">#074765</color>-->

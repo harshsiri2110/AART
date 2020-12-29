@@ -51,6 +51,7 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this,Foster_reg.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -74,7 +75,7 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FirstPage.this, LoginPage.class));
-                overridePendingTransition(R.anim.slide_in_bottom,R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
     }
