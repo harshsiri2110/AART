@@ -70,8 +70,9 @@ public class Foster_Profile extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this,"Position - "+i,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Foster_Profile.this,Details.class);
-                intent.putExtra("selectedCard",postList.get(i));
+                intent.putExtra("selectedCard",models.get(i).getID());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
