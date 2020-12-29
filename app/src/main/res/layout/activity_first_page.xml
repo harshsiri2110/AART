@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".Foster_reg">
+    tools:context=".Foster_reg"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -70,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="#117AAC"
+        android:backgroundTint="@color/colorPrimary"
         android:textColor="#ffff"
         android:text="Existing user? Login"
         android:textSize="15sp">
