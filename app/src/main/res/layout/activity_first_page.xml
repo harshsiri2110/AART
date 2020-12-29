@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="#117AAC"
+        android:backgroundTint="#C86647"
         android:textColor="#ffff"
         android:text="Existing user? Login"
         android:textSize="15sp">
