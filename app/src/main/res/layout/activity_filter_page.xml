@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
     tools:context=".FilterPage">
 
     <ScrollView
@@ -151,36 +153,6 @@
             android:id="@+id/filter_age_text"
             android:textColor="@color/colorPrimary"/>
 
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBox1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="0-3 Months"-->
-<!--            android:layout_below="@+id/filter_age_text"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            />-->
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBox2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="4-12 Months"-->
-<!--            android:layout_below="@+id/checkBox1"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            />-->
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBox3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="> 1 Year"-->
-<!--            android:layout_below="@+id/checkBox2"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            />-->
 
         <SeekBar
             android:id="@+id/seekBar3"
@@ -212,77 +184,6 @@
             android:singleLine="true">
         </TextView>
 
-        <!--<TextView
-            android:id="@+id/seekBar_text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 month"
-            android:layout_marginTop="100dp"
-            android:layout_toRightOf="@+id/seekBar_text0"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:textSize="13sp">
-
-        </TextView>
-
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:id="@+id/seekBar_text2"
-        android:text="3 months"
-        android:textSize="13sp"
-        android:layout_toRightOf="@+id/seekBar_text1"
-        android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-        >
-
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:id="@+id/seekBar_text3"
-        android:text="6 months"
-        android:textSize="13sp"
-        android:layout_toRightOf="@+id/seekBar_text2"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        >
-
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/seekBar_text4"
-        android:layout_marginTop="100dp"
-        android:text="12 months"
-        android:textSize="13sp"
-        android:layout_toRightOf="@+id/seekBar_text3"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        >
-
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar_text5"
-        android:text="Older"
-        android:textSize="13sp"
-        android:layout_toRightOf="@+id/seekBar_text4"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_gravity="end"
-        >
-    </TextView>
-        </RelativeLayout>-->
-
         </androidx.cardview.widget.CardView>
 
         <Button
@@ -309,6 +210,7 @@
             android:background="@drawable/button_rounded"
             android:id="@+id/filter_clear_button"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             />
 
         </LinearLayout>
