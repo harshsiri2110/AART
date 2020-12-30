@@ -2,8 +2,10 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +46,7 @@ public class FirstPage extends AppCompatActivity {
             regbtn.setVisibility(View.INVISIBLE);
             regbtn.setEnabled(false);
             getLoginbtn.setText("Sign in with another account");
+            getLoginbtn.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.colorPrimaryDark));
         }
 
 
@@ -134,7 +137,7 @@ public class FirstPage extends AppCompatActivity {
             case R.id.first_page_profile_icon:
                 {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
-                overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
                  }
 
