@@ -25,12 +25,12 @@ public class Splash_Screen_2 extends AppCompatActivity {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(Splash_Screen_2.this,logo,"first_page_logo");
                 Intent intent = new Intent(Splash_Screen_2.this,FirstPage.class);
                 startActivity(intent,options.toBundle());
-                new Handler().postDelayed(new Runnable() {
+                /*new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         finish();
                     }
-                },1500);
+                },1500);*/
             }
         },2000);
     }
