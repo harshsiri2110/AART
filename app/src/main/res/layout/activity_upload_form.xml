@@ -181,7 +181,7 @@
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Location*"
+                android:hint="Location (Area, City)*"
                 android:inputType="textCapSentences"
                 />
         </com.google.android.material.textfield.TextInputLayout>
