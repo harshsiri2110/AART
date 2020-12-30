@@ -263,7 +263,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="(Preferred horizontal pictures)"
                         android:textSize="15sp"
                         android:layout_below="@+id/update_imgupload"
 
