@@ -2,10 +2,12 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -122,6 +124,32 @@ public class UploadForm extends AppCompatActivity
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
 
+        /*final AlertDialog.Builder confirmDel = new AlertDialog.Builder(this);
+
+        imgView.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemSelected(final int i) {
+                confirmDel.setMessage("Are you sure you want to delete this picture?");
+                confirmDel.setTitle("Confirm Delete Picture");
+                confirmDel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageUriList.remove(imageUriList.get(i));
+                        previewImages.remove(previewImages.get(i));
+                        imgView.setImageList(previewImages,ScaleTypes.FIT);
+                    }
+                });
+                confirmDel.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = confirmDel.create();
+                alertDialog.show();
+            }
+        });
+*/
         ArrayAdapter <String> adapter = new ArrayAdapter <String> (UploadForm.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Age));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

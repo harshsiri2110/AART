@@ -59,7 +59,7 @@ public class FirstPage extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
+            getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(200));
         }
 
 
