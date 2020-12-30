@@ -1,12 +1,18 @@
 package com.example.aart;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +37,7 @@ public class FirstPage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,17 @@ public class FirstPage extends AppCompatActivity {
         getLoginbtn = findViewById(R.id.btnlogin);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.first_page_toolbar,null);
+        actionBar.setCustomView(v);
+        getSupportActionBar().setTitle("");
+
+
+
 
         if(firebaseAuth.getCurrentUser() != null){
             regbtn.setVisibility(View.INVISIBLE);
@@ -139,7 +157,7 @@ public class FirstPage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
-                 }
+                }
 
                 case R.id.first_page_logout:
                     {
