@@ -11,6 +11,8 @@
     </style>
     <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
 
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="colorPrimary">@android:color/transparent</item>
         <!--<item name="titleTextColor">@color/black</item>-->
@@ -31,9 +33,11 @@
 
 
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@drawable/background_splashscreen</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
         <style name="AppTheme.NoActionBar">

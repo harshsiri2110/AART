@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".FirstPage"
-
     >
 
 

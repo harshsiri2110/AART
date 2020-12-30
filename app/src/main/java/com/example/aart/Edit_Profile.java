@@ -149,6 +149,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 reference.child("profilePic").setValue(profilePicture);
 
                 startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
             }
         });
@@ -162,6 +163,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         loadingDialog.dismissDialog();
                     }
                 }, 2000);

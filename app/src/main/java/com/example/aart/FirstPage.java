@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ public class FirstPage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +58,18 @@ public class FirstPage extends AppCompatActivity {
         actionBar.setCustomView(v);
         getSupportActionBar().setTitle("");
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
+        }
 
 
         if(firebaseAuth.getCurrentUser() != null){
             regbtn.setVisibility(View.INVISIBLE);
             regbtn.setEnabled(false);
             getLoginbtn.setText("Sign in with another account");
-            getLoginbtn.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.colorPrimaryDark));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getLoginbtn.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.colorPrimaryDark));
+            }
         }
 
 

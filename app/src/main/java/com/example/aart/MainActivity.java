@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItem;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.solver.widgets.Snapshot;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
@@ -98,20 +99,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Home");
 
-        /*Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Collections.sort(models, new Comparator<Model>() {
-                    @Override
-                    public int compare(Model o1, Model o2) {
-                        return o2.getID().compareTo(o1.getID());
-                    }
-                });
-                adapter.notifyDataSetChanged();
-            }
-        }, 2000);*/
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
         final ImageView listPlaceholder = findViewById(R.id.listPlaceholder);
