@@ -10,7 +10,6 @@
     >
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +20,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+
+            <TextView
+                android:id="@+id/first_page_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WANT TO ADOPT?"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:visibility="visible"/>
 
     <ImageButton
         android:id="@+id/dogSelect"
@@ -67,11 +76,22 @@
         android:gravity="center"
         android:textColor="#000000"/>
 
+            <TextView
+                android:id="@+id/first_page_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ARE YOU A FOSTER?"
+                android:textStyle="italic"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="#000000"/>
+
     <Button
         android:id="@+id/btnlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button_rounded"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="#ffff"
