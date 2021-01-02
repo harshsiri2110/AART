@@ -54,6 +54,8 @@ public class FirstPage extends AppCompatActivity {
 
         firstPageDescription2 = findViewById(R.id.first_page_description2);
 
+        getSupportActionBar().setTitle("PETronus");
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
