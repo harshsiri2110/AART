@@ -59,7 +59,7 @@
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".FirstPage"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.MainActivityActionBar.Transparent"></activity>
     </application>
 
 </manifest>
