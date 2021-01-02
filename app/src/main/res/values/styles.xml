@@ -19,18 +19,6 @@
 
     </style>
 
-    <style name="AppTheme.MainActivityActionBar.Transparent" parent="AppTheme">
-
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="colorPrimary">@android:color/transparent</item>
-        <!--<item name="titleTextColor">@color/black</item>-->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-    </style>
-
     <style name="AppTheme.MyPostDetailsStyle" parent="AppTheme">
         <item name="windowActionBarOverlay">true</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
