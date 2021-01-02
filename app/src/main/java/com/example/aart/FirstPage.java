@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +39,7 @@ public class FirstPage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
+    TextView firstPageDescription2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class FirstPage extends AppCompatActivity {
         getLoginbtn = findViewById(R.id.btnlogin);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        firstPageDescription2 = findViewById(R.id.first_page_description2);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -140,6 +144,8 @@ public class FirstPage extends AppCompatActivity {
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
                         menu.findItem(R.id.first_page_profile_icon).setIcon((int)fosterdetails.getProfilePic());
                         menu.findItem(R.id.first_page_logout).setVisible(true);
+                        String[] name = fosterdetails.getName().split(" ");
+                        firstPageDescription2.setText("HI "+name[0].toUpperCase()+"! NOT YOU?");
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
