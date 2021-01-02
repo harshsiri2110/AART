@@ -71,8 +71,6 @@ public class AdapterFosterProfile extends BaseAdapter {
 
         final DatabaseReference dtbReff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-
-
         imageSlider = view.findViewById(R.id.image);
 
         title = view.findViewById(R.id.title);

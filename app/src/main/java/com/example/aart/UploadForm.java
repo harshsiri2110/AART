@@ -237,7 +237,7 @@ public class UploadForm extends AppCompatActivity
                 reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(UploadForm.this, "data inserted",Toast.LENGTH_LONG).show();
+
                         startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     }
