@@ -7,18 +7,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.transition.ChangeBounds;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +40,8 @@ public class FirstPage extends AppCompatActivity {
     Button loginbtn;
     ImageButton dogSelect,catSelect;
     int backButtonCount = 0;
+
+    ImageView logo;
 
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
@@ -61,6 +68,23 @@ public class FirstPage extends AppCompatActivity {
         View v = inflater.inflate(R.layout.first_page_toolbar,null);
         actionBar.setCustomView(v);
         getSupportActionBar().setTitle("");
+
+        logo = v.findViewById(R.id.first_page_app_logo);
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RotateAnimation rotateAnimation = new RotateAnimation(0,360,
+                        Animation.RELATIVE_TO_SELF,0.5f,
+                        Animation.RELATIVE_TO_SELF,0.5f);
+
+                rotateAnimation.setDuration(1000);
+                rotateAnimation.setRepeatCount(0);
+                logo.startAnimation(rotateAnimation);
+            }
+        },2000);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
