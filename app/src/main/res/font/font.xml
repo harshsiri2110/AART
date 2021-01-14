@@ -4,4 +4,20 @@
         android:fontStyle="italic"
         android:fontWeight="400"
         android:font="@font/otto" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/acratica" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/actonia" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/agatha" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/goodfoot" />
 </font-family>

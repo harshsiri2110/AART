@@ -14,6 +14,7 @@
         android:id="@+id/about_us_gif"
         android:layout_gravity="left|top"
         android:layout_marginLeft="17dp"
+
         />
 
     <LinearLayout
@@ -43,7 +44,8 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                />
 
     <ImageButton
         android:id="@+id/dogSelect"

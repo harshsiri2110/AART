@@ -75,6 +75,9 @@ public class FirstPage extends AppCompatActivity {
         logo = v.findViewById(R.id.first_page_app_logo);
         aboutUs = findViewById(R.id.about_us_gif);
 
+
+        //aboutUs.setVisibility(View.INVISIBLE);
+
         rotateLogo();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -145,7 +148,16 @@ public class FirstPage extends AppCompatActivity {
                 rotateAnimation.setRepeatCount(0);
                 logo.startAnimation(rotateAnimation);
 
-                Glide.with(FirstPage.this).load(R.drawable.about_us_gif1).into(aboutUs);
+                //aboutUs.setVisibility(View.VISIBLE);
+                Glide.with(FirstPage.this).load(R.drawable.about_us_gif_full).into(aboutUs);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //aboutUs.setVisibility(View.INVISIBLE);
+                        Glide.with(FirstPage.this).clear(aboutUs);
+                    }
+                },4700);
 
                 handler.postDelayed(new Runnable() {
                     @Override
