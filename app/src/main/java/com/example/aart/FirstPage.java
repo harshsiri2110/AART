@@ -145,7 +145,7 @@ public class FirstPage extends AppCompatActivity {
                 rotateAnimation.setRepeatCount(0);
                 logo.startAnimation(rotateAnimation);
 
-                Glide.with(FirstPage.this).load(R.drawable.about_us_gif).into(aboutUs);
+                Glide.with(FirstPage.this).load(R.drawable.about_us_gif_foo).into(aboutUs);
 
                 handler.postDelayed(new Runnable() {
                     @Override
