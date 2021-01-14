@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,12 +42,14 @@ public class FirstPage extends AppCompatActivity {
     ImageButton dogSelect,catSelect;
     int backButtonCount = 0;
 
-    ImageView logo;
+    ImageView logo,aboutUs;
 
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
     TextView firstPageDescription2;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class FirstPage extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         logo = v.findViewById(R.id.first_page_app_logo);
+        aboutUs = findViewById(R.id.about_us_gif);
 
         rotateLogo();
 
@@ -137,9 +141,11 @@ public class FirstPage extends AppCompatActivity {
                         Animation.RELATIVE_TO_SELF,0.5f,
                         Animation.RELATIVE_TO_SELF,0.5f);
 
-                rotateAnimation.setDuration(500);
+                rotateAnimation.setDuration(700);
                 rotateAnimation.setRepeatCount(0);
                 logo.startAnimation(rotateAnimation);
+
+                Glide.with(FirstPage.this).load(R.drawable.about_us_gif).into(aboutUs);
 
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -181,7 +187,7 @@ public class FirstPage extends AppCompatActivity {
             FirebaseUser usr = firebaseAuth.getCurrentUser();
                 final String uid = usr.getUid();
                 userRef = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
-                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                userRef.addListenerForSingleValueEvent(new ValueEventListener(){
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
