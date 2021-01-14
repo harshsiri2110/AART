@@ -71,20 +71,7 @@ public class FirstPage extends AppCompatActivity {
 
         logo = v.findViewById(R.id.first_page_app_logo);
 
-        Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                RotateAnimation rotateAnimation = new RotateAnimation(0,360,
-                        Animation.RELATIVE_TO_SELF,0.5f,
-                        Animation.RELATIVE_TO_SELF,0.5f);
-
-                rotateAnimation.setDuration(1000);
-                rotateAnimation.setRepeatCount(0);
-                logo.startAnimation(rotateAnimation);
-            }
-        },2000);
+        rotateLogo();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setSharedElementEnterTransition(new ChangeBounds().setDuration(500));
@@ -96,7 +83,8 @@ public class FirstPage extends AppCompatActivity {
             regbtn.setEnabled(false);
             getLoginbtn.setText("Sign in with another account");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getLoginbtn.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.colorPrimaryDark));
+                getLoginbtn.setBackgroundTintList(ContextCompat.getColorStateList(this,
+                        R.color.colorPrimaryDark));
             }
         }
 
@@ -112,7 +100,9 @@ public class FirstPage extends AppCompatActivity {
         dogSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Dog"));
+                startActivity(new Intent(FirstPage.this,MainActivity.class)
+                        .putExtra("Activity","FirstPage")
+                        .putExtra("FirstFilter","Dog"));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
@@ -120,7 +110,9 @@ public class FirstPage extends AppCompatActivity {
         catSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstPage.this,MainActivity.class).putExtra("Activity","FirstPage").putExtra("FirstFilter","Cat"));
+                startActivity(new Intent(FirstPage.this,MainActivity.class)
+                        .putExtra("Activity","FirstPage")
+                        .putExtra("FirstFilter","Cat"));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
@@ -132,6 +124,32 @@ public class FirstPage extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+    }
+
+    void rotateLogo()
+    {
+        final Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RotateAnimation rotateAnimation = new RotateAnimation(0,360,
+                        Animation.RELATIVE_TO_SELF,0.5f,
+                        Animation.RELATIVE_TO_SELF,0.5f);
+
+                rotateAnimation.setDuration(500);
+                rotateAnimation.setRepeatCount(0);
+                logo.startAnimation(rotateAnimation);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        rotateLogo();
+                    }
+                },10000);
+
+            }
+        },2000);
     }
 
 
@@ -147,7 +165,8 @@ public class FirstPage extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Press the back button once again to close the application."
+                    , Toast.LENGTH_SHORT).show();
             backButtonCount++;
         }
     }
@@ -166,7 +185,8 @@ public class FirstPage extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Fosterdetails fosterdetails = snapshot.child(uid).getValue(Fosterdetails.class);
-                        menu.findItem(R.id.first_page_profile_icon).setIcon((int)fosterdetails.getProfilePic());
+                        menu.findItem(R.id.first_page_profile_icon).setIcon((int)fosterdetails
+                                .getProfilePic());
                         menu.findItem(R.id.first_page_logout).setVisible(true);
                         String[] name = fosterdetails.getName().split(" ");
                         firstPageDescription2.setText("HI "+name[0].toUpperCase()+"! NOT YOU?");
