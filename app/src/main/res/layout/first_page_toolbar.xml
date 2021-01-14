@@ -19,11 +19,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/first_page_app_logo"
-        android:text="PETronus"
+        android:text="PET"
+        android:id="@+id/capital_text_beside_logo_first_page"
         android:textSize="23sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:paddingLeft="12dp"
+        android:paddingTop="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/capital_text_beside_logo_first_page"
+        android:text="ronus"
+        android:textSize="23sp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
         android:paddingTop="5dp"/>
 
 
