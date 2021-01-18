@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About_Us"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/about_us_app_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_final_4"
+        android:transitionName="first_page_logo"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="PET"
+            android:id="@+id/about_us_app_name_capital"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="148dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/about_us_app_name_capital"
+            android:fontFamily="@font/acratica"
+            android:text="ronus"
+            android:textColor="@color/black"
+            android:textSize="39sp"
+            android:layout_marginTop="13dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_us_app_name_capital"
+            android:id="@+id/about_us_text"
+            android:layout_marginTop="40dp"
+            android:text="ABOUT US"
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_us_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Inspired by the guardian angel PATRONUS from Harry Potter, we believe that
+everyone perceives their pets as angels.\n\nHere at PETronus we aim to help you in finding your
+little angel and also help give them a chance to have a beautiful home."
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/comebro"
+           />
+
+
+
+</RelativeLayout>
+
+</LinearLayout>
+

@@ -131,6 +131,14 @@ public class FirstPage extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FirstPage.this, About_Us.class));
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
+            }
+        });
     }
 
     void rotateLogo()

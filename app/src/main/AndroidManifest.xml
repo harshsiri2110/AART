@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/logo5_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar.Transparent">
-        <activity android:name=".Splash_Screen_2"
+        <activity android:name=".About_Us"></activity>
+        <activity
+            android:name=".Splash_Screen_2"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,43 +25,40 @@
         <activity
             android:name=".Edit_Profile"
             android:parentActivityName=".Foster_Profile"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity
             android:name=".UpdatePost"
-            android:parentActivityName=".Foster_Profile"></activity>
+            android:parentActivityName=".Foster_Profile" />
         <activity
             android:name=".Foster_Profile"
-            android:parentActivityName=".Cards"></activity>
+            android:parentActivityName=".Cards" />
         <activity
             android:name=".FilterPage"
-            android:parentActivityName=".Cards"></activity>
+            android:parentActivityName=".Cards" />
         <activity
             android:name=".LoginPage"
-            android:parentActivityName=".FirstPage"></activity>
+            android:parentActivityName=".FirstPage" />
         <activity
             android:name=".FirstPage"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
-        <activity
-            android:name=".SplashScreen">
-
-        </activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity android:name=".SplashScreen"></activity>
         <activity
             android:name=".Foster_reg"
-            android:parentActivityName=".FirstPage"></activity>
+            android:parentActivityName=".FirstPage" />
         <activity
             android:name=".Details"
             android:parentActivityName=".Cards"
-            android:theme="@style/AppTheme.MyPostDetailsStyle"></activity>
+            android:theme="@style/AppTheme.MyPostDetailsStyle" />
         <activity
             android:name=".UploadForm"
-            android:parentActivityName=".Cards"></activity>
+            android:parentActivityName=".Cards" />
         <activity
             android:name=".Cards"
-            android:parentActivityName=".FirstPage"></activity>
+            android:parentActivityName=".FirstPage" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".FirstPage"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
     </application>
 
 </manifest>

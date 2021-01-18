@@ -15,5 +15,7 @@
         </item>
 
     </string-array>
+    
+    <string name="about_us"></string>
 
 </resources>
