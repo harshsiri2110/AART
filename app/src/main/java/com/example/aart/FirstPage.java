@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.transition.ChangeBounds;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,12 +47,13 @@ public class FirstPage extends AppCompatActivity {
 
     ImageView logo,aboutUs;
 
+    Handler handler;
+    Runnable runnable;
+
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
-    TextView firstPageDescription2;
-
-
+    TextView firstPageDescription2,title1,title2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +77,14 @@ public class FirstPage extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         logo = v.findViewById(R.id.first_page_app_logo);
+        title1 = v.findViewById(R.id.capital_text_beside_logo_first_page);
+        title2 = v.findViewById(R.id.italic_text_beside_logo_first_page);
+
         aboutUs = findViewById(R.id.about_us_gif);
 
+        //Glide.with(getApplicationContext()).clear(aboutUs);
 
+        //Glide.with(FirstPage.this).load(R.drawable.about_us_gif_full).into(aboutUs);
         //aboutUs.setVisibility(View.INVISIBLE);
 
         rotateLogo();
@@ -99,6 +108,8 @@ public class FirstPage extends AppCompatActivity {
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                handler.removeCallbacks(runnable);
+                //Glide.with(getApplicationContext()).clear(aboutUs);
                 startActivity(new Intent(FirstPage.this,Foster_reg.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
@@ -107,6 +118,8 @@ public class FirstPage extends AppCompatActivity {
         dogSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                handler.removeCallbacks(runnable);
+                //Glide.with(getApplicationContext()).clear(aboutUs);
                 startActivity(new Intent(FirstPage.this,MainActivity.class)
                         .putExtra("Activity","FirstPage")
                         .putExtra("FirstFilter","Dog"));
@@ -117,6 +130,8 @@ public class FirstPage extends AppCompatActivity {
         catSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                handler.removeCallbacks(runnable);
+                //Glide.with(getApplicationContext()).clear(aboutUs);
                 startActivity(new Intent(FirstPage.this,MainActivity.class)
                         .putExtra("Activity","FirstPage")
                         .putExtra("FirstFilter","Cat"));
@@ -127,25 +142,38 @@ public class FirstPage extends AppCompatActivity {
         getLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                handler.removeCallbacks(runnable);
+                //Glide.with(getApplicationContext()).clear(aboutUs);
                 startActivity(new Intent(FirstPage.this, LoginPage.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
         logo.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstPage.this, About_Us.class));
+                Intent intent = new Intent(FirstPage.this, About_Us.class);
+                Pair pairs[] = new Pair[3];
+                pairs[0] = new Pair<View, String> (logo, "first_page_logo");
+                pairs[1] = new Pair<View, String> (title1, "first_page_title_1");
+                pairs[2] = new Pair<View, String> (title2, "first_page_title_2");
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(FirstPage.this,pairs);
+
+                startActivity(intent, options.toBundle());
+
+
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
             }
         });
     }
 
+
     void rotateLogo()
     {
-        final Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
                 RotateAnimation rotateAnimation = new RotateAnimation(0,360,
@@ -156,16 +184,17 @@ public class FirstPage extends AppCompatActivity {
                 rotateAnimation.setRepeatCount(0);
                 logo.startAnimation(rotateAnimation);
 
-                //aboutUs.setVisibility(View.VISIBLE);
-                Glide.with(FirstPage.this).load(R.drawable.about_us_gif_full).into(aboutUs);
+                /*//aboutUs.setVisibility(View.VISIBLE);
+                //Glide.with(getApplicationContext()).asGif().load(R.drawable.about_us_gif_full).into(aboutUs);
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         //aboutUs.setVisibility(View.INVISIBLE);
-                        Glide.with(FirstPage.this).clear(aboutUs);
+                        //Glide.with(getApplicationContext()).clear(aboutUs);
+
                     }
-                },4700);
+                },4700);*/
 
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -175,9 +204,9 @@ public class FirstPage extends AppCompatActivity {
                 },10000);
 
             }
-        },2000);
+        };
+        handler.postDelayed(runnable,2000);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -235,15 +264,21 @@ public class FirstPage extends AppCompatActivity {
         switch (id) {
             case R.id.first_page_profile_icon:
                 {
+                    handler.removeCallbacks(runnable);
+                    //Glide.with(getApplicationContext()).clear(aboutUs);
                 startActivity(new Intent(getApplicationContext(), Foster_Profile.class));
+
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
                 }
 
                 case R.id.first_page_logout:
                     {
+                        handler.removeCallbacks(runnable);
+                        //Glide.with(getApplicationContext()).clear(aboutUs);
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(getApplicationContext(), FirstPage.class));
+
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     finish();
                     break;
