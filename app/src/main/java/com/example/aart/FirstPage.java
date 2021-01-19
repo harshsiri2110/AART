@@ -26,6 +26,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,13 +48,15 @@ public class FirstPage extends AppCompatActivity {
 
     ImageView logo,aboutUs;
 
+    LinearLayout title;
+
     Handler handler;
     Runnable runnable;
 
     FirebaseAuth firebaseAuth;
     DatabaseReference userRef;
 
-    TextView firstPageDescription2,title1,title2;
+    TextView firstPageDescription2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +80,7 @@ public class FirstPage extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         logo = v.findViewById(R.id.first_page_app_logo);
-        title1 = v.findViewById(R.id.capital_text_beside_logo_first_page);
-        title2 = v.findViewById(R.id.italic_text_beside_logo_first_page);
+        title = v.findViewById(R.id.first_page_toolbar_title_linear_layout);
 
         aboutUs = findViewById(R.id.about_us_gif);
 
@@ -154,10 +156,9 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FirstPage.this, About_Us.class);
-                Pair pairs[] = new Pair[3];
+                Pair pairs[] = new Pair[2];
                 pairs[0] = new Pair<View, String> (logo, "first_page_logo");
-                pairs[1] = new Pair<View, String> (title1, "first_page_title_1");
-                pairs[2] = new Pair<View, String> (title2, "first_page_title_2");
+                pairs[1] = new Pair<View, String> (title, "first_page_title");
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(FirstPage.this,pairs);
 
