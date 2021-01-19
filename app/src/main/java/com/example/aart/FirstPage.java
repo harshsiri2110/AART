@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.transition.ChangeBounds;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +50,8 @@ public class FirstPage extends AppCompatActivity {
 
     ImageView logo,aboutUs;
 
-    LinearLayout title;
+    RelativeLayout title;
+
 
     Handler handler;
     Runnable runnable;
@@ -81,6 +84,7 @@ public class FirstPage extends AppCompatActivity {
 
         logo = v.findViewById(R.id.first_page_app_logo);
         title = v.findViewById(R.id.first_page_toolbar_title_linear_layout);
+        //title = v.findViewById(R.id.first_page_title);
 
         aboutUs = findViewById(R.id.about_us_gif);
 

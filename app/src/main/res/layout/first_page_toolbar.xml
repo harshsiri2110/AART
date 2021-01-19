@@ -18,7 +18,7 @@
         android:transitionName="first_page_logo"
         />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/first_page_app_logo"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/first_page_app_logo"
+
         android:text="PET"
         android:id="@+id/capital_text_beside_logo_first_page"
         android:textSize="23sp"
@@ -50,12 +50,12 @@
         android:text="ronus"
         android:textColor="@color/black"
         android:textSize="30sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="13dp"
         android:transitionName="first_page_title_2"
         android:id="@+id/italic_text_beside_logo_first_page"
         />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 
