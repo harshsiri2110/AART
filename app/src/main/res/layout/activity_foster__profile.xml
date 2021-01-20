@@ -49,6 +49,35 @@
         >
     </TextView>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foster_profile_listPlaceholder"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foster_profile_listPlaceholder_text"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@android:color/transparent"
+            android:id="@+id/foster_profile_add_post_button"
+            />
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
         android:id="@+id/foster_profile_swipeRefresh"

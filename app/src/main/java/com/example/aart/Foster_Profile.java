@@ -6,11 +6,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,7 +39,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Foster_Profile extends AppCompatActivity {
 
-    TextView name, email;
+    TextView name, email, empty_list_text;
+    ImageView empty_list_image;
+    TextView empty_list_button;
     ListView fosterPosts;
     AdapterFosterProfile adapter;
 
@@ -62,6 +70,35 @@ public class Foster_Profile extends AppCompatActivity {
         setContentView(R.layout.activity_foster__profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
+
+        empty_list_button = findViewById(R.id.foster_profile_add_post_button);
+        empty_list_image = findViewById(R.id.foster_profile_listPlaceholder);
+        empty_list_text = findViewById(R.id.foster_profile_listPlaceholder_text);
+
+        empty_list_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UploadForm.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(fosterPosts.getAdapter().isEmpty()) {
+                    empty_list_button.setVisibility(View.VISIBLE);
+                    empty_list_button.setText("ADD A POST NOW!");
+                    empty_list_image.setVisibility(View.VISIBLE);
+                    empty_list_image.setImageResource(R.drawable.empty_list_2_removebg_preview);
+                    empty_list_image.setMinimumHeight(250);
+                    empty_list_text.setVisibility(View.VISIBLE);
+                    empty_list_text.setText("You haven't uploaded anything yet!");
+                }
+            }
+        },1000);
 
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
@@ -197,6 +234,7 @@ public class Foster_Profile extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
 
                 fosterPosts.setAdapter(adapter);
+
             }
 
             @Override

@@ -284,6 +284,12 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == android.R.id.home)

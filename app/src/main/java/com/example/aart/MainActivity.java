@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity
 
         listView.setEmptyView(listPlaceholder);
 
+
+
         emptyListTextView = findViewById(R.id.empty_list_text_view);
 
         Handler handler = new Handler();
