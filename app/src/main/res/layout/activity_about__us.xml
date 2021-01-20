@@ -86,7 +86,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/about_us_text_2">
+            android:id="@+id/about_us_text_2"
+            android:layout_centerHorizontal="true"
+            >
 
         <TextView
             android:layout_width="wrap_content"
@@ -119,12 +121,41 @@
             android:text="Inspired by the guardian angel PATRONUS from Harry Potter, we believe that
 everyone perceives their pets as angels.\n\nHere at PETronus we aim to help you find your
 little angel and also help give them a chance to have a beautiful home."
-            android:textSize="30sp"
+            android:textSize="33sp"
             android:textColor="@color/black"
             android:fontFamily="@font/comebro"
-           />
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+
+            />
 
         </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="CREATORS"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Tanya Thakur\t\t\t\t\t\t\t\t\t\Harsh Siriah"
+            android:textSize="30sp"
+            android:fontFamily="@font/comebro"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            />
 
 
 
