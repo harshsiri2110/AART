@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:src="@drawable/title"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/about_us_title"
         android:transitionName="first_page_title"
         />
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
 
             android:id="@+id/about_us_text"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:text="ABOUT US"
             android:textSize="25sp"
             android:textColor="@color/colorPrimaryDark"
