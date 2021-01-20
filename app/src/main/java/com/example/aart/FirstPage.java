@@ -12,10 +12,13 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.transition.ChangeBounds;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -48,10 +51,9 @@ public class FirstPage extends AppCompatActivity {
     ImageButton dogSelect,catSelect;
     int backButtonCount = 0;
 
-    ImageView logo,aboutUs;
+    ImageView logo,aboutUs,title;
 
-    RelativeLayout title;
-
+    //RelativeLayout title;
 
     Handler handler;
     Runnable runnable;
@@ -60,6 +62,8 @@ public class FirstPage extends AppCompatActivity {
     DatabaseReference userRef;
 
     TextView firstPageDescription2;
+
+    //TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +87,23 @@ public class FirstPage extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         logo = v.findViewById(R.id.first_page_app_logo);
-        title = v.findViewById(R.id.first_page_toolbar_title_linear_layout);
-        //title = v.findViewById(R.id.first_page_title);
+        //title = v.findViewById(R.id.first_page_toolbar_title_linear_layout);
+        title = v.findViewById(R.id.first_page_title);
+        /*Typeface font = Typeface.createFromAsset(getAssets(), "fonts/acratica.otf");
 
+        SpannableStringBuilder str = new SpannableStringBuilder("PETronus");
+
+        str.setSpan(new CustomTypefaceSpan("",font),3,8, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        title.setText(str);*/
         aboutUs = findViewById(R.id.about_us_gif);
 
         //Glide.with(getApplicationContext()).clear(aboutUs);
 
         //Glide.with(FirstPage.this).load(R.drawable.about_us_gif_full).into(aboutUs);
         //aboutUs.setVisibility(View.INVISIBLE);
+
+
 
         rotateLogo();
 

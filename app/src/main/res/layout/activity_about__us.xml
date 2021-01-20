@@ -17,11 +17,36 @@
         android:transitionName="first_page_logo"
         />
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:src="@drawable/title"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:id="@+id/about_us_title"
+        android:transitionName="first_page_title"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/about_us_title"
+            android:transitionName="first_page_title"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            />-->
+
+
+
+        <!--<RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/about_us_title"
@@ -36,7 +61,7 @@
 
             android:text="PET"
             android:id="@+id/about_us_app_name_capital"
-            android:textSize="30sp"
+            android:textSize="100sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
@@ -46,22 +71,21 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_toRightOf="@+id/about_us_app_name_capital"
             android:fontFamily="@font/acratica"
             android:text="ronus"
             android:textColor="@color/black"
-            android:textSize="39sp"
-            android:layout_marginTop="10dp"
+            android:textSize="109sp"
+            android:layout_marginTop="24dp"
             android:transitionName="first_page_title_2"
             />
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_us_title"
             android:id="@+id/about_us_text_2">
 
         <TextView

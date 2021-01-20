@@ -18,7 +18,34 @@
         android:transitionName="first_page_logo"
         />
 
-    <RelativeLayout
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/title"
+        android:layout_toRightOf="@+id/first_page_app_logo"
+        android:layout_marginTop="5dp"
+        android:id="@+id/first_page_title"
+        android:transitionName="first_page_title"
+        />
+
+
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/first_page_title"
+
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:transitionName="first_page_title"
+        />-->
+
+
+
+    <!--<RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/first_page_app_logo"
@@ -50,12 +77,12 @@
         android:text="ronus"
         android:textColor="@color/black"
         android:textSize="30sp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="12dp"
         android:transitionName="first_page_title_2"
         android:id="@+id/italic_text_beside_logo_first_page"
         />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 
