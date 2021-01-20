@@ -117,7 +117,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Inspired by the guardian angel PATRONUS from Harry Potter, we believe that
-everyone perceives their pets as angels.\n\nHere at PETronus we aim to help you in finding your
+everyone perceives their pets as angels.\n\nHere at PETronus we aim to help you find your
 little angel and also help give them a chance to have a beautiful home."
             android:textSize="30sp"
             android:textColor="@color/black"
