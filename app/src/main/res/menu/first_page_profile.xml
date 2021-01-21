@@ -9,10 +9,17 @@
         />
 
     <item
+        android:id="@+id/first_page_add_post"
+        android:title="Add Post"
+
+        />
+
+    <item
         android:id="@+id/first_page_logout"
         android:title="Log Out"
         
         />
+
 
 
 </menu>

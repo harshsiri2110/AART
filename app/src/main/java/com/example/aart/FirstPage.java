@@ -301,6 +301,14 @@ public class FirstPage extends AppCompatActivity {
                     break;
                 }
 
+            case R.id.first_page_add_post:
+            {
+                handler.removeCallbacks(runnable);
+                startActivity(new Intent(getApplicationContext(), UploadForm.class));
+
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
