@@ -7,7 +7,18 @@
     tools:context=".About_Us"
     android:orientation="vertical">
 
-    <ImageView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+       android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <ImageView
         android:id="@+id/about_us_app_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -110,26 +121,25 @@
             android:layout_below="@+id/about_us_text_2">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/about_us_text"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Inspired by the guardian angel PATRONUS from Harry Potter, we believe that
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_us_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/comebro"
+                android:gravity="center_horizontal"
+                android:text="Inspired by the guardian angel PATRONUS from Harry Potter, we believe that
 everyone perceives their pets as angels.\n\nHere at PETronus we aim to help you find your
 little angel and also help give them a chance to have a beautiful home."
-            android:textSize="33sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/comebro"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="33sp"
 
-            />
+                />
 
         </LinearLayout>
-
 
 
         <TextView
@@ -156,11 +166,11 @@ little angel and also help give them a chance to have a beautiful home."
             android:layout_marginBottom="10dp"
             />
 
+        </RelativeLayout>
 
+        </LinearLayout>
 
-
-
-</RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>
 
