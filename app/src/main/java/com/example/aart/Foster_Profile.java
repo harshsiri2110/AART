@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +86,8 @@ public class Foster_Profile extends AppCompatActivity {
 
         Handler handler = new Handler();
 
+
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -93,7 +96,7 @@ public class Foster_Profile extends AppCompatActivity {
                     empty_list_button.setText("ADD A POST NOW!");
                     empty_list_image.setVisibility(View.VISIBLE);
                     empty_list_image.setImageResource(R.drawable.empty_list_2_removebg_preview);
-                    empty_list_image.setMinimumHeight(250);
+                    empty_list_image.getLayoutParams().height = 600;
                     empty_list_text.setVisibility(View.VISIBLE);
                     empty_list_text.setText("You haven't uploaded anything yet!");
                 }
