@@ -93,23 +93,6 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnEdit = (Button)findViewById(R.id.edit_profile_btnapply);
         btnDeleteProfile = (Button)findViewById(R.id.edit_profile_btndelete);
 
-        checkBoxView = View.inflate(this,R.layout.delete_user_posts_confirmation_checkbox,null);
-        final CheckBox delete_posts_checkbox = checkBoxView.findViewById(R.id.user_posts_delete_confirmation_checkbox);
-
-        delete_posts_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    delete_user_posts = true;
-                }
-                else
-                {
-                    delete_user_posts = false;
-                }
-            }
-        });
-        delete_posts_checkbox.setText("Delete all my posts?");
 
         Bundle bundle = getIntent().getExtras();
 
@@ -158,23 +141,13 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 btnDeleteProfile.setEnabled(false);
-                loadingDialog.startLoadingDialog();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        loadingDialog.dismissDialog();
-                    }
-                }, 2000);
-
                 bob.setMessage("Are you sure you want to delete?");
                 bob.setTitle("Confirm Delete Profile");
                 bob.setView(checkBoxView);
                 bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int which) {
-
+                        loadingDialog.startLoadingDialog();
                         reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
 
                             @Override
@@ -217,6 +190,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         dialog.dismiss();
+                                        loadingDialog.dismissDialog();
                                         firebaseAuth.signOut();
                                         startActivity(new Intent(Edit_Profile.this, FirstPage.class));
                                     }
@@ -232,7 +206,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-
+                        btnDeleteProfile.setEnabled(true);
                     }
                 });
                 AlertDialog alertDialog = bob.create();

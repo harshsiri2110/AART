@@ -122,7 +122,6 @@ public class FirstPage extends AppCompatActivity {
             }
         }
 
-
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
