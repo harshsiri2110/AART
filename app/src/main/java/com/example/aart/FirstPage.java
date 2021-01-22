@@ -9,13 +9,19 @@ import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -103,7 +109,10 @@ public class FirstPage extends AppCompatActivity {
         //Glide.with(FirstPage.this).load(R.drawable.about_us_gif_full).into(aboutUs);
         //aboutUs.setVisibility(View.INVISIBLE);
 
-
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
 
         rotateLogo();
 
@@ -183,6 +192,42 @@ public class FirstPage extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.stationary_animation);
             }
         });
+    }
+
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(FirstPage.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirstPage.this.finish();
+                        System.exit(0);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(FirstPage firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

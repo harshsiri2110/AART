@@ -146,6 +146,7 @@ public class AdapterFosterProfile extends BaseAdapter {
                                     });
                                 }
                                 context.startActivity(new Intent(context,Foster_Profile.class));
+
                             }
                         });
                     }

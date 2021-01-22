@@ -206,53 +206,64 @@ public class UploadForm extends AppCompatActivity
             @Override
             public void onClick(View view){
 
-                btnupload.setEnabled(false);
-                loadingDialog.startLoadingDialog();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingDialog.dismissDialog();
-                    }
-                }, 2000);
-
-                int selectedId = radioGenderGroup.getCheckedRadioButtonId();
-                txtGender = (RadioButton) findViewById(selectedId);
-
-                selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
-                txtSpecies= (RadioButton)findViewById(selectedId);
-
-                model.setTitle(txtTitle.getText().toString());
-                model.setAge(txtAge.getText().toString() + " " + spinner.getSelectedItem().toString());
-                model.setLocation(location.getText().toString());
-                model.setGender(txtGender.getText().toString());
-                model.setDescription(description.getText().toString());
-                model.setMedical(medical.getText().toString());
-                model.setSpeciesText(txtSpecies.getText().toString());
-                model.setID(timeStamp);
-                //model.setID(UUID.randomUUID().toString());
-                model.setfosterEmail(fosterEmail);
-                model.setFosterName(fosterName);
-
-                reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-
-                        startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                    }
-                });
-
-                if(!imageUriList.isEmpty())
+                if((txtTitle.getText().toString().equals("") ||
+                        txtAge.getText().toString().equals("") ||
+                        location.getText().toString().equals("") ||
+                        description.getText().toString().equals("") ||
+                        radioGenderGroup.getCheckedRadioButtonId() == -1 ||
+                        radioSpeciesGroup.getCheckedRadioButtonId() == -1 ||
+                        imageUriList.isEmpty() ||
+                        txtTitle.getText().toString().equals("")))
                 {
-                    for(int i = 0 ; i < imageUriList.size();i++)
+                    Toast.makeText(UploadForm.this,
+                            "Please fill in the required fields", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    btnupload.setEnabled(false);
+                    loadingDialog.startLoadingDialog();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingDialog.dismissDialog();
+                        }
+                    }, 2000);
+
+                    int selectedId = radioGenderGroup.getCheckedRadioButtonId();
+                    txtGender = (RadioButton) findViewById(selectedId);
+
+                    selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
+                    txtSpecies= (RadioButton)findViewById(selectedId);
+
+                    model.setTitle(txtTitle.getText().toString());
+                    model.setAge(txtAge.getText().toString() + " " + spinner.getSelectedItem().toString());
+                    model.setLocation(location.getText().toString());
+                    model.setGender(txtGender.getText().toString());
+                    model.setDescription(description.getText().toString());
+                    model.setMedical(medical.getText().toString());
+                    model.setSpeciesText(txtSpecies.getText().toString());
+                    model.setID(timeStamp);
+                    //model.setID(UUID.randomUUID().toString());
+                    model.setfosterEmail(fosterEmail);
+                    model.setFosterName(fosterName);
+
+                    reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
+                            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        }
+                    });
+
+                    if(!imageUriList.isEmpty())
                     {
-                        uploadPicture(imageUriList.get(i));
+                        for(int i = 0 ; i < imageUriList.size();i++)
+                        {
+                            uploadPicture(imageUriList.get(i));
+                        }
                     }
                 }
-
-
-
             }
         }));
     }
