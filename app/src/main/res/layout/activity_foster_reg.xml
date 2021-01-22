@@ -137,7 +137,7 @@
             android:ems="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:hint="Mobile Number (Excluding +91)"
+            android:hint="Mobile Number (Excluding +91)*"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,6 +162,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         >
 
         <EditText
@@ -174,12 +175,15 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:hint="Password*"
-            android:inputType="textVisiblePassword" />
+            android:inputType="textPassword" />
+
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         >
 
         <EditText
@@ -193,6 +197,7 @@
             android:focusableInTouchMode="true"
             android:hint="Confirm Password*"
             android:inputType="textPassword" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
