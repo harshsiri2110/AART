@@ -197,9 +197,6 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                                 });
                             }
                         });
-
-
-
                     }
                 });
                 bob.setNegativeButton("No", new DialogInterface.OnClickListener() {

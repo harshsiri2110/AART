@@ -58,8 +58,8 @@
                 android:id="@+id/filter_CatSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
                 android:text="A Cat"
                 android:textSize="22sp" />
 
@@ -67,8 +67,9 @@
                 android:id="@+id/filter_bothSpecies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp"
                 android:text="Both"
                 android:textSize="22sp" />
 
@@ -115,8 +116,8 @@
                 android:id="@+id/filter_femaleSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
                 android:text="Female"
                 android:textSize="22sp" />
@@ -125,9 +126,10 @@
                 android:id="@+id/filter_bothGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
                 android:text="Both"
                 android:textSize="22sp" />
 
@@ -142,47 +144,118 @@
         android:id="@+id/filter_card3"
         android:layout_marginTop="40dp">
 
-        <TextView
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Age"
-            android:textSize="25sp"
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/filter_card2"
-            android:gravity="center_horizontal"
-            android:id="@+id/filter_age_text"
-            android:textColor="@color/colorPrimary"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:textSize="25sp"
+                android:layout_marginTop="25dp"
+                android:layout_below="@+id/filter_card2"
+                android:gravity="center_horizontal"
+                android:id="@+id/filter_age_text"
+                android:textColor="@color/colorPrimary"/>
 
-        <SeekBar
+            <SeekBar
             android:id="@+id/seekBar3"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:max="5"
+            android:layout_marginTop="15dp"
             android:progress="0"
             android:layout_below="@+id/filter_age_text"
             />
 
-       <!-- <RelativeLayout
+
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">-->
-
-
-        <TextView
-            android:id="@+id/seekBar_text0"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="None       1 month      3 months     6 months    12 months     Older"
-            android:layout_marginTop="100dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="13sp"
-            android:layout_gravity="start"
-            android:singleLine="true">
-        </TextView>
+            android:stretchColumns="*"
+            >
+
+        <TableRow
+            android:id="@+id/seekbar_row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/seekBar_text0"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="0"
+                android:singleLine="true"
+                android:text="None"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/seekBar_text1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:singleLine="true"
+                android:text="1 month"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/seekBar_text2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="2"
+                android:singleLine="true"
+                android:text="3 months"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/seekBar_text3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="3"
+                android:singleLine="true"
+                android:text="6 months"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/seekBar_text4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="4"
+                android:singleLine="true"
+                android:text="12 months"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/seekBar_text5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_column="5"
+                android:singleLine="true"
+                android:text="Older"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center">
+            </TextView>
+
+        </TableRow>
+
+        </TableLayout>
+
+        </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 
