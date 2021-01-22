@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,6 +78,11 @@ public class Foster_Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
 
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
+
         empty_list_button = findViewById(R.id.foster_profile_add_post_button);
         empty_list_image = findViewById(R.id.foster_profile_listPlaceholder);
         empty_list_text = findViewById(R.id.foster_profile_listPlaceholder_text);
@@ -85,8 +96,6 @@ public class Foster_Profile extends AppCompatActivity {
         });
 
         Handler handler = new Handler();
-
-
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -140,17 +149,23 @@ public class Foster_Profile extends AppCompatActivity {
         reference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fosterdetails = snapshot.child(userId).getValue(Fosterdetails.class);
-                fosterName = fosterdetails.getName();
-                fosterEmail = fosterdetails.getEmail();
-                fosterNumber = fosterdetails.getMobileNo();
-                profilePic = fosterdetails.getProfilePic();
+                if(!isConnected(Foster_Profile.this))
+                {
+                    showCustomDialog();
+                }
+                else {
+                    fosterdetails = snapshot.child(userId).getValue(Fosterdetails.class);
+                    fosterName = fosterdetails.getName();
+                    fosterEmail = fosterdetails.getEmail();
+                    fosterNumber = fosterdetails.getMobileNo();
+                    profilePic = fosterdetails.getProfilePic();
 
-                name.setText(fosterName);
-                email.setText(fosterdetails.getEmail());
-                circleImageView.setImageResource(fosterdetails.getProfilePic());
+                    name.setText(fosterName);
+                    email.setText(fosterdetails.getEmail());
+                    circleImageView.setImageResource(fosterdetails.getProfilePic());
 
-                showCards();
+                    showCards();
+                }
             }
 
             @Override
@@ -164,6 +179,56 @@ public class Foster_Profile extends AppCompatActivity {
         if(!models.isEmpty())
         {
             models.clear();
+        }
+    }
+
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Foster_Profile.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(Foster_Profile firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
         }
     }
 
@@ -182,61 +247,64 @@ public class Foster_Profile extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
-
-                postCount = Integer.MIN_VALUE;
-
-                for(final DataSnapshot currPostSnap : snapshot.getChildren())
+                if(!isConnected(Foster_Profile.this))
                 {
-                    currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+                    showCustomDialog();
+                }
+                else {
+                    postCount = Integer.MIN_VALUE;
 
-                            currModel = currPostSnap.getValue(Model.class);
+                    for (final DataSnapshot currPostSnap : snapshot.getChildren()) {
+                        currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
 
-                            assert currModel != null;
-                            if (fosterEmail.equals(currModel.getfosterEmail()))
-                            {
-                                imgCount = Integer.MIN_VALUE;
-                                imgCount = (int) imgSnapshot.getChildrenCount();
-                                //Log.d("TEST","Images count - "+imgCount);
+                                currModel = currPostSnap.getValue(Model.class);
 
-                                for (DataSnapshot currImgSnap : imgSnapshot.getChildren()) {
-                                    ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
+                                assert currModel != null;
+                                if (fosterEmail.equals(currModel.getfosterEmail())) {
+                                    imgCount = Integer.MIN_VALUE;
+                                    imgCount = (int) imgSnapshot.getChildrenCount();
+                                    //Log.d("TEST","Images count - "+imgCount);
 
-                                    currModel.getImageList().add(currImg);
+                                    for (DataSnapshot currImgSnap : imgSnapshot.getChildren()) {
+                                        ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
 
-                                    adapter.notifyDataSetChanged();
+                                        currModel.getImageList().add(currImg);
 
-                                    if (currModel.getImageList().size() == imgCount) {
-                                        if(!postList.contains(currModel.getID())) {
-                                            postList.add(currModel.getID());
-                                            models.add(currModel);
-                                            Collections.sort(models, new Comparator<Model>() {
-                                                @Override
-                                                public int compare(Model o1, Model o2) {
-                                                    return o2.getID().compareTo(o1.getID());
-                                                }
-                                            });
+                                        adapter.notifyDataSetChanged();
 
-                                            adapter.notifyDataSetChanged();
+                                        if (currModel.getImageList().size() == imgCount) {
+                                            if (!postList.contains(currModel.getID())) {
+                                                postList.add(currModel.getID());
+                                                models.add(currModel);
+                                                Collections.sort(models, new Comparator<Model>() {
+                                                    @Override
+                                                    public int compare(Model o1, Model o2) {
+                                                        return o2.getID().compareTo(o1.getID());
+                                                    }
+                                                });
+
+                                                adapter.notifyDataSetChanged();
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
+
+                    adapter = new AdapterFosterProfile(models, Foster_Profile.this, R.layout.foster_edit_post_card);
+
+                    adapter.notifyDataSetChanged();
+
+                    fosterPosts.setAdapter(adapter);
                 }
-
-                adapter = new AdapterFosterProfile(models, Foster_Profile.this,R.layout.foster_edit_post_card);
-
-                adapter.notifyDataSetChanged();
-
-                fosterPosts.setAdapter(adapter);
 
             }
 

@@ -2,16 +2,20 @@ package com.example.aart;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -124,6 +128,11 @@ public class UploadForm extends AppCompatActivity
         reff = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
 
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
+
         /*final AlertDialog.Builder confirmDel = new AlertDialog.Builder(this);
 
         imgView.setItemClickListener(new ItemClickListener() {
@@ -159,14 +168,20 @@ public class UploadForm extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
-                String currUser = firebaseAuth.getCurrentUser().getUid();
+                if(!isConnected(UploadForm.this))
+                {
+                    showCustomDialog();
+                }
+                else {
+                    String currUser = firebaseAuth.getCurrentUser().getUid();
 
-                Fosterdetails currFoster = snapshot.child(currUser).getValue(Fosterdetails.class);
+                    Fosterdetails currFoster = snapshot.child(currUser).getValue(Fosterdetails.class);
 
-                fosterEmail = currFoster.getEmail();
-                fosterName = currFoster.getName();
+                    fosterEmail = currFoster.getEmail();
+                    fosterName = currFoster.getName();
 
-                //model.setFosterName(fosterName);
+                    //model.setFosterName(fosterName);
+                }
             }
 
             @Override
@@ -206,66 +221,119 @@ public class UploadForm extends AppCompatActivity
             @Override
             public void onClick(View view){
 
-                if((txtTitle.getText().toString().equals("") ||
-                        txtAge.getText().toString().equals("") ||
-                        location.getText().toString().equals("") ||
-                        description.getText().toString().equals("") ||
-                        radioGenderGroup.getCheckedRadioButtonId() == -1 ||
-                        radioSpeciesGroup.getCheckedRadioButtonId() == -1 ||
-                        imageUriList.isEmpty() ||
-                        txtTitle.getText().toString().equals("")))
+                if(!isConnected(UploadForm.this))
                 {
-                    Toast.makeText(UploadForm.this,
-                            "Please fill in the required fields", Toast.LENGTH_LONG).show();
+                    showCustomDialog();
                 }
-                else{
-                    btnupload.setEnabled(false);
-                    loadingDialog.startLoadingDialog();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadingDialog.dismissDialog();
-                        }
-                    }, 2000);
+                else {
 
-                    int selectedId = radioGenderGroup.getCheckedRadioButtonId();
-                    txtGender = (RadioButton) findViewById(selectedId);
+                    if ((txtTitle.getText().toString().equals("") ||
+                            txtAge.getText().toString().equals("") ||
+                            location.getText().toString().equals("") ||
+                            description.getText().toString().equals("") ||
+                            radioGenderGroup.getCheckedRadioButtonId() == -1 ||
+                            radioSpeciesGroup.getCheckedRadioButtonId() == -1 ||
+                            imageUriList.isEmpty() ||
+                            txtTitle.getText().toString().equals(""))) {
+                        Toast.makeText(UploadForm.this,
+                                "Please fill in the required fields", Toast.LENGTH_LONG).show();
+                    } else {
+                        btnupload.setEnabled(false);
+                        loadingDialog.startLoadingDialog();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadingDialog.dismissDialog();
+                            }
+                        }, 2000);
 
-                    selectedId= radioSpeciesGroup.getCheckedRadioButtonId();
-                    txtSpecies= (RadioButton)findViewById(selectedId);
+                        int selectedId = radioGenderGroup.getCheckedRadioButtonId();
+                        txtGender = (RadioButton) findViewById(selectedId);
 
-                    model.setTitle(txtTitle.getText().toString());
-                    model.setAge(txtAge.getText().toString() + " " + spinner.getSelectedItem().toString());
-                    model.setLocation(location.getText().toString());
-                    model.setGender(txtGender.getText().toString());
-                    model.setDescription(description.getText().toString());
-                    model.setMedical(medical.getText().toString());
-                    model.setSpeciesText(txtSpecies.getText().toString());
-                    model.setID(timeStamp);
-                    //model.setID(UUID.randomUUID().toString());
-                    model.setfosterEmail(fosterEmail);
-                    model.setFosterName(fosterName);
+                        selectedId = radioSpeciesGroup.getCheckedRadioButtonId();
+                        txtSpecies = (RadioButton) findViewById(selectedId);
 
-                    reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
+                        model.setTitle(txtTitle.getText().toString());
+                        model.setAge(txtAge.getText().toString() + " " + spinner.getSelectedItem().toString());
+                        model.setLocation(location.getText().toString());
+                        model.setGender(txtGender.getText().toString());
+                        model.setDescription(description.getText().toString());
+                        model.setMedical(medical.getText().toString());
+                        model.setSpeciesText(txtSpecies.getText().toString());
+                        model.setID(timeStamp);
+                        //model.setID(UUID.randomUUID().toString());
+                        model.setfosterEmail(fosterEmail);
+                        model.setFosterName(fosterName);
 
-                            startActivity(new Intent(UploadForm.this,MainActivity.class).putExtra("Activity","UploadForm"));
-                            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                        }
-                    });
+                        reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
 
-                    if(!imageUriList.isEmpty())
-                    {
-                        for(int i = 0 ; i < imageUriList.size();i++)
-                        {
-                            uploadPicture(imageUriList.get(i));
+                                startActivity(new Intent(UploadForm.this, MainActivity.class).putExtra("Activity", "UploadForm"));
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                            }
+                        });
+
+                        if (!imageUriList.isEmpty()) {
+                            for (int i = 0; i < imageUriList.size(); i++) {
+                                uploadPicture(imageUriList.get(i));
+                            }
                         }
                     }
                 }
             }
         }));
+    }
+
+    private void showCustomDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UploadForm.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(UploadForm firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
     }
 
     private void FileChooser()
@@ -308,7 +376,10 @@ public class UploadForm extends AppCompatActivity
     {
         final String randomKey= UUID.randomUUID().toString();
         final StorageReference storageRef = storageReference.child(timeStamp).child("images" + randomKey);
-
+        if(!isConnected(UploadForm.this))
+        {
+            showCustomDialog();
+        }
         storageRef.putFile(imgUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                 {

@@ -9,8 +9,15 @@ import androidx.transition.Transition;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.transition.ChangeBounds;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +68,11 @@ public class Details extends AppCompatActivity {
             getWindow().setSharedElementExitTransition(new ChangeBounds().setDuration(300));
         }
 
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
@@ -83,6 +95,55 @@ public class Details extends AppCompatActivity {
 
         getDetails(selectedCard);
 
+    }
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Details.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(Details firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
     }
 
     class ViewPagerAdapter extends FragmentStatePagerAdapter
@@ -127,7 +188,10 @@ public class Details extends AppCompatActivity {
                 snapshot.getRef().child("images").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
-
+                        if(!isConnected(Details.this))
+                        {
+                            showCustomDialog();
+                        }
                         int imgCount;
                         imgCount = (int)imgSnapshot.getChildrenCount();
                         //Log.d("TEST","Images count - "+imgCount);

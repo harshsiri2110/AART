@@ -230,6 +230,16 @@ public class FirstPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
+    }
+
 
     void rotateLogo()
     {
@@ -356,4 +366,6 @@ public class FirstPage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

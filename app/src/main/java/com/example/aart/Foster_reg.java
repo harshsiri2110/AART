@@ -3,10 +3,16 @@ package com.example.aart;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +69,11 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Register");
 
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
+
         fosterdetails = new Fosterdetails();
 
         reference= FirebaseDatabase.getInstance().getReference().child("Foster").child("User");
@@ -111,67 +122,89 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onClick(View view)
             {
-                //submit.setEnabled(false);
-                loadingDialog.startLoadingDialog();
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingDialog.dismissDialog();
-                    }
-                }, 2000);
-
-                final String mname = name.getText().toString();
-                final long mnumber = Long.parseLong(number.getText().toString());
-
-                fosterdetails.setName(mname);
-                fosterdetails.setMobileNo(mnumber);
-                fosterdetails.setEmail(email.getText().toString());
-                fosterdetails.setPassword(password.getText().toString());
-                fosterdetails.setProfilePic(selectedImage);
-                currId = maxId + 1;
-
-                final String memail= email.getText().toString().trim();
-                final String mpassword = password.getText().toString().trim();
-                String mConfirmPass = confirmPassword.getText().toString().trim();
-
-                if(TextUtils.isEmpty(memail)){
-                    email.setError("Email is Required.");
-                    return;
-                }
-
-                if(TextUtils.isEmpty(mpassword)){
-                    password.setError(("Password is Required."));
-                    return;
-                }
-
-                if(mpassword.length() < 6){
-                    password.setError(("Password must be >= 6 characters"));
-                    return;
-                }
-
-                if(!mConfirmPass.equals(mpassword))
+                if(!isConnected(Foster_reg.this))
                 {
-                    confirmPassword.setError("Password is not the same");
-                    return;
+                    showCustomDialog();
                 }
+                else {
+                    if(name.getText().toString().equals("")
+                            ||number.getText().toString().equals("")
+                            ||email.getText().toString().equals("")
+                            ||password.getText().toString().equals("")
+                            ||confirmPassword.getText().toString().equals(""))
+                    {
+                        Toast.makeText(Foster_reg.this,
+                                "Please fill in the required fields", Toast.LENGTH_LONG).show();
+                    }
+                    else {
 
-                firebaseAuth.createUserWithEmailAndPassword(memail, mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
-
-                            addUser(mname, memail, mnumber, selectedImage);
-                            startActivity(new Intent(getApplicationContext(), FirstPage.class));
-                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                            //startActivity(new Intent(Foster_reg.this,MainActivity.class));
+                        if (checkNumberInput(name.getText().toString())) {
+                            Toast.makeText(Foster_reg.this,
+                                    "The field 'Full Name' cannot contain digits", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(Foster_reg.this, "Email already exists. Please try another email.", Toast.LENGTH_SHORT).show();
+                            //submit.setEnabled(false);
+                            loadingDialog.startLoadingDialog();
+
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadingDialog.dismissDialog();
+                                }
+                            }, 2000);
+
+                            final String mname = name.getText().toString();
+                            final long mnumber = Long.parseLong(number.getText().toString());
+
+                            fosterdetails.setName(mname);
+                            fosterdetails.setMobileNo(mnumber);
+                            fosterdetails.setEmail(email.getText().toString());
+                            fosterdetails.setPassword(password.getText().toString());
+                            fosterdetails.setProfilePic(selectedImage);
+                            currId = maxId + 1;
+
+                            final String memail = email.getText().toString().trim();
+                            final String mpassword = password.getText().toString().trim();
+                            String mConfirmPass = confirmPassword.getText().toString().trim();
+
+                            if (TextUtils.isEmpty(memail)) {
+                                email.setError("Email is Required.");
+                                return;
+                            }
+
+                            if (TextUtils.isEmpty(mpassword)) {
+                                password.setError(("Password is Required."));
+                                return;
+                            }
+
+                            if (mpassword.length() < 6) {
+                                password.setError(("Password must be >= 6 characters"));
+                                return;
+                            }
+
+                            if (!mConfirmPass.equals(mpassword)) {
+                                confirmPassword.setError("Password is not the same");
+                                return;
+                            }
+
+                            firebaseAuth.createUserWithEmailAndPassword(memail, mpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Foster_reg.this, "User created", Toast.LENGTH_SHORT).show();
+
+                                        addUser(mname, memail, mnumber, selectedImage);
+                                        startActivity(new Intent(getApplicationContext(), FirstPage.class));
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        //startActivity(new Intent(Foster_reg.this,MainActivity.class));
+                                    } else {
+                                        Toast.makeText(Foster_reg.this, "Email already exists. Please try another email.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
                     }
-                });
+                }
             }
         }));
         login.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +214,68 @@ public class Foster_reg extends AppCompatActivity implements View.OnClickListene
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+    }
+
+    private boolean checkNumberInput(String str)
+    {
+        for(char ch : str.toCharArray())
+        {
+            if(ch >= '0' && ch <= '9')
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Foster_reg.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(Foster_reg firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
     }
 
 

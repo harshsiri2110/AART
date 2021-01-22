@@ -18,13 +18,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.transition.ChangeBounds;
 import android.util.Log;
 import android.view.Display;
@@ -100,6 +106,11 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Home");
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
 
         //Listview for cards
         listView = (ListView) findViewById(R.id.listView);
@@ -407,124 +418,106 @@ public class MainActivity extends AppCompatActivity
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
-
-                postCount = Integer.MIN_VALUE;
-
-                for(final DataSnapshot currPostSnap : snapshot.getChildren())
+                if(!isConnected(MainActivity.this))
                 {
-                    currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
+                    showCustomDialog();
+                }
+                else {
+                    postCount = Integer.MIN_VALUE;
 
-                            currModel = currPostSnap.getValue(Model.class);
+                    for (final DataSnapshot currPostSnap : snapshot.getChildren()) {
+                        currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
 
-                            imgCount = Integer.MIN_VALUE;
-                            imgCount = (int)imgSnapshot.getChildrenCount();
-                            //Log.d("TEST","Images count - "+imgCount);
+                                currModel = currPostSnap.getValue(Model.class);
 
-                            for(DataSnapshot currImgSnap : imgSnapshot.getChildren())
-                            {
-                                ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
+                                imgCount = Integer.MIN_VALUE;
+                                imgCount = (int) imgSnapshot.getChildrenCount();
+                                //Log.d("TEST","Images count - "+imgCount);
 
-                                currModel.getImageList().add(currImg);
+                                for (DataSnapshot currImgSnap : imgSnapshot.getChildren()) {
+                                    ImageUrl currImg = currImgSnap.getValue(ImageUrl.class);
 
-                                adapter.notifyDataSetChanged();
+                                    currModel.getImageList().add(currImg);
 
-                                if(currModel.getImageList().size() == imgCount)
-                                {
-                                    if(!postList.contains(currModel.getID())) {
+                                    adapter.notifyDataSetChanged();
 
-                                        postList.add(currModel.getID());
+                                    if (currModel.getImageList().size() == imgCount) {
+                                        if (!postList.contains(currModel.getID())) {
 
-                                        String[] ageText = currModel.getAge().split(" ");
+                                            postList.add(currModel.getID());
 
-                                        if(ageText[1].equals("Months"))
-                                        {
-                                            curr_age_in_months = Float.parseFloat(ageText[0]);
+                                            String[] ageText = currModel.getAge().split(" ");
+
+                                            if (ageText[1].equals("Months")) {
+                                                curr_age_in_months = Float.parseFloat(ageText[0]);
+                                            } else if (ageText[1].equals("Year(s)")) {
+                                                curr_age_in_months = Float.parseFloat(ageText[0]) * 12;
+                                            }
+
+                                            if (filter_on) {
+
+                                                if (species > 0 && gender > 0 && filter_age > 0) {
+                                                    filter_all_attributes(species, gender, filter_age);
+                                                } else if (gender > 0 && filter_age > 0) {
+                                                    filter_gender_and_age(gender, filter_age);
+                                                } else if (species > 0 && filter_age > 0) {
+                                                    filter_species_and_age(species, filter_age);
+                                                } else if (species > 0 && gender > 0) {
+                                                    Log.d("TEST", "Calling filter_species_and_gender");
+                                                    filter_species_and_gender(species, gender);
+                                                } else if (species > 0) {
+                                                    filter_cards_species(species);
+                                                } else if (gender > 0) {
+                                                    filter_cards_gender(gender);
+                                                } else if (filter_age >= 0) {
+                                                    filter_cards_age(filter_age);
+                                                }
+                                            } else {
+                                                models.add(currModel);
+                                            }
+                                            //Collections.sort(models, Collections.<Model>reverseOrder());
+                                            Collections.sort(models, new Comparator<Model>() {
+                                                @Override
+                                                public int compare(Model o1, Model o2) {
+                                                    return o2.getID().compareTo(o1.getID());
+                                                }
+                                            });
+                                            adapter.notifyDataSetChanged();
                                         }
-                                        else if(ageText[1].equals("Year(s)"))
-                                        {
-                                            curr_age_in_months = Float.parseFloat(ageText[0])*12;
-                                        }
-
-                                        if(filter_on)
-                                        {
-
-                                            if(species > 0 && gender > 0 && filter_age > 0){
-                                                filter_all_attributes(species,gender,filter_age);
-                                            }
-                                            else if(gender > 0 && filter_age > 0)
-                                            {
-                                                filter_gender_and_age(gender,filter_age);
-                                            }
-                                            else if(species > 0 && filter_age > 0)
-                                            {
-                                                filter_species_and_age(species,filter_age);
-                                            }
-                                            else if(species > 0 && gender > 0)
-                                            {
-                                                Log.d("TEST","Calling filter_species_and_gender");
-                                                filter_species_and_gender(species,gender);
-                                            }
-                                            else if(species > 0 )
-                                            {
-                                                filter_cards_species(species);
-                                            }
-                                            else if(gender > 0)
-                                            {
-                                                filter_cards_gender(gender);
-                                            }
-                                            else if(filter_age >= 0 )
-                                            {
-                                                filter_cards_age(filter_age);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            models.add(currModel);
-                                        }
-                                        //Collections.sort(models, Collections.<Model>reverseOrder());
-                                        Collections.sort(models, new Comparator<Model>() {
-                                            @Override
-                                            public int compare(Model o1, Model o2) {
-                                                return o2.getID().compareTo(o1.getID());
-                                            }
-                                        });
-                                        adapter.notifyDataSetChanged();
                                     }
                                 }
                             }
-                        }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    adapter = new Adapter(models, MainActivity.this, R.layout.temp_cards);
+
+                    adapter.notifyDataSetChanged();
+
+                    listView = findViewById(R.id.listView);
+                    listView.setAdapter(adapter);
+
+                    adapter.registerDataSetObserver(new DataSetObserver() {
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                        public void onChanged() {
+                            super.onChanged();
+                            if (!listView.getAdapter().isEmpty()) {
+                                addPostButton.setVisibility(View.VISIBLE);
+                                if (firebaseAuth.getCurrentUser() == null) {
+                                    addPostButton.setVisibility(View.INVISIBLE);
+                                }
+                                emptyListTextView.setEnabled(false);
+                            }
                         }
                     });
                 }
-
-                adapter = new Adapter(models, MainActivity.this,R.layout.temp_cards);
-
-                adapter.notifyDataSetChanged();
-
-                listView = findViewById(R.id.listView);
-                listView.setAdapter(adapter);
-
-                adapter.registerDataSetObserver(new DataSetObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if(!listView.getAdapter().isEmpty())
-                        {
-                            addPostButton.setVisibility(View.VISIBLE);
-                            if(firebaseAuth.getCurrentUser() == null)
-                            {
-                                addPostButton.setVisibility(View.INVISIBLE);
-                            }
-                            emptyListTextView.setEnabled(false);
-                        }
-                    }
-                });
 
             }
 
@@ -635,6 +628,56 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(MainActivity firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
     }
 
 }

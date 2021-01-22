@@ -5,10 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +64,11 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_edit__profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Edit Profile");
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
 
         final LoadingDialog loadingDialog = new LoadingDialog(Edit_Profile.this);
 
@@ -115,101 +124,158 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnEdit.setEnabled(false);
+                if(!isConnected(Edit_Profile.this))
+                {
+                    showCustomDialog();
+                }
+                else {
+                    btnEdit.setEnabled(false);
 
-                loadingDialog.startLoadingDialog();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingDialog.dismissDialog();
-                    }
-                }, 2000);
+                    loadingDialog.startLoadingDialog();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingDialog.dismissDialog();
+                        }
+                    }, 2000);
 
-                reference.child("name").setValue(editName.getText().toString());
-                reference.child("email").setValue(editEmail.getText().toString());
-                reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
-                reference.child("profilePic").setValue(profilePicture);
+                    reference.child("name").setValue(editName.getText().toString());
+                    reference.child("email").setValue(editEmail.getText().toString());
+                    reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
+                    reference.child("profilePic").setValue(profilePicture);
 
-                startActivity(new Intent(Edit_Profile.this, FirstPage.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-
+                    startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
 
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnDeleteProfile.setEnabled(false);
-                bob.setMessage("Are you sure you want to delete?");
-                bob.setTitle("Confirm Delete Profile");
-                bob.setView(checkBoxView);
-                bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, int which) {
-                        loadingDialog.startLoadingDialog();
-                        reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                if(!isConnected(Edit_Profile.this))
+                {
+                    showCustomDialog();
+                }
+                else {
+                    btnDeleteProfile.setEnabled(false);
+                    bob.setMessage("Are you sure you want to delete?");
+                    bob.setTitle("Confirm Delete Profile");
+                    bob.setView(checkBoxView);
+                    bob.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, int which) {
+                            loadingDialog.startLoadingDialog();
+                            reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
 
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                postsRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        for(DataSnapshot post : snapshot.getChildren())
-                                        {
-                                            final Model currPost = post.getValue(Model.class);
-                                            if(user_email.equals(currPost.getfosterEmail()))
-                                            {
-                                                post.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        for(ImageUrl img : currPost.getImageList())
-                                                        {
-                                                            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(img.getUri());
-                                                            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void aVoid) {
-                                                                    Toast.makeText(Edit_Profile.this, "Account and posts deleted!", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            });
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    postsRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot post : snapshot.getChildren()) {
+                                                final Model currPost = post.getValue(Model.class);
+                                                if (user_email.equals(currPost.getfosterEmail())) {
+                                                    post.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            for (ImageUrl img : currPost.getImageList()) {
+                                                                StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(img.getUri());
+                                                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Toast.makeText(Edit_Profile.this, "Account and posts deleted!", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+                                                            }
                                                         }
-                                                    }
-                                                });
-                                                continue;
+                                                    });
+                                                    continue;
+                                                }
                                             }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
 
-                                firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        dialog.dismiss();
-                                        loadingDialog.dismissDialog();
-                                        firebaseAuth.signOut();
-                                        startActivity(new Intent(Edit_Profile.this, FirstPage.class));
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-                bob.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        btnDeleteProfile.setEnabled(true);
-                    }
-                });
-                AlertDialog alertDialog = bob.create();
-                alertDialog.show();
+                                    firebaseAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            dialog.dismiss();
+                                            loadingDialog.dismissDialog();
+                                            firebaseAuth.signOut();
+                                            startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                    bob.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            btnDeleteProfile.setEnabled(true);
+                        }
+                    });
+                    AlertDialog alertDialog = bob.create();
+                    alertDialog.show();
+                }
             }
         });
+    }
+    private void showCustomDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Edit_Profile.this);
+        builder.setMessage("You're not connected to the internet! Please check your internet connection.")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), FirstPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                });
+        android.app.AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isConnected(Edit_Profile firstPage) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) firstPage.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!isConnected(this))
+        {
+            showCustomDialog();
+        }
     }
 
     @Override

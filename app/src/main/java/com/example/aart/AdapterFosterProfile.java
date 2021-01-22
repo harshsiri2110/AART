@@ -1,5 +1,6 @@
 package com.example.aart;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -145,6 +146,7 @@ public class AdapterFosterProfile extends BaseAdapter {
                                         }
                                     });
                                 }
+                                ((Activity)context).finish();
                                 context.startActivity(new Intent(context,Foster_Profile.class));
 
                             }
