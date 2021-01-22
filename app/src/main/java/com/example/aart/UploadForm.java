@@ -65,7 +65,7 @@ public class UploadForm extends AppCompatActivity
     Button btnupload, selectImages;
     DatabaseReference reff, reff2;
     String fosterEmail, fosterName, timeStamp, age_dropdown;
-
+    long fosterNumber;
     RadioGroup radioGenderGroup, radioSpeciesGroup;
     RadioButton txtGender, txtSpecies;
     ImageSlider imgView;
@@ -179,7 +179,7 @@ public class UploadForm extends AppCompatActivity
 
                     fosterEmail = currFoster.getEmail();
                     fosterName = currFoster.getName();
-
+                    fosterNumber = currFoster.getMobileNo();
                     //model.setFosterName(fosterName);
                 }
             }
@@ -265,6 +265,7 @@ public class UploadForm extends AppCompatActivity
                         //model.setID(UUID.randomUUID().toString());
                         model.setfosterEmail(fosterEmail);
                         model.setFosterName(fosterName);
+                        model.setFosterNumber(fosterNumber);
 
                         reff.child(timeStamp).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

@@ -18,6 +18,15 @@ public class Model {
    private String medical;
    private String fosterEmail;
    private String fosterName;
+   private long fosterNumber;
+
+    public long getFosterNumber() {
+        return fosterNumber;
+    }
+
+    public void setFosterNumber(long fosterNumber) {
+        this.fosterNumber = fosterNumber;
+    }
 
     public String getfosterEmail() {
         return fosterEmail;

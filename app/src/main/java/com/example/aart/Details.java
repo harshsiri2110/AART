@@ -211,7 +211,8 @@ public class Details extends AppCompatActivity {
                                 location.setText(currModel.getLocation());
                                 //description.setText(currModel.getDescription());
 
-                                adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),"1234567896"),"About Me");
+
+                                adapter.addFrag(new AboutMe(currModel.getDescription(),currModel.getFosterName(),String.valueOf(currModel.getFosterNumber())),"About Me");
                                 adapter.addFrag(new MedicalDetails(currModel.getMedical()),"Medical History");
 
                                 for (ImageUrl currUri : currModel.getImageList())
