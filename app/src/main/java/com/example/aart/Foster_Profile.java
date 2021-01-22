@@ -354,10 +354,10 @@ public class Foster_Profile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         startActivity(new Intent(getApplicationContext(),FirstPage.class));
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
+
 
 
 }

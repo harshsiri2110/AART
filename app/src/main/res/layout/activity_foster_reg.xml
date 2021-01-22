@@ -118,7 +118,7 @@
             android:ems="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:inputType="textCapSentences"
+            android:inputType="textPersonName|textCapSentences"
             android:hint="Full Name*"
              />
     </com.google.android.material.textfield.TextInputLayout>
