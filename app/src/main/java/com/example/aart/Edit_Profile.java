@@ -129,27 +129,36 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                     showCustomDialog();
                 }
                 else {
-                    btnEdit.setEnabled(false);
+                    if (checkNumberInput(editName.getText().toString())) {
+                        Toast.makeText(Edit_Profile.this,
+                                "The field 'Full Name' cannot contain digits", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        btnEdit.setEnabled(false);
 
-                    loadingDialog.startLoadingDialog();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadingDialog.dismissDialog();
-                        }
-                    }, 2000);
 
-                    reference.child("name").setValue(editName.getText().toString());
-                    reference.child("email").setValue(editEmail.getText().toString());
-                    reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
-                    reference.child("profilePic").setValue(profilePicture);
+                        loadingDialog.startLoadingDialog();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadingDialog.dismissDialog();
+                            }
+                        }, 2000);
 
-                    startActivity(new Intent(Edit_Profile.this, FirstPage.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        reference.child("name").setValue(editName.getText().toString());
+                        reference.child("email").setValue(editEmail.getText().toString());
+                        reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
+                        reference.child("profilePic").setValue(profilePicture);
+
+                        startActivity(new Intent(Edit_Profile.this, FirstPage.class));
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
                 }
             }
         });
+
+
 
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,6 +260,18 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 });
         android.app.AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private boolean checkNumberInput( String str)
+    {
+        for(char ch : str.toCharArray())
+        {
+            if(ch >= '0' && ch <= '9')
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isConnected(Edit_Profile firstPage) {

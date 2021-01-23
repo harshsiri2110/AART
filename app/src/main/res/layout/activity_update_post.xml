@@ -45,8 +45,8 @@
                     android:id="@+id/update_CatSelect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:text="Cat"
                     android:textSize="22sp" />
@@ -152,8 +152,9 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
                     android:text="Female"
                     android:id="@+id/update_radioFemale"
                     android:textSize="20sp"
