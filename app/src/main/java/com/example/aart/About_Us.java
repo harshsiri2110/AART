@@ -63,7 +63,6 @@ public class About_Us extends AppCompatActivity {
         }
     }
 
-
     public void social_media_insta(View view)
     {
         Uri uri = Uri.parse("https://instagram.com/petronus_app");
@@ -77,31 +76,19 @@ public class About_Us extends AppCompatActivity {
         }
     }
 
-
-
     public void social_media_fb(View view)
     {
+        String id = "106376204786112";
 
         try {
-            startActivity(newFacebookIntent(getApplicationContext().getPackageManager(),"https://www.facebook.com/petronusapp"));
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + id)));
         }
-    }
-
-    public static Intent newFacebookIntent(PackageManager pm, String url) {
-        Uri uri = Uri.parse(url);
-        try {
-            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
-            if (applicationInfo.enabled) {
-                // http://stackoverflow.com/a/24547437/1048340
-                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {
+        catch (ActivityNotFoundException e)
+        {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/petronusapp")));
         }
-        return new Intent(Intent.ACTION_VIEW, uri);
-    }
 
+    }
 
     private void showCustomDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(About_Us.this);
