@@ -80,18 +80,17 @@ public class About_Us extends AppCompatActivity {
 
     public void social_media_fb(View view)
     {
-        try{
+        /*try{
             getApplicationContext().getPackageManager().getApplicationInfo("com.facebook.katana",0);
         }
         catch(PackageManager.NameNotFoundException e)
         {
             Toast.makeText(About_Us.this, "PAckage not found",Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
-        }
+        }*/
 
         Uri uri = Uri.parse("fb://petronusapp/106376204786112");
         Intent fb = new Intent(Intent.ACTION_VIEW,uri);
-
 
         try {
             startActivity(fb);

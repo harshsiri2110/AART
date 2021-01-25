@@ -96,6 +96,7 @@ little angel and also help give them a chance to have a beautiful home."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/about_us_social_media_layout"
             android:layout_below="@+id/about_us_description_text"
             android:layout_centerHorizontal="true">
 
@@ -199,23 +200,24 @@ little angel and also help give them a chance to have a beautiful home."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_below="@+id/about_us_social_media_layout"
             android:text="CREATORS"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="15dp"
             android:textStyle="bold"
+            android:id="@+id/about_us_creators_text"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/about_us_creators_text"
             android:layout_centerHorizontal="true"
             android:text="Tanya Thakur\t\t\t\t\t\t\t\t\t\Harsh Siriah"
             android:textSize="30sp"
             android:fontFamily="@font/comebro"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             />
 
