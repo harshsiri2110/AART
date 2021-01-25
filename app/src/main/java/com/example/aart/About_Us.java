@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -80,23 +81,25 @@ public class About_Us extends AppCompatActivity {
 
     public void social_media_fb(View view)
     {
-        /*try{
-            getApplicationContext().getPackageManager().getApplicationInfo("com.facebook.katana",0);
-        }
-        catch(PackageManager.NameNotFoundException e)
-        {
-            Toast.makeText(About_Us.this, "PAckage not found",Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
-        }*/
-
-        Uri uri = Uri.parse("fb://petronusapp/106376204786112");
-        Intent fb = new Intent(Intent.ACTION_VIEW,uri);
 
         try {
-            startActivity(fb);
+            startActivity(newFacebookIntent(getApplicationContext().getPackageManager(),"https://www.facebook.com/petronusapp"));
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
         }
+    }
+
+    public static Intent newFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
     }
 
 
