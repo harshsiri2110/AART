@@ -3,19 +3,24 @@ package com.example.aart;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.transition.ChangeBounds;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class About_Us extends AppCompatActivity {
 
@@ -43,6 +48,58 @@ public class About_Us extends AppCompatActivity {
         title.setText(str);*/
 
     }
+
+    public void social_media_mail(View view)
+    {
+        String mailto = "mailto:petronus.app@gmail.com";
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse(mailto));
+
+        try {
+            startActivity(emailIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(About_Us.this, "Error to open email app", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void social_media_insta(View view)
+    {
+        Uri uri = Uri.parse("https://instagram.com/petronus_app");
+        Intent insta = new Intent(Intent.ACTION_VIEW, uri);
+        insta.setPackage("com.instagram.android");
+
+        try {
+            startActivity(insta);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://instagram.com/petronus_app")));
+        }
+    }
+
+
+
+    public void social_media_fb(View view)
+    {
+        try{
+            getApplicationContext().getPackageManager().getApplicationInfo("com.facebook.katana",0);
+        }
+        catch(PackageManager.NameNotFoundException e)
+        {
+            Toast.makeText(About_Us.this, "PAckage not found",Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
+        }
+
+        Uri uri = Uri.parse("fb://petronusapp/106376204786112");
+        Intent fb = new Intent(Intent.ACTION_VIEW,uri);
+
+
+        try {
+            startActivity(fb);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.facebook.com/petronusapp")));
+        }
+    }
+
 
     private void showCustomDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(About_Us.this);

@@ -66,7 +66,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_us_text_2">
+            android:layout_below="@+id/about_us_text_2"
+
+            android:id="@+id/about_us_description_text">
 
 
             <TextView
@@ -86,6 +88,109 @@ little angel and also help give them a chance to have a beautiful home."
                 android:textSize="33sp"
 
                 />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/about_us_description_text"
+            android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/about_us_mail_layout"
+            android:layout_below="@+id/about_us_description_text"
+            >
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/mail"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:onClick="social_media_mail"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="petronus.app@gmail.com"
+                android:textAllCaps="false"
+                android:fontFamily="@font/comebro"
+                android:textSize="30sp"
+                android:layout_marginLeft="10dp"
+                android:onClick="social_media_mail"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:id="@+id/about_us_insta_layout"
+            android:layout_below="@+id/about_us_mail_layout"
+            >
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/insta"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:onClick="social_media_insta"
+                android:background="@android:color/transparent"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="petronus_app"
+                android:onClick="social_media_insta"
+                android:textAllCaps="false"
+                android:fontFamily="@font/comebro"
+                android:textSize="30sp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:id="@+id/about_us_fb_layout"
+            android:layout_below="@+id/about_us_insta_layout"
+            >
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/fb"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:onClick="social_media_fb"
+                android:background="@android:color/transparent"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="petronusapp"
+                android:onClick="social_media_fb"
+                android:textAllCaps="false"
+                android:fontFamily="@font/comebro"
+                android:textSize="30sp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
 
         </LinearLayout>
 
