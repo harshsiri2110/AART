@@ -146,7 +146,7 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                         reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
                         reference.child("profilePic").setValue(profilePicture);
 
-                        postsRef.addValueEventListener(new ValueEventListener() {
+                        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for(DataSnapshot post: snapshot.getChildren())
