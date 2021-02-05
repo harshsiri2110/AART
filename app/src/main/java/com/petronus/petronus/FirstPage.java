@@ -272,13 +272,16 @@ public class FirstPage extends AppCompatActivity {
 
         if(backButtonCount >= 1)
         {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK|
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+//                    Intent.FLAG_ACTIVITY_CLEAR_TASK|
+//                    Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            FirstPage.this.finish();
+            finishAffinity();
+
         }
         else
         {
