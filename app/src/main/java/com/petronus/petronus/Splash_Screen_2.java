@@ -1,13 +1,11 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.ChangeBounds;
 import android.widget.ImageView;
 
 public class Splash_Screen_2 extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import android.app.Activity;
 import android.app.AlertDialog;

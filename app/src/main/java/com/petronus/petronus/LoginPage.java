@@ -1,4 +1,4 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

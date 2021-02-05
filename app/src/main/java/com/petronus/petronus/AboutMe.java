@@ -1,5 +1,7 @@
-package com.example.aart;
+package com.petronus.petronus;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,10 +13,10 @@ import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MedicalDetails#newInstance} factory method to
+ * Use the {@link AboutMe#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MedicalDetails extends Fragment {
+public class AboutMe extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,14 +26,20 @@ public class MedicalDetails extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String medicalDetails;
-    TextView medicalDet;
 
-    public MedicalDetails() {
+    private String description, foster_name, foster_number;
+
+    TextView descriptionText, fosterNameText, fosterNumberText;
+
+    public AboutMe() {
         // Required empty public constructor
     }
-    public MedicalDetails(String medicalDetails){
-        this.medicalDetails = medicalDetails;
+
+    public AboutMe(String description,String foster_name,String foster_number)
+    {
+        this.description = description;
+        this.foster_name = foster_name;
+        this.foster_number = foster_number;
     }
 
     /**
@@ -40,11 +48,11 @@ public class MedicalDetails extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MedicalDetails.
+     * @return A new instance of fragment AboutMe.
      */
     // TODO: Rename and change types and number of parameters
-    public static MedicalDetails newInstance(String param1, String param2) {
-        MedicalDetails fragment = new MedicalDetails();
+    public static AboutMe newInstance(String param1, String param2) {
+        AboutMe fragment = new AboutMe();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,9 +73,26 @@ public class MedicalDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup root = (ViewGroup)inflater.inflate(R.layout.fragment_medical_details, container, false);
-        medicalDet= root.findViewById(R.id.medicalText);
-        medicalDet.setText(medicalDetails);
+
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_about_me, container, false);
+
+        descriptionText = root.findViewById(R.id.about_me_text);
+        fosterNameText = root.findViewById(R.id.fosterName);
+        fosterNumberText = root.findViewById(R.id.fosterNumber);
+
+        descriptionText.setText(description);
+        fosterNameText.setText(foster_name);
+        fosterNumberText.setText(foster_number);
+
+        fosterNumberText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel: +91" + foster_number));
+                startActivity(callIntent);
+            }
+        });
+
         return root;
     }
 }

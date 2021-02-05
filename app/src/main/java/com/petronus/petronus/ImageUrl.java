@@ -1,4 +1,4 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 public class ImageUrl {
 

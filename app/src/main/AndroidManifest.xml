@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aart">
+    package="com.petronus.petronus">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/logo5_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar.Transparent">
-        <activity android:name=".About_Us"></activity>
+        <activity android:name="com.petronus.petronus.About_Us"></activity>
         <activity
-            android:name=".Splash_Screen_2"
+            android:name="com.petronus.petronus.Splash_Screen_2"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,41 +23,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Edit_Profile"
-            android:parentActivityName=".Foster_Profile"
+            android:name="com.petronus.petronus.Edit_Profile"
+            android:parentActivityName="com.petronus.petronus.Foster_Profile"
             android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity
-            android:name=".UpdatePost"
-            android:parentActivityName=".Foster_Profile" />
+            android:name="com.petronus.petronus.UpdatePost"
+            android:parentActivityName="com.petronus.petronus.Foster_Profile" />
         <activity
-            android:name=".Foster_Profile"
-            android:parentActivityName=".Cards" />
+            android:name="com.petronus.petronus.Foster_Profile"
+            android:parentActivityName="com.petronus.petronus.Cards" />
         <activity
-            android:name=".FilterPage"
-            android:parentActivityName=".Cards" />
+            android:name="com.petronus.petronus.FilterPage"
+            android:parentActivityName="com.petronus.petronus.Cards" />
         <activity
-            android:name=".LoginPage"
-            android:parentActivityName=".FirstPage" />
+            android:name="com.petronus.petronus.LoginPage"
+            android:parentActivityName="com.petronus.petronus.FirstPage" />
         <activity
-            android:name=".FirstPage"
+            android:name="com.petronus.petronus.FirstPage"
             android:theme="@style/AppTheme.ActionBar.Transparent" />
-        <activity android:name=".SplashScreen"></activity>
+        <activity android:name="com.petronus.petronus.SplashScreen"></activity>
         <activity
-            android:name=".Foster_reg"
-            android:parentActivityName=".FirstPage" />
+            android:name="com.petronus.petronus.Foster_reg"
+            android:parentActivityName="com.petronus.petronus.FirstPage" />
         <activity
-            android:name=".Details"
-            android:parentActivityName=".Cards"
+            android:name="com.petronus.petronus.Details"
+            android:parentActivityName="com.petronus.petronus.Cards"
             android:theme="@style/AppTheme.MyPostDetailsStyle" />
         <activity
-            android:name=".UploadForm"
-            android:parentActivityName=".Cards" />
+            android:name="com.petronus.petronus.UploadForm"
+            android:parentActivityName="com.petronus.petronus.Cards" />
         <activity
-            android:name=".Cards"
-            android:parentActivityName=".FirstPage" />
+            android:name="com.petronus.petronus.Cards"
+            android:parentActivityName="com.petronus.petronus.FirstPage" />
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".FirstPage"
+            android:name="com.petronus.petronus.MainActivity"
+            android:parentActivityName="com.petronus.petronus.FirstPage"
             android:theme="@style/AppTheme.ActionBar.Transparent" />
     </application>
 

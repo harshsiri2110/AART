@@ -1,7 +1,6 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,19 +12,15 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -150,6 +145,26 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                         reference.child("email").setValue(editEmail.getText().toString());
                         reference.child("mobileNo").setValue(Long.parseLong(editNumber.getText().toString()));
                         reference.child("profilePic").setValue(profilePicture);
+
+                        postsRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot post: snapshot.getChildren())
+                                {
+                                    final Model currModel = post.getValue(Model.class);
+                                    if(user_email.equals(currModel.getfosterEmail()))
+                                    {
+                                        post.getRef().child("fosterName").setValue(editName.getText().toString());
+                                        post.getRef().child("fosterNumber").setValue(Long.parseLong(editNumber.getText().toString()));
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                         startActivity(new Intent(Edit_Profile.this, FirstPage.class));
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -1,13 +1,11 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.transition.Transition;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,8 +18,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.transition.ChangeBounds;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.denzcoskun.imageslider.ImageSlider;

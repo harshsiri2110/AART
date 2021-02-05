@@ -1,17 +1,8 @@
-package com.example.aart;
+package com.petronus.petronus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ImageView;
-
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.models.SlideModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.denzcoskun.imageslider.constants.ScaleTypes;
 
 
 public class Cards extends AppCompatActivity {

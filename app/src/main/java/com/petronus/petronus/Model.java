@@ -1,9 +1,6 @@
-package com.example.aart;
-
-import android.net.Uri;
+package com.petronus.petronus;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Model {
 
