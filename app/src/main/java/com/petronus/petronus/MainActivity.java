@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
                     emptyListTextView.setVisibility(View.VISIBLE);
                 }
             }
-        },3500);
+        },6000);
 
 
 

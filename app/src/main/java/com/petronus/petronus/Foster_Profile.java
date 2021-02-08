@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -70,13 +71,23 @@ public class Foster_Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
 
+        fosterPosts = findViewById(R.id.profile_listView);
+
         if(!isConnected(this))
         {
             showCustomDialog();
         }
 
         empty_list_button = findViewById(R.id.foster_profile_add_post_button);
+
         empty_list_image = findViewById(R.id.foster_profile_listPlaceholder);
+        empty_list_image.setVisibility(View.VISIBLE);
+        empty_list_image.getLayoutParams().height = 800;
+
+        Glide.with(this).load(R.drawable.loading_bar2).into(empty_list_image);
+
+        fosterPosts.setEmptyView(empty_list_image);
+
         empty_list_text = findViewById(R.id.foster_profile_listPlaceholder_text);
 
         empty_list_button.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +106,9 @@ public class Foster_Profile extends AppCompatActivity {
                 if(fosterPosts.getAdapter().isEmpty()) {
                     empty_list_button.setVisibility(View.VISIBLE);
                     empty_list_button.setText("ADD A POST NOW!");
-                    empty_list_image.setVisibility(View.VISIBLE);
-                    empty_list_image.setImageResource(R.drawable.empty_list_2_removebg_preview);
                     empty_list_image.getLayoutParams().height = 600;
+                    empty_list_image.setImageResource(R.drawable.empty_list_2_removebg_preview);
+
                     empty_list_text.setVisibility(View.VISIBLE);
                     empty_list_text.setText("You haven't uploaded anything yet!");
                 }
@@ -106,7 +117,7 @@ public class Foster_Profile extends AppCompatActivity {
 
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
-        fosterPosts = findViewById(R.id.profile_listView);
+
         fosterPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
