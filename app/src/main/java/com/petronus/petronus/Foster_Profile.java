@@ -102,7 +102,7 @@ public class Foster_Profile extends AppCompatActivity {
                     empty_list_text.setText("You haven't uploaded anything yet!");
                 }
             }
-        },1000);
+        },10000);
 
         name = findViewById(R.id.profile_name);
         email = findViewById(R.id.profile_email);
@@ -236,7 +236,7 @@ public class Foster_Profile extends AppCompatActivity {
     {
         reference = FirebaseDatabase.getInstance().getReference().child("Foster").child("Posts");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot snapshot) {
                 if(!isConnected(Foster_Profile.this))
@@ -247,7 +247,7 @@ public class Foster_Profile extends AppCompatActivity {
                     postCount = Integer.MIN_VALUE;
 
                     for (final DataSnapshot currPostSnap : snapshot.getChildren()) {
-                        currPostSnap.getRef().child("images").addValueEventListener(new ValueEventListener() {
+                        currPostSnap.getRef().child("images").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot imgSnapshot) {
 
