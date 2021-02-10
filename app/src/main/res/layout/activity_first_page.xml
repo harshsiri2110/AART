@@ -41,7 +41,7 @@
                 android:id="@+id/first_page_description1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="&quot;ADOPTION IS IT'S OWN REWARD&quot;"
+                android:text="&quot;ADOPTION IS ITS OWN REWARD&quot;"
                 android:textSize="20sp"
                 android:textStyle="italic"
                 android:gravity="center"

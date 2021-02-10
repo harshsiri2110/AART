@@ -8,8 +8,8 @@ android {
         applicationId "com.petronus.petronus"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.03"
+        versionCode 5
+        versionName "1.035"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
