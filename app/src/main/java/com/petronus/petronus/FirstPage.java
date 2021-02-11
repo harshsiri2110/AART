@@ -195,7 +195,7 @@ public class FirstPage extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        FirstPage.this.finish();
+                        //FirstPage.this.finish();
                         System.exit(0);
                     }
                 });
@@ -280,7 +280,7 @@ public class FirstPage extends AppCompatActivity {
 //                    Intent.FLAG_ACTIVITY_NEW_TASK);
 //            startActivity(intent);
 //            FirstPage.this.finish();
-            finishAffinity();
+            System.exit(0);
 
         }
         else
