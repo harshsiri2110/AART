@@ -44,18 +44,18 @@ tools:context=".Cards">
             android:layout_height="25dp"
             android:src="@drawable/age"
             android:id="@+id/ageIcon"
-            android:layout_below="@+id/images"
+            android:layout_below="@+id/details_title"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="20dp"
             />
 
         <TextView
             android:id="@+id/ageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/images"
+            android:layout_below="@+id/details_title"
             android:layout_marginLeft="47dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="24dp"
             android:text="3 months"
             android:textSize="15sp"
             />
@@ -65,8 +65,8 @@ tools:context=".Cards">
             android:layout_height="25dp"
             android:src="@drawable/gender2"
             android:id="@+id/genderIcon"
-            android:layout_below="@+id/images"
-            android:layout_marginTop="47dp"
+            android:layout_below="@+id/details_title"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="137dp"
             />
 
@@ -74,9 +74,9 @@ tools:context=".Cards">
             android:id="@+id/genderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/images"
+            android:layout_below="@+id/details_title"
             android:layout_marginLeft="163dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="24dp"
             android:text="male"
             android:textSize="15sp"
             />
@@ -86,17 +86,17 @@ tools:context=".Cards">
             android:layout_height="25dp"
             android:src="@drawable/location"
             android:id="@+id/locationIcon"
-            android:layout_below="@+id/images"
-            android:layout_marginTop="47dp"
+            android:layout_below="@+id/details_title"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="237dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/images"
+            android:layout_below="@+id/details_title"
             android:layout_marginLeft="264dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="24dp"
             android:text="Kothrud, Pune"
             android:textSize="15sp"
             android:id="@+id/locationText"
