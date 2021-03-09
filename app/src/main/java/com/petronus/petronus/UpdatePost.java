@@ -215,6 +215,7 @@ public class UpdatePost extends AppCompatActivity {
                         for (int i = 0; i < imageUriList.size(); i++) {
                             uploadPicture(imageUriList.get(i));
                         }
+                        finish();
                     }
                 }
             }
