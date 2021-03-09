@@ -195,8 +195,7 @@ public class FirstPage extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //FirstPage.this.finish();
-                        System.exit(0);
+                        exitApp();
                     }
                 });
         AlertDialog alert = builder.create();
@@ -267,21 +266,25 @@ public class FirstPage extends AppCompatActivity {
         handler.postDelayed(runnable,2000);
     }
 
+    void exitApp()
+    {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+        finishAffinity();
+    }
+
     @Override
     public void onBackPressed() {
 
         if(backButtonCount >= 1)
         {
-//            Intent intent = new Intent(Intent.ACTION_MAIN);
-//            intent.addCategory(Intent.CATEGORY_HOME);
-//            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
-//                    Intent.FLAG_ACTIVITY_CLEAR_TASK|
-//                    Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(intent);
-//            FirstPage.this.finish();
-            System.exit(0);
-
+            exitApp();
         }
         else
         {
